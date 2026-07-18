@@ -1,0 +1,2946 @@
+{
+    "wazuh_results": [
+        {
+            "timestamp": "2026-05-15T01:14:51.017+0530",
+            "host": "monitoring-server-01",
+            "ip": "192.168.100.100",
+            "role": "monitoring",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 6,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-05-15T01:14:51.016+0530",
+            "host": "monitoring-server-01",
+            "ip": "192.168.100.100",
+            "role": "monitoring",
+            "rule_id": "5715",
+            "description": "sshd: authentication success.",
+            "risk_score": 0,
+            "classification": "Legitimate",
+            "reasons": [
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-05-15T01:12:46.901+0530",
+            "host": "monitoring-server-01",
+            "ip": "192.168.100.100",
+            "role": "monitoring",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 0,
+            "classification": "Legitimate",
+            "reasons": [
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-05-15T01:12:30.866+0530",
+            "host": "monitoring-server-01",
+            "ip": "192.168.100.100",
+            "role": "monitoring",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-05-15T01:12:30.865+0530",
+            "host": "monitoring-server-01",
+            "ip": "192.168.100.100",
+            "role": "monitoring",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 10,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-05-15T01:12:30.864+0530",
+            "host": "monitoring-server-01",
+            "ip": "192.168.100.100",
+            "role": "monitoring",
+            "rule_id": "5402",
+            "description": "Successful sudo to ROOT executed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-05-15T00:32:17.660+0530",
+            "host": "monitoring-server-01",
+            "ip": "192.168.100.100",
+            "role": "monitoring",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 6,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-05-15T00:32:17.660+0530",
+            "host": "monitoring-server-01",
+            "ip": "192.168.100.100",
+            "role": "monitoring",
+            "rule_id": "5715",
+            "description": "sshd: authentication success.",
+            "risk_score": 0,
+            "classification": "Legitimate",
+            "reasons": [
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-05-15T00:30:43.555+0530",
+            "host": "monitoring-server-01",
+            "ip": "192.168.100.100",
+            "role": "monitoring",
+            "rule_id": "5762",
+            "description": "sshd: connection reset",
+            "risk_score": 0,
+            "classification": "Legitimate",
+            "reasons": [
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-05-15T00:30:41.544+0530",
+            "host": "monitoring-server-01",
+            "ip": "192.168.100.100",
+            "role": "monitoring",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 0,
+            "classification": "Legitimate",
+            "reasons": [
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        }
+    ],
+    "zeek_results": [
+        {
+            "timestamp": "2026-05-12T19:28:12.938648+00:00",
+            "source_ip": "192.168.100.50",
+            "source_role": "file_server",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 1514,
+            "service": null,
+            "risk_score": -2,
+            "classification": "Legitimate",
+            "reasons": [
+                "Communication matches expected host role behavior",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T19:28:38.494521+00:00",
+            "source_ip": "192.168.100.21",
+            "source_role": "admin_workstation",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 1514,
+            "service": null,
+            "risk_score": 8,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Connection to non-approved destination port for this host role",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T17:32:46.891263+00:00",
+            "source_ip": "192.168.100.20",
+            "source_role": "workstation",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 1514,
+            "service": null,
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Connection to non-approved destination for this host role",
+                "Connection to non-approved destination port for this host role"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T18:26:57.560274+00:00",
+            "source_ip": "192.168.100.30",
+            "source_role": "ehr_app",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 1514,
+            "service": null,
+            "risk_score": -2,
+            "classification": "Legitimate",
+            "reasons": [
+                "Communication matches expected host role behavior",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T17:27:15.302990+00:00",
+            "source_ip": "192.168.100.40",
+            "source_role": "database",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 1514,
+            "service": null,
+            "risk_score": -5,
+            "classification": "Legitimate",
+            "reasons": [
+                "Communication matches expected host role behavior"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:34:20.700867+00:00",
+            "source_ip": "fe80::a00:27ff:fe99:277e",
+            "source_role": "unknown",
+            "destination_ip": "ff02::fb",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:34:20.701776+00:00",
+            "source_ip": "192.168.100.20",
+            "source_role": "workstation",
+            "destination_ip": "224.0.0.251",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 12,
+            "classification": "Suspicious",
+            "reasons": [
+                "Connection to non-approved destination for this host role",
+                "Connection to non-approved destination port for this host role",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:34:36.159024+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.251",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:34:36.160308+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::fb",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:35:01.843397+00:00",
+            "source_ip": "192.168.100.30",
+            "source_role": "ehr_app",
+            "destination_ip": "192.168.100.40",
+            "destination_role": "database",
+            "destination_port": 5432,
+            "service": "postgresql",
+            "risk_score": -2,
+            "classification": "Legitimate",
+            "reasons": [
+                "Communication matches expected host role behavior",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:35:01.839172+00:00",
+            "source_ip": "192.168.100.21",
+            "source_role": "admin_workstation",
+            "destination_ip": "192.168.100.30",
+            "destination_role": "ehr_app",
+            "destination_port": 5000,
+            "service": "http",
+            "risk_score": 8,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Connection to non-approved destination port for this host role",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:35:47.971282+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.251",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:32:28.612639+00:00",
+            "source_ip": "192.168.100.30",
+            "source_role": "ehr_app",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 1514,
+            "service": null,
+            "risk_score": -2,
+            "classification": "Legitimate",
+            "reasons": [
+                "Communication matches expected host role behavior",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:36:35.258705+00:00",
+            "source_ip": "192.168.100.30",
+            "source_role": "ehr_app",
+            "destination_ip": "192.168.100.40",
+            "destination_role": "database",
+            "destination_port": 5432,
+            "service": "postgresql",
+            "risk_score": -2,
+            "classification": "Legitimate",
+            "reasons": [
+                "Communication matches expected host role behavior",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:36:35.254411+00:00",
+            "source_ip": "192.168.100.20",
+            "source_role": "workstation",
+            "destination_ip": "192.168.100.30",
+            "destination_role": "ehr_app",
+            "destination_port": 5000,
+            "service": "http",
+            "risk_score": 8,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Connection to non-approved destination port for this host role",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:39:38.154189+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.251",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:39:38.155467+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::fb",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:40:01.943033+00:00",
+            "source_ip": "192.168.100.30",
+            "source_role": "ehr_app",
+            "destination_ip": "192.168.100.40",
+            "destination_role": "database",
+            "destination_port": 5432,
+            "service": "postgresql",
+            "risk_score": -2,
+            "classification": "Legitimate",
+            "reasons": [
+                "Communication matches expected host role behavior",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:40:01.926831+00:00",
+            "source_ip": "192.168.100.21",
+            "source_role": "admin_workstation",
+            "destination_ip": "192.168.100.30",
+            "destination_role": "ehr_app",
+            "destination_port": 5000,
+            "service": "http",
+            "risk_score": 8,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Connection to non-approved destination port for this host role",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:40:02.528629+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::1:3",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:40:02.528630+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.252",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:40:02.708073+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::1:3",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:40:02.708073+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.252",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:40:03.726022+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::1:3",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:40:03.726022+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.252",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:32:22.694069+00:00",
+            "source_ip": "192.168.100.50",
+            "source_role": "file_server",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 1514,
+            "service": null,
+            "risk_score": -2,
+            "classification": "Legitimate",
+            "reasons": [
+                "Communication matches expected host role behavior",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:40:05.765329+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::1:3",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:40:05.765330+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.252",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:40:02.521679+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::fb",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:40:06.081275+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.255",
+            "destination_role": "unknown",
+            "destination_port": 137,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:40:01.390202+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.251",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:40:02.709063+00:00",
+            "source_ip": "::",
+            "source_role": "unknown",
+            "destination_ip": "ff02::1:ff92:6352",
+            "destination_role": "unknown",
+            "destination_port": 136,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:40:03.708635+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::1",
+            "destination_role": "unknown",
+            "destination_port": 135,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:40:02.472799+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.22",
+            "destination_role": "unknown",
+            "destination_port": 0,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:40:02.472799+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::16",
+            "destination_role": "unknown",
+            "destination_port": 0,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:40:02.709063+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::2",
+            "destination_role": "unknown",
+            "destination_port": 134,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:40:10.660207+00:00",
+            "source_ip": "192.168.100.50",
+            "source_role": "file_server",
+            "destination_ip": "192.168.100.255",
+            "destination_role": "unknown",
+            "destination_port": 138,
+            "service": null,
+            "risk_score": 12,
+            "classification": "Suspicious",
+            "reasons": [
+                "Connection to non-approved destination for this host role",
+                "Connection to non-approved destination port for this host role",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:41:11.131533+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.251",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:41:36.997952+00:00",
+            "source_ip": "192.168.100.30",
+            "source_role": "ehr_app",
+            "destination_ip": "192.168.100.40",
+            "destination_role": "database",
+            "destination_port": 5432,
+            "service": "postgresql",
+            "risk_score": -2,
+            "classification": "Legitimate",
+            "reasons": [
+                "Communication matches expected host role behavior",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:41:36.992193+00:00",
+            "source_ip": "192.168.100.20",
+            "source_role": "workstation",
+            "destination_ip": "192.168.100.30",
+            "destination_role": "ehr_app",
+            "destination_port": 5000,
+            "service": "http",
+            "risk_score": 8,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Connection to non-approved destination port for this host role",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:40:02.505328+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::1:2",
+            "destination_role": "unknown",
+            "destination_port": 547,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:40:10.476618+00:00",
+            "source_ip": "192.168.100.50",
+            "source_role": "file_server",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 1514,
+            "service": null,
+            "risk_score": -2,
+            "classification": "Legitimate",
+            "reasons": [
+                "Communication matches expected host role behavior",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:42:20.089897+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.252",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:42:20.089897+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::1:3",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:42:20.355584+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.252",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:42:20.355584+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::1:3",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:42:21.014816+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::1:3",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:42:21.014817+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.252",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:42:22.032345+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::1:3",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:42:22.032346+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.252",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:42:23.070363+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::1:3",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:42:23.070364+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.252",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:42:24.075255+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::1:3",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:42:24.075255+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.252",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:42:20.088318+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::fb",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:42:27.906379+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.255",
+            "destination_role": "unknown",
+            "destination_port": 137,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:42:08.549797+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.251",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:42:19.999608+00:00",
+            "source_ip": "::",
+            "source_role": "unknown",
+            "destination_ip": "ff02::1:ff92:6352",
+            "destination_role": "unknown",
+            "destination_port": 136,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:42:20.999644+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::1",
+            "destination_role": "unknown",
+            "destination_port": 135,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:42:19.999608+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.22",
+            "destination_role": "unknown",
+            "destination_port": 0,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:42:19.999608+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::16",
+            "destination_role": "unknown",
+            "destination_port": 0,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:42:19.999608+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::2",
+            "destination_role": "unknown",
+            "destination_port": 134,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:43:28.327594+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.251",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:22.888902+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::1:3",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:22.889498+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.252",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:23.173255+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.252",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:23.173255+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::1:3",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:23.811503+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::1:3",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:23.811503+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.252",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:24.813641+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::1:3",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:24.813641+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.252",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:25.869409+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::1:3",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:25.869410+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.252",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:42:20.309979+00:00",
+            "source_ip": "192.168.100.50",
+            "source_role": "file_server",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 1514,
+            "service": null,
+            "risk_score": -2,
+            "classification": "Legitimate",
+            "reasons": [
+                "Communication matches expected host role behavior",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:29.510072+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.252",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:29.510072+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::1:3",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:29.529921+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::1:3",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:29.530660+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.252",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:30.791158+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::1:3",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:30.791158+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.252",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:30.894154+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::1:3",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:30.894154+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.252",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:32.181517+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.252",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:32.181517+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::1:3",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:33.838355+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::1:3",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:33.838355+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.252",
+            "destination_role": "unknown",
+            "destination_port": 5355,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:30.758674+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.255",
+            "destination_role": "unknown",
+            "destination_port": 137,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:22.888326+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::fb",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:20.794318+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.251",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:45:05.851799+00:00",
+            "source_ip": "192.168.100.30",
+            "source_role": "ehr_app",
+            "destination_ip": "192.168.100.40",
+            "destination_role": "database",
+            "destination_port": 5432,
+            "service": "postgresql",
+            "risk_score": -2,
+            "classification": "Legitimate",
+            "reasons": [
+                "Communication matches expected host role behavior",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:45:05.848022+00:00",
+            "source_ip": "192.168.100.21",
+            "source_role": "admin_workstation",
+            "destination_ip": "192.168.100.30",
+            "destination_role": "ehr_app",
+            "destination_port": 5000,
+            "service": "http",
+            "risk_score": 8,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Connection to non-approved destination port for this host role",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:22.792950+00:00",
+            "source_ip": "::",
+            "source_role": "unknown",
+            "destination_ip": "ff02::1:ff92:6352",
+            "destination_role": "unknown",
+            "destination_port": 136,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:23.793569+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::1",
+            "destination_role": "unknown",
+            "destination_port": 135,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:45:06.665796+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.251",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:22.792951+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::2",
+            "destination_role": "unknown",
+            "destination_port": 134,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:30.810312+00:00",
+            "source_ip": "192.168.100.50",
+            "source_role": "file_server",
+            "destination_ip": "192.168.100.255",
+            "destination_role": "unknown",
+            "destination_port": 138,
+            "service": null,
+            "risk_score": 12,
+            "classification": "Suspicious",
+            "reasons": [
+                "Connection to non-approved destination for this host role",
+                "Connection to non-approved destination port for this host role",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:22.792950+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.22",
+            "destination_role": "unknown",
+            "destination_port": 0,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:44:22.793483+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::16",
+            "destination_role": "unknown",
+            "destination_port": 0,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:45:38.664120+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.251",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:42:20.311533+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::1:2",
+            "destination_role": "unknown",
+            "destination_port": 547,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:46:41.683151+00:00",
+            "source_ip": "192.168.100.30",
+            "source_role": "ehr_app",
+            "destination_ip": "192.168.100.40",
+            "destination_role": "database",
+            "destination_port": 5432,
+            "service": "postgresql",
+            "risk_score": -2,
+            "classification": "Legitimate",
+            "reasons": [
+                "Communication matches expected host role behavior",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:46:41.679231+00:00",
+            "source_ip": "192.168.100.20",
+            "source_role": "workstation",
+            "destination_ip": "192.168.100.30",
+            "destination_role": "ehr_app",
+            "destination_port": 5000,
+            "service": "http",
+            "risk_score": 8,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Connection to non-approved destination port for this host role",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:46:36.048816+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.251",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:49:33.619216+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.251",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:49:33.620617+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::fb",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:50:06.009436+00:00",
+            "source_ip": "192.168.100.30",
+            "source_role": "ehr_app",
+            "destination_ip": "192.168.100.40",
+            "destination_role": "database",
+            "destination_port": 5432,
+            "service": "postgresql",
+            "risk_score": -2,
+            "classification": "Legitimate",
+            "reasons": [
+                "Communication matches expected host role behavior",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:50:06.005528+00:00",
+            "source_ip": "192.168.100.21",
+            "source_role": "admin_workstation",
+            "destination_ip": "192.168.100.30",
+            "destination_role": "ehr_app",
+            "destination_port": 5000,
+            "service": "http",
+            "risk_score": 8,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Connection to non-approved destination port for this host role",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:50:25.519228+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.255",
+            "destination_role": "unknown",
+            "destination_port": 137,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:50:39.552944+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.251",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:51:41.757344+00:00",
+            "source_ip": "192.168.100.30",
+            "source_role": "ehr_app",
+            "destination_ip": "192.168.100.40",
+            "destination_role": "database",
+            "destination_port": 5432,
+            "service": "postgresql",
+            "risk_score": -2,
+            "classification": "Legitimate",
+            "reasons": [
+                "Communication matches expected host role behavior",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:51:41.753421+00:00",
+            "source_ip": "192.168.100.20",
+            "source_role": "workstation",
+            "destination_ip": "192.168.100.30",
+            "destination_role": "ehr_app",
+            "destination_port": 5000,
+            "service": "http",
+            "risk_score": 8,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Connection to non-approved destination port for this host role",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:32:18.109090+00:00",
+            "source_ip": "192.168.100.20",
+            "source_role": "workstation",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 1514,
+            "service": null,
+            "risk_score": 12,
+            "classification": "Suspicious",
+            "reasons": [
+                "Connection to non-approved destination for this host role",
+                "Connection to non-approved destination port for this host role",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:52:13.819336+00:00",
+            "source_ip": "fe80::a00:27ff:fe99:277e",
+            "source_role": "unknown",
+            "destination_ip": "ff02::fb",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:52:13.819869+00:00",
+            "source_ip": "192.168.100.20",
+            "source_role": "workstation",
+            "destination_ip": "224.0.0.251",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 12,
+            "classification": "Suspicious",
+            "reasons": [
+                "Connection to non-approved destination for this host role",
+                "Connection to non-approved destination port for this host role",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:54:35.628645+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.251",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:54:35.629481+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::fb",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:55:05.157293+00:00",
+            "source_ip": "192.168.100.30",
+            "source_role": "ehr_app",
+            "destination_ip": "192.168.100.40",
+            "destination_role": "database",
+            "destination_port": 5432,
+            "service": "postgresql",
+            "risk_score": -2,
+            "classification": "Legitimate",
+            "reasons": [
+                "Communication matches expected host role behavior",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:55:05.152228+00:00",
+            "source_ip": "192.168.100.21",
+            "source_role": "admin_workstation",
+            "destination_ip": "192.168.100.30",
+            "destination_role": "ehr_app",
+            "destination_port": 5000,
+            "service": "http",
+            "risk_score": 8,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Connection to non-approved destination port for this host role",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:55:31.838496+00:00",
+            "source_ip": "192.168.100.30",
+            "source_role": "ehr_app",
+            "destination_ip": "192.168.100.40",
+            "destination_role": "database",
+            "destination_port": 5432,
+            "service": "postgresql",
+            "risk_score": -2,
+            "classification": "Legitimate",
+            "reasons": [
+                "Communication matches expected host role behavior",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:55:31.835091+00:00",
+            "source_ip": "192.168.100.20",
+            "source_role": "workstation",
+            "destination_ip": "192.168.100.30",
+            "destination_role": "ehr_app",
+            "destination_port": 5000,
+            "service": "http",
+            "risk_score": 8,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Connection to non-approved destination port for this host role",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:55:31.847856+00:00",
+            "source_ip": "192.168.100.30",
+            "source_role": "ehr_app",
+            "destination_ip": "192.168.100.40",
+            "destination_role": "database",
+            "destination_port": 5432,
+            "service": "postgresql",
+            "risk_score": -2,
+            "classification": "Legitimate",
+            "reasons": [
+                "Communication matches expected host role behavior",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:55:31.841562+00:00",
+            "source_ip": "192.168.100.20",
+            "source_role": "workstation",
+            "destination_ip": "192.168.100.30",
+            "destination_role": "ehr_app",
+            "destination_port": 5000,
+            "service": "http",
+            "risk_score": 8,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Connection to non-approved destination port for this host role",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:55:31.917691+00:00",
+            "source_ip": "192.168.100.20",
+            "source_role": "workstation",
+            "destination_ip": "192.168.100.50",
+            "destination_role": "file_server",
+            "destination_port": 445,
+            "service": "gssapi,ntlm,smb",
+            "risk_score": 4,
+            "classification": "Legitimate",
+            "reasons": [
+                "SMB activity detected",
+                "Communication matches expected host role behavior",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:56:47.433591+00:00",
+            "source_ip": "192.168.100.50",
+            "source_role": "file_server",
+            "destination_ip": "192.168.100.255",
+            "destination_role": "unknown",
+            "destination_port": 138,
+            "service": null,
+            "risk_score": 12,
+            "classification": "Suspicious",
+            "reasons": [
+                "Connection to non-approved destination for this host role",
+                "Connection to non-approved destination port for this host role",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:57:54.540235+00:00",
+            "source_ip": "fe80::a00:27ff:feb0:6ee",
+            "source_role": "unknown",
+            "destination_ip": "ff02::2",
+            "destination_role": "unknown",
+            "destination_port": 134,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:59:37.651034+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.251",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:59:37.652206+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::fb",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:00:05.334118+00:00",
+            "source_ip": "192.168.100.30",
+            "source_role": "ehr_app",
+            "destination_ip": "192.168.100.40",
+            "destination_role": "database",
+            "destination_port": 5432,
+            "service": "postgresql",
+            "risk_score": -2,
+            "classification": "Legitimate",
+            "reasons": [
+                "Communication matches expected host role behavior",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:00:05.330598+00:00",
+            "source_ip": "192.168.100.21",
+            "source_role": "admin_workstation",
+            "destination_ip": "192.168.100.30",
+            "destination_role": "ehr_app",
+            "destination_port": 5000,
+            "service": "http",
+            "risk_score": 8,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Connection to non-approved destination port for this host role",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:59:46.553158+00:00",
+            "source_ip": "fe80::a00:27ff:fe99:277e",
+            "source_role": "unknown",
+            "destination_ip": "ff02::fb",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:59:46.570312+00:00",
+            "source_ip": "192.168.100.20",
+            "source_role": "workstation",
+            "destination_ip": "224.0.0.251",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 12,
+            "classification": "Suspicious",
+            "reasons": [
+                "Connection to non-approved destination for this host role",
+                "Connection to non-approved destination port for this host role",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:00:17.867873+00:00",
+            "source_ip": "fe80::a00:27ff:fe99:277e",
+            "source_role": "unknown",
+            "destination_ip": "ff02::fb",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:00:17.867874+00:00",
+            "source_ip": "192.168.100.20",
+            "source_role": "workstation",
+            "destination_ip": "224.0.0.251",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 12,
+            "classification": "Suspicious",
+            "reasons": [
+                "Connection to non-approved destination for this host role",
+                "Connection to non-approved destination port for this host role",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:00:32.090185+00:00",
+            "source_ip": "192.168.100.30",
+            "source_role": "ehr_app",
+            "destination_ip": "192.168.100.40",
+            "destination_role": "database",
+            "destination_port": 5432,
+            "service": "postgresql",
+            "risk_score": -2,
+            "classification": "Legitimate",
+            "reasons": [
+                "Communication matches expected host role behavior",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:00:32.086563+00:00",
+            "source_ip": "192.168.100.20",
+            "source_role": "workstation",
+            "destination_ip": "192.168.100.30",
+            "destination_role": "ehr_app",
+            "destination_port": 5000,
+            "service": "http",
+            "risk_score": 8,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Connection to non-approved destination port for this host role",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:59:46.581443+00:00",
+            "source_ip": "fe80::a00:27ff:fe99:277e",
+            "source_role": "unknown",
+            "destination_ip": "ff02::16",
+            "destination_role": "unknown",
+            "destination_port": 0,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T22:59:46.593189+00:00",
+            "source_ip": "192.168.100.20",
+            "source_role": "workstation",
+            "destination_ip": "224.0.0.22",
+            "destination_role": "unknown",
+            "destination_port": 0,
+            "service": null,
+            "risk_score": 12,
+            "classification": "Suspicious",
+            "reasons": [
+                "Connection to non-approved destination for this host role",
+                "Connection to non-approved destination port for this host role",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:00:49.891658+00:00",
+            "source_ip": "fe80::a00:27ff:fe99:277e",
+            "source_role": "unknown",
+            "destination_ip": "ff02::fb",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:00:49.892091+00:00",
+            "source_ip": "192.168.100.20",
+            "source_role": "workstation",
+            "destination_ip": "224.0.0.251",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 12,
+            "classification": "Suspicious",
+            "reasons": [
+                "Connection to non-approved destination for this host role",
+                "Connection to non-approved destination port for this host role",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:01:53.843989+00:00",
+            "source_ip": "fe80::a00:27ff:fe99:277e",
+            "source_role": "unknown",
+            "destination_ip": "ff02::fb",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:01:53.844521+00:00",
+            "source_ip": "192.168.100.20",
+            "source_role": "workstation",
+            "destination_ip": "224.0.0.251",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 12,
+            "classification": "Suspicious",
+            "reasons": [
+                "Connection to non-approved destination for this host role",
+                "Connection to non-approved destination port for this host role",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:02:50.035234+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.251",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:02:58.794702+00:00",
+            "source_ip": "fe80::a00:27ff:fe8f:df85",
+            "source_role": "unknown",
+            "destination_ip": "ff02::2",
+            "destination_role": "unknown",
+            "destination_port": 134,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:04:02.030271+00:00",
+            "source_ip": "fe80::a00:27ff:fe99:277e",
+            "source_role": "unknown",
+            "destination_ip": "ff02::fb",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:04:02.033618+00:00",
+            "source_ip": "192.168.100.20",
+            "source_role": "workstation",
+            "destination_ip": "224.0.0.251",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 12,
+            "classification": "Suspicious",
+            "reasons": [
+                "Connection to non-approved destination for this host role",
+                "Connection to non-approved destination port for this host role",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:04:39.661753+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "224.0.0.251",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:04:39.662535+00:00",
+            "source_ip": "fe80::843d:554a:af92:6352",
+            "source_role": "unknown",
+            "destination_ip": "ff02::fb",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:05.492391+00:00",
+            "source_ip": "192.168.100.30",
+            "source_role": "ehr_app",
+            "destination_ip": "192.168.100.40",
+            "destination_role": "database",
+            "destination_port": 5432,
+            "service": "postgresql",
+            "risk_score": -2,
+            "classification": "Legitimate",
+            "reasons": [
+                "Communication matches expected host role behavior",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:05.488472+00:00",
+            "source_ip": "192.168.100.21",
+            "source_role": "admin_workstation",
+            "destination_ip": "192.168.100.30",
+            "destination_role": "ehr_app",
+            "destination_port": 5000,
+            "service": "http",
+            "risk_score": 8,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Connection to non-approved destination port for this host role",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:11.000865+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:11.015183+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:11.016979+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:11.160258+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:11.174432+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:11.186250+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:11.187013+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:11.328313+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:11.329003+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:11.385910+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:11.388967+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:11.438379+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:11.445138+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:11.196732+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:17.957934+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:17.979801+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:18.103021+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:18.188235+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:18.319088+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:18.342560+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:18.345587+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:18.346216+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:18.351336+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:11.029909+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:11.177821+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:11.214809+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:11.508741+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:18.426071+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:32.192236+00:00",
+            "source_ip": "192.168.100.30",
+            "source_role": "ehr_app",
+            "destination_ip": "192.168.100.40",
+            "destination_role": "database",
+            "destination_port": 5432,
+            "service": "postgresql",
+            "risk_score": -2,
+            "classification": "Legitimate",
+            "reasons": [
+                "Communication matches expected host role behavior",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:32.188643+00:00",
+            "source_ip": "192.168.100.20",
+            "source_role": "workstation",
+            "destination_ip": "192.168.100.30",
+            "destination_role": "ehr_app",
+            "destination_port": 5000,
+            "service": "http",
+            "risk_score": 8,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Connection to non-approved destination port for this host role",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:34.285396+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:34.335687+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:34.356952+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:08:18.109356+00:00",
+            "source_ip": "fe80::a00:27ff:fe99:277e",
+            "source_role": "unknown",
+            "destination_ip": "ff02::fb",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:08:18.110288+00:00",
+            "source_ip": "192.168.100.20",
+            "source_role": "workstation",
+            "destination_ip": "224.0.0.251",
+            "destination_role": "unknown",
+            "destination_port": 5353,
+            "service": "dns",
+            "risk_score": 12,
+            "classification": "Suspicious",
+            "reasons": [
+                "Connection to non-approved destination for this host role",
+                "Connection to non-approved destination port for this host role",
+                "Network activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-05-12T23:05:11.219553+00:00",
+            "source_ip": "192.168.100.1",
+            "source_role": "unknown",
+            "destination_ip": "192.168.100.100",
+            "destination_role": "monitoring",
+            "destination_port": 443,
+            "service": null,
+            "risk_score": 7,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Source IP is not found in host inventory",
+                "Network activity occurred outside normal working hours"
+            ]
+        }
+    ],
+    "correlated_results": []
+}

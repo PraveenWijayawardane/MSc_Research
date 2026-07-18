@@ -1,0 +1,34 @@
+scores:
+  correlated_host_network_activity: 5
+  correlated_privilege_and_db_access: 8
+  correlated_privilege_and_smb_activity: 8
+  correlated_privilege_and_ssh_activity: 6
+
+  wazuh_success_login: 1
+  wazuh_failed_login: 4
+  wazuh_root_escalation: 5
+  wazuh_sudo_usage: 4
+  wazuh_new_user_created: 7
+  wazuh_service_restart: 2
+
+  zeek_internal_ssh: 2
+  zeek_unauthorized_port: 5
+  zeek_new_internal_destination: 4
+  zeek_smb_activity: 6
+  zeek_rdp_activity: 6
+  zeek_port_scan: 8
+  zeek_large_data_transfer: 5
+
+  off_hours_activity: 3
+  unknown_source_host: 4
+  direct_db_access_from_workstation: 7
+
+reductions:
+  trusted_admin_host: -3
+  expected_communication: -5
+  normal_working_hours: -1
+
+classification:
+  legitimate_max: 5
+  low_suspicion_max: 10
+  suspicious_max: 15

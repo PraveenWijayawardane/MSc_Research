@@ -1,0 +1,72 @@
+{
+  "192.168.100.10": {
+    "hostname": "attacker-kali",
+    "role": "attacker",
+    "trusted_admin_host": false,
+    "allowed_destinations": [],
+    "allowed_ports": []
+  },
+  "192.168.100.20": {
+    "hostname": "user-pc-01",
+    "role": "workstation",
+    "trusted_admin_host": false,
+    "allowed_destinations": ["192.168.100.30", "192.168.100.50"],
+    "allowed_ports": [80, 443, 445]
+  },
+  "192.168.100.21": {
+    "hostname": "admin-pc-01",
+    "role": "admin_workstation",
+    "trusted_admin_host": true,
+    "allowed_destinations": [
+      "192.168.100.20",
+      "192.168.100.30",
+      "192.168.100.40",
+      "192.168.100.50",
+      "192.168.100.100",
+      "192.168.100.120"
+    ],
+    "allowed_ports": [22, 80, 443, 5432, 5601, 9200]
+  },
+  "192.168.100.30": {
+    "hostname": "ehr-app-server-01",
+    "role": "ehr_app",
+    "trusted_admin_host": false,
+    "allowed_destinations": ["192.168.100.40", "192.168.100.100"],
+    "allowed_ports": [5432, 1514, 1515]
+  },
+  "192.168.100.40": {
+    "hostname": "ehr-db-server-01",
+    "role": "database",
+    "trusted_admin_host": false,
+    "allowed_destinations": ["192.168.100.100"],
+    "allowed_ports": [1514, 1515]
+  },
+  "192.168.100.50": {
+    "hostname": "file-server-01",
+    "role": "file_server",
+    "trusted_admin_host": false,
+    "allowed_destinations": ["192.168.100.100"],
+    "allowed_ports": [1514, 1515, 445]
+  },
+  "192.168.100.100": {
+    "hostname": "monitoring-server-01",
+    "role": "monitoring",
+    "trusted_admin_host": true,
+    "allowed_destinations": [
+      "192.168.100.20",
+      "192.168.100.21",
+      "192.168.100.30",
+      "192.168.100.40",
+      "192.168.100.50",
+      "192.168.100.120"
+    ],
+    "allowed_ports": [22, 1514, 1515, 9200, 5601, 55000]
+  },
+  "192.168.100.120": {
+    "hostname": "zeek-sensor-02",
+    "role": "network_sensor",
+    "trusted_admin_host": true,
+    "allowed_destinations": ["192.168.100.100"],
+    "allowed_ports": [22, 1514, 1515, 9200]
+  }
+}

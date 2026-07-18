@@ -1,0 +1,54 @@
+[
+  {
+    "ts": "2026-05-11T12:08:50.000+0000",
+    "uid": "C1",
+    "id.orig_h": "192.168.100.20",
+    "id.orig_p": 45622,
+    "id.resp_h": "192.168.100.30",
+    "id.resp_p": 80,
+    "proto": "tcp",
+    "service": "http",
+    "duration": 2.4,
+    "orig_bytes": 1200,
+    "resp_bytes": 8500
+  },
+  {
+    "ts": "2026-05-11T12:10:10.000+0000",
+    "uid": "C2",
+    "id.orig_h": "192.168.100.20",
+    "id.orig_p": 49122,
+    "id.resp_h": "192.168.100.40",
+    "id.resp_p": 5432,
+    "proto": "tcp",
+    "service": "postgresql",
+    "duration": 1.2,
+    "orig_bytes": 600,
+    "resp_bytes": 900
+  },
+  {
+    "ts": "2026-05-11T12:12:30.000+0000",
+    "uid": "C3",
+    "id.orig_h": "192.168.100.10",
+    "id.orig_p": 40001,
+    "id.resp_h": "192.168.100.30",
+    "id.resp_p": 22,
+    "proto": "tcp",
+    "service": "ssh",
+    "duration": 0.8,
+    "orig_bytes": 300,
+    "resp_bytes": 500
+  },
+  {
+    "ts": "2026-05-11T12:13:10.000+0000",
+    "uid": "C4",
+    "id.orig_h": "192.168.100.10",
+    "id.orig_p": 40002,
+    "id.resp_h": "192.168.100.40",
+    "id.resp_p": 445,
+    "proto": "tcp",
+    "service": "smb",
+    "duration": 3.1,
+    "orig_bytes": 2000,
+    "resp_bytes": 1500
+  }
+]

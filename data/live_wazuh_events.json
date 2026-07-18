@@ -1,0 +1,259 @@
+[
+    {
+        "_index": "wazuh-alerts-4.x-2026.05.14",
+        "_id": "nfAFKJ4BdNcQERvcTi9A",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sshd-session"
+            },
+            "agent": {
+                "name": "monitoring-server-01"
+            },
+            "data": {
+                "srcuser": "vagrant",
+                "uid": "0",
+                "dstuser": "vagrant"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "May 14 19:44:49 monitoring-server-01 sshd-session[8621]: pam_unix(sshd:session): session opened for user vagrant(uid=1000) by vagrant(uid=0)",
+            "timestamp": "2026-05-15T01:14:51.017+0530"
+        },
+        "sort": [
+            1778787891017
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.05.14",
+        "_id": "nPAFKJ4BdNcQERvcTi9A",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sshd-session"
+            },
+            "agent": {
+                "name": "monitoring-server-01"
+            },
+            "data": {
+                "dstuser": "vagrant"
+            },
+            "rule": {
+                "description": "sshd: authentication success.",
+                "id": "5715"
+            },
+            "full_log": "May 14 19:44:49 monitoring-server-01 sshd-session[8621]: Accepted password for vagrant from 192.168.100.1 port 50291 ssh2",
+            "timestamp": "2026-05-15T01:14:51.016+0530"
+        },
+        "sort": [
+            1778787891016
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.05.14",
+        "_id": "m_ADKJ4BdNcQERvcZS-z",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sshd-session"
+            },
+            "agent": {
+                "name": "monitoring-server-01"
+            },
+            "data": {
+                "dstuser": "vagrant"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "May 14 19:42:45 monitoring-server-01 sshd-session[8457]: pam_unix(sshd:session): session closed for user vagrant",
+            "timestamp": "2026-05-15T01:12:46.901+0530"
+        },
+        "sort": [
+            1778787766901
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.05.14",
+        "_id": "mvADKJ4BdNcQERvcKy8M",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "name": "monitoring-server-01"
+            },
+            "data": {
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "May 14 19:42:30 monitoring-server-01 sudo[8613]: pam_unix(sudo:session): session closed for user root",
+            "timestamp": "2026-05-15T01:12:30.866+0530"
+        },
+        "sort": [
+            1778787750866
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.05.14",
+        "_id": "mfADKJ4BdNcQERvcKy8M",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "name": "monitoring-server-01"
+            },
+            "data": {
+                "srcuser": "vagrant",
+                "uid": "1000",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "May 14 19:42:29 monitoring-server-01 sudo[8613]: pam_unix(sudo:session): session opened for user root(uid=0) by vagrant(uid=1000)",
+            "timestamp": "2026-05-15T01:12:30.865+0530"
+        },
+        "sort": [
+            1778787750865
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.05.14",
+        "_id": "mPADKJ4BdNcQERvcKy8M",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "name": "monitoring-server-01"
+            },
+            "data": {
+                "srcuser": "vagrant",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "Successful sudo to ROOT executed.",
+                "id": "5402"
+            },
+            "full_log": "May 14 19:42:29 monitoring-server-01 sudo[8613]:  vagrant : TTY=pts/1 ; PWD=/home/vagrant ; USER=root ; COMMAND=/sbin/ss -tulpn",
+            "timestamp": "2026-05-15T01:12:30.864+0530"
+        },
+        "sort": [
+            1778787750864
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.05.14",
+        "_id": "ffDeJ54BdNcQERvcTy9d",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sshd-session"
+            },
+            "agent": {
+                "name": "monitoring-server-01"
+            },
+            "data": {
+                "srcuser": "vagrant",
+                "uid": "0",
+                "dstuser": "vagrant"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "May 14 19:02:16 monitoring-server-01 sshd-session[8457]: pam_unix(sshd:session): session opened for user vagrant(uid=1000) by vagrant(uid=0)",
+            "timestamp": "2026-05-15T00:32:17.660+0530"
+        },
+        "sort": [
+            1778785337660
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.05.14",
+        "_id": "fPDeJ54BdNcQERvcTy9d",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sshd-session"
+            },
+            "agent": {
+                "name": "monitoring-server-01"
+            },
+            "data": {
+                "dstuser": "vagrant"
+            },
+            "rule": {
+                "description": "sshd: authentication success.",
+                "id": "5715"
+            },
+            "full_log": "May 14 19:02:16 monitoring-server-01 sshd-session[8457]: Accepted password for vagrant from 192.168.100.1 port 61775 ssh2",
+            "timestamp": "2026-05-15T00:32:17.660+0530"
+        },
+        "sort": [
+            1778785337660
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.05.14",
+        "_id": "e_DcJ54BdNcQERvc3S83",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sshd-session"
+            },
+            "agent": {
+                "name": "monitoring-server-01"
+            },
+            "data": {
+                "dstuser": "by"
+            },
+            "rule": {
+                "description": "sshd: connection reset",
+                "id": "5762"
+            },
+            "full_log": "May 14 19:00:43 monitoring-server-01 sshd-session[8453]: Connection reset by 192.168.100.1 port 61774 [preauth]",
+            "timestamp": "2026-05-15T00:30:43.555+0530"
+        },
+        "sort": [
+            1778785243555
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.05.14",
+        "_id": "evDcJ54BdNcQERvc3S83",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sshd-session"
+            },
+            "agent": {
+                "name": "monitoring-server-01"
+            },
+            "data": {
+                "dstuser": "vagrant"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "May 14 19:00:40 monitoring-server-01 sshd-session[7908]: pam_unix(sshd:session): session closed for user vagrant",
+            "timestamp": "2026-05-15T00:30:41.544+0530"
+        },
+        "sort": [
+            1778785241544
+        ]
+    }
+]

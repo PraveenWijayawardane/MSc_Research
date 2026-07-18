@@ -1,0 +1,148 @@
+[
+  {
+    "_source": {
+      "agent": {
+        "ip": "192.168.100.10",
+        "name": "attacker-kali",
+        "id": "001"
+      },
+      "data": {
+        "srcuser": "vagrant"
+      },
+      "rule": {
+        "id": "5710",
+        "description": "sshd: authentication failed."
+      },
+      "timestamp": "2026-05-11T03:22:00.000+0000"
+    }
+  },
+  {
+    "_source": {
+      "agent": {
+        "ip": "192.168.100.20",
+        "name": "user-pc-01",
+        "id": "002"
+      },
+      "data": {
+        "srcuser": "vagrant",
+        "uid": "0",
+        "dstuser": "root"
+      },
+      "rule": {
+        "id": "5501",
+        "description": "PAM: Login session opened."
+      },
+      "timestamp": "2026-05-11T12:09:07.175+0000"
+    }
+  },
+  {
+    "_source": {
+      "agent": {
+        "ip": "192.168.100.21",
+        "name": "admin-pc-01",
+        "id": "003"
+      },
+      "data": {
+        "srcuser": "vagrant",
+        "dstuser": "vagrant"
+      },
+      "rule": {
+        "id": "5501",
+        "description": "PAM: Login session opened."
+      },
+      "timestamp": "2026-05-11T10:15:00.000+0000"
+    }
+  },
+  {
+    "_source": {
+      "agent": {
+        "ip": "192.168.100.30",
+        "name": "ehr-app-server-01",
+        "id": "004"
+      },
+      "data": {
+        "srcuser": "vagrant",
+        "dstuser": "vagrant"
+      },
+      "rule": {
+        "id": "5501",
+        "description": "PAM: Login session opened."
+      },
+      "timestamp": "2026-05-11T10:30:00.000+0000"
+    }
+  },
+  {
+    "_source": {
+      "agent": {
+        "ip": "192.168.100.40",
+        "name": "ehr-db-server-01",
+        "id": "005"
+      },
+      "data": {
+        "srcuser": "vagrant",
+        "uid": "0",
+        "dstuser": "root"
+      },
+      "rule": {
+        "id": "5501",
+        "description": "PAM: Login session opened."
+      },
+      "timestamp": "2026-05-11T11:00:00.000+0000"
+    }
+  },
+  {
+    "_source": {
+      "agent": {
+        "ip": "192.168.100.50",
+        "name": "file-server-01",
+        "id": "006"
+      },
+      "data": {
+        "srcuser": "vagrant",
+        "dstuser": "vagrant"
+      },
+      "rule": {
+        "id": "5501",
+        "description": "PAM: Login session opened."
+      },
+      "timestamp": "2026-05-11T11:20:00.000+0000"
+    }
+  },
+  {
+    "_source": {
+      "agent": {
+        "ip": "192.168.100.100",
+        "name": "monitoring-server-01",
+        "id": "007"
+      },
+      "data": {
+        "srcuser": "vagrant",
+        "uid": "0",
+        "dstuser": "root"
+      },
+      "rule": {
+        "id": "5501",
+        "description": "PAM: Login session opened."
+      },
+      "timestamp": "2026-05-11T09:45:00.000+0000"
+    }
+  },
+  {
+    "_source": {
+      "agent": {
+        "ip": "192.168.100.120",
+        "name": "zeek-sensor-02",
+        "id": "008"
+      },
+      "data": {
+        "srcuser": "vagrant",
+        "dstuser": "vagrant"
+      },
+      "rule": {
+        "id": "5501",
+        "description": "PAM: Login session opened."
+      },
+      "timestamp": "2026-05-11T09:50:00.000+0000"
+    }
+  }
+]
