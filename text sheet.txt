@@ -1,0 +1,64 @@
+3osPhI44*d.y*cd4ZcN4SgZqgp.+I2.v
+
+#wazuh password list
+
+sudo tar -O -xvf /root/wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt
+
+wazuh-install-files/wazuh-passwords.txt
+# Admin user for the web user interface and Wazuh indexer. Use this user to log in to Wazuh dashboard
+  indexer_username: 'admin'
+  indexer_password: 'zo7F5MaVCIzU70*.sA*rYkJnqZSh6Nmr'
+
+# Anomaly detection user for the web user interface
+  indexer_username: 'anomalyadmin'
+  indexer_password: '4mkuL9nMuuqO0Ybn.yUvbrx?fD2I7DfX'
+
+# Wazuh dashboard user for establishing the connection with Wazuh indexer
+  indexer_username: 'kibanaserver'
+  indexer_password: 'sFb8kv.yIvz78.jW1DTbsh8ajyKFnpCT'
+
+# Regular Dashboard user, only has read permissions to all indices and all permissions on the .kibana index
+  indexer_username: 'kibanaro'
+  indexer_password: 'Zq*AS8BrWB8BH*mHfVWAb3j*6QhYwHpg'
+
+# Filebeat user for CRUD operations on Wazuh indices
+  indexer_username: 'logstash'
+  indexer_password: 'xcom?uX?Of?9xVyKVyxL1f?GAtvAvTtd'
+
+# User with READ access to all indices
+  indexer_username: 'readall'
+  indexer_password: 'NQcWO3yRfScBUZw45nH*tbu?4QiNsCBH'
+
+# User with permissions to perform snapshot and restore operations
+  indexer_username: 'snapshotrestore'
+  indexer_password: 'uBup6DhqWOrTyvDhX4+YkrIcJuFbTw9f'
+
+# Password for wazuh API user
+  api_username: 'wazuh'
+  api_password: 'J?YGSk6H37xCYSAjj8rYTMrFoeHpVD+H'
+
+# Password for wazuh-wui API user
+  api_username: 'wazuh-wui'
+  api_password: 'mnW?nB0g?3U3HAZiPL7bn+63SSmggLB5'
+
+
+============================= File server handle commands ===================
+
+sudo apt install -y smbclient cifs-utils
+smbclient -L //192.168.100.50 -N
+smbclient //192.168.100.50/patient-records -N
+
+Inside smbclient:
+
+ls
+get report1.txt
+put test.txt [ create test.txt file before uploading ]
+exit
+
+
+======== wazuh live log fetching using ssh tunnel ==========
+
+//run this on separate powershell before run the wazuh_live_collector.py
+
+ssh-keygen -R 192.168.100.100
+ssh -L 9200:127.0.0.1:9200 vagrant@192.168.100.100
