@@ -1,7 +1,775 @@
 {
     "wazuh_results": [
         {
-            "timestamp": "2026-05-15T01:14:51.017+0530",
+            "timestamp": "2026-07-19T22:20:03.304+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:20:03.285+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 10,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:20:03.275+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5402",
+            "description": "Successful sudo to ROOT executed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:20:03.256+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:20:03.218+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 10,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:20:03.217+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5402",
+            "description": "Successful sudo to ROOT executed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:15:02.209+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:15:02.165+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5402",
+            "description": "Successful sudo to ROOT executed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:15:02.165+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 10,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:15:02.164+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:15:02.146+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 10,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:15:02.145+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5402",
+            "description": "Successful sudo to ROOT executed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:10:02.497+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 10,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:10:02.497+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:10:02.479+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:10:02.479+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5402",
+            "description": "Successful sudo to ROOT executed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:10:02.457+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 10,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:10:02.455+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5402",
+            "description": "Successful sudo to ROOT executed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:05:02.556+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:05:02.514+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 10,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:05:02.482+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5402",
+            "description": "Successful sudo to ROOT executed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:05:02.481+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:05:02.433+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 10,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:05:02.433+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5402",
+            "description": "Successful sudo to ROOT executed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:00:07.520+0530",
+            "host": "file-server-01",
+            "ip": "192.168.100.50",
+            "role": "file_server",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 3,
+            "classification": "Legitimate",
+            "reasons": [
+                "Activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:00:07.511+0530",
+            "host": "file-server-01",
+            "ip": "192.168.100.50",
+            "role": "file_server",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:00:07.479+0530",
+            "host": "file-server-01",
+            "ip": "192.168.100.50",
+            "role": "file_server",
+            "rule_id": "5715",
+            "description": "sshd: authentication success.",
+            "risk_score": 3,
+            "classification": "Legitimate",
+            "reasons": [
+                "Activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:00:07.461+0530",
+            "host": "ehr-db-server-01",
+            "ip": "192.168.100.40",
+            "role": "database",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 3,
+            "classification": "Legitimate",
+            "reasons": [
+                "Activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:00:07.447+0530",
+            "host": "ehr-db-server-01",
+            "ip": "192.168.100.40",
+            "role": "database",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:00:07.425+0530",
+            "host": "ehr-db-server-01",
+            "ip": "192.168.100.40",
+            "role": "database",
+            "rule_id": "5715",
+            "description": "sshd: authentication success.",
+            "risk_score": 3,
+            "classification": "Legitimate",
+            "reasons": [
+                "Activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:00:03.421+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:00:03.420+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 10,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:00:03.377+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5402",
+            "description": "Successful sudo to ROOT executed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:00:03.377+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:00:03.370+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 10,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T22:00:03.369+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5402",
+            "description": "Successful sudo to ROOT executed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:55:02.026+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:55:01.983+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 10,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:55:01.982+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5402",
+            "description": "Successful sudo to ROOT executed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:55:01.962+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5402",
+            "description": "Successful sudo to ROOT executed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:55:01.962+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 10,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:55:01.962+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:50:02.926+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:50:02.916+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 10,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:50:02.909+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5402",
+            "description": "Successful sudo to ROOT executed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:50:02.901+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:50:02.894+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 10,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:50:02.884+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5402",
+            "description": "Successful sudo to ROOT executed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:48:14.430+0530",
             "host": "monitoring-server-01",
             "ip": "192.168.100.100",
             "role": "monitoring",
@@ -17,7 +785,7 @@
             ]
         },
         {
-            "timestamp": "2026-05-15T01:14:51.016+0530",
+            "timestamp": "2026-07-19T21:48:14.430+0530",
             "host": "monitoring-server-01",
             "ip": "192.168.100.100",
             "role": "monitoring",
@@ -31,7 +799,7 @@
             ]
         },
         {
-            "timestamp": "2026-05-15T01:12:46.901+0530",
+            "timestamp": "2026-07-19T21:48:06.419+0530",
             "host": "monitoring-server-01",
             "ip": "192.168.100.100",
             "role": "monitoring",
@@ -45,7 +813,134 @@
             ]
         },
         {
-            "timestamp": "2026-05-15T01:12:30.866+0530",
+            "timestamp": "2026-07-19T21:45:01.841+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:45:01.840+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 10,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:45:01.829+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5402",
+            "description": "Successful sudo to ROOT executed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:45:01.819+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:45:01.799+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5402",
+            "description": "Successful sudo to ROOT executed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:45:01.799+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 10,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:45:01.596+0530",
+            "host": "monitoring-server-01",
+            "ip": "192.168.100.100",
+            "role": "monitoring",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 0,
+            "classification": "Legitimate",
+            "reasons": [
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:44:57.593+0530",
+            "host": "monitoring-server-01",
+            "ip": "192.168.100.100",
+            "role": "monitoring",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 5,
+            "classification": "Legitimate",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:44:57.593+0530",
             "host": "monitoring-server-01",
             "ip": "192.168.100.100",
             "role": "monitoring",
@@ -61,7 +956,7 @@
             ]
         },
         {
-            "timestamp": "2026-05-15T01:12:30.865+0530",
+            "timestamp": "2026-07-19T21:43:21.531+0530",
             "host": "monitoring-server-01",
             "ip": "192.168.100.100",
             "role": "monitoring",
@@ -78,23 +973,7 @@
             ]
         },
         {
-            "timestamp": "2026-05-15T01:12:30.864+0530",
-            "host": "monitoring-server-01",
-            "ip": "192.168.100.100",
-            "role": "monitoring",
-            "rule_id": "5402",
-            "description": "Successful sudo to ROOT executed.",
-            "risk_score": 9,
-            "classification": "Low Suspicion",
-            "reasons": [
-                "Root-level session or privilege escalation detected",
-                "Sudo command usage detected",
-                "Activity occurred outside normal working hours",
-                "Activity came from trusted admin/monitoring host"
-            ]
-        },
-        {
-            "timestamp": "2026-05-15T00:32:17.660+0530",
+            "timestamp": "2026-07-19T21:43:21.531+0530",
             "host": "monitoring-server-01",
             "ip": "192.168.100.100",
             "role": "monitoring",
@@ -110,7 +989,39 @@
             ]
         },
         {
-            "timestamp": "2026-05-15T00:32:17.660+0530",
+            "timestamp": "2026-07-19T21:43:21.530+0530",
+            "host": "monitoring-server-01",
+            "ip": "192.168.100.100",
+            "role": "monitoring",
+            "rule_id": "5402",
+            "description": "Successful sudo to ROOT executed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:42:59.464+0530",
+            "host": "monitoring-server-01",
+            "ip": "192.168.100.100",
+            "role": "monitoring",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 6,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:42:59.463+0530",
             "host": "monitoring-server-01",
             "ip": "192.168.100.100",
             "role": "monitoring",
@@ -124,21 +1035,383 @@
             ]
         },
         {
-            "timestamp": "2026-05-15T00:30:43.555+0530",
-            "host": "monitoring-server-01",
-            "ip": "192.168.100.100",
-            "role": "monitoring",
-            "rule_id": "5762",
-            "description": "sshd: connection reset",
-            "risk_score": 0,
-            "classification": "Legitimate",
+            "timestamp": "2026-07-19T21:40:03.078+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
             "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
                 "Activity occurred outside normal working hours",
                 "Activity came from trusted admin/monitoring host"
             ]
         },
         {
-            "timestamp": "2026-05-15T00:30:41.544+0530",
+            "timestamp": "2026-07-19T21:40:03.068+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 10,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:40:03.060+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5402",
+            "description": "Successful sudo to ROOT executed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:40:03.054+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:40:03.042+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 10,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:40:02.896+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5402",
+            "description": "Successful sudo to ROOT executed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:35:01.871+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 10,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:35:01.871+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:35:01.829+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:35:01.829+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5402",
+            "description": "Successful sudo to ROOT executed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:35:01.812+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 10,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:35:01.812+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5402",
+            "description": "Successful sudo to ROOT executed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:30:06.935+0530",
+            "host": "file-server-01",
+            "ip": "192.168.100.50",
+            "role": "file_server",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 3,
+            "classification": "Legitimate",
+            "reasons": [
+                "Activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:30:06.927+0530",
+            "host": "file-server-01",
+            "ip": "192.168.100.50",
+            "role": "file_server",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:30:06.911+0530",
+            "host": "file-server-01",
+            "ip": "192.168.100.50",
+            "role": "file_server",
+            "rule_id": "5715",
+            "description": "sshd: authentication success.",
+            "risk_score": 3,
+            "classification": "Legitimate",
+            "reasons": [
+                "Activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:30:06.653+0530",
+            "host": "ehr-db-server-01",
+            "ip": "192.168.100.40",
+            "role": "database",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 3,
+            "classification": "Legitimate",
+            "reasons": [
+                "Activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:30:06.650+0530",
+            "host": "ehr-db-server-01",
+            "ip": "192.168.100.40",
+            "role": "database",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:30:06.627+0530",
+            "host": "ehr-db-server-01",
+            "ip": "192.168.100.40",
+            "role": "database",
+            "rule_id": "5715",
+            "description": "sshd: authentication success.",
+            "risk_score": 3,
+            "classification": "Legitimate",
+            "reasons": [
+                "Activity occurred outside normal working hours"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:30:01.515+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:30:01.514+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 10,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:30:01.470+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:30:01.470+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5402",
+            "description": "Successful sudo to ROOT executed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:30:01.469+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 10,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:30:01.450+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5402",
+            "description": "Successful sudo to ROOT executed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:26:02.944+0530",
             "host": "monitoring-server-01",
             "ip": "192.168.100.100",
             "role": "monitoring",
@@ -147,6 +1420,167 @@
             "risk_score": 0,
             "classification": "Legitimate",
             "reasons": [
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:26:02.944+0530",
+            "host": "monitoring-server-01",
+            "ip": "192.168.100.100",
+            "role": "monitoring",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 6,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:26:02.944+0530",
+            "host": "monitoring-server-01",
+            "ip": "192.168.100.100",
+            "role": "monitoring",
+            "rule_id": "5715",
+            "description": "sshd: authentication success.",
+            "risk_score": 0,
+            "classification": "Legitimate",
+            "reasons": [
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:25:02.627+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:25:02.583+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:25:02.582+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 10,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:25:02.581+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5402",
+            "description": "Successful sudo to ROOT executed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:25:02.564+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 10,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:25:02.564+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5402",
+            "description": "Successful sudo to ROOT executed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:20:03.837+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5502",
+            "description": "PAM: Login session closed.",
+            "risk_score": 9,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
+                "Activity occurred outside normal working hours",
+                "Activity came from trusted admin/monitoring host"
+            ]
+        },
+        {
+            "timestamp": "2026-07-19T21:20:03.831+0530",
+            "host": "admin-pc-01",
+            "ip": "192.168.100.21",
+            "role": "admin_workstation",
+            "rule_id": "5501",
+            "description": "PAM: Login session opened.",
+            "risk_score": 10,
+            "classification": "Low Suspicion",
+            "reasons": [
+                "Successful PAM login/session opened detected",
+                "Root-level session or privilege escalation detected",
+                "Sudo command usage detected",
                 "Activity occurred outside normal working hours",
                 "Activity came from trusted admin/monitoring host"
             ]

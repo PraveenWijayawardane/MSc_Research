@@ -7,11 +7,6 @@ OUTPUT_JSON_FILE = "data/live_zeek_conn.json"
 
 
 def convert_zeek_timestamp(ts):
-    """
-    Convert Zeek epoch timestamp to ISO format.
-    Example:
-    1778614092.938648 -> 2026-05-13T04:08:12.938648+00:00
-    """
     try:
         return datetime.fromtimestamp(float(ts), tz=timezone.utc).isoformat()
     except Exception:
@@ -19,12 +14,8 @@ def convert_zeek_timestamp(ts):
 
 
 def convert_value(value):
-    """
-    Convert Zeek unset/empty values into cleaner Python values.
-    """
     if value in ["-", "(empty)", ""]:
         return None
-
     return value
 
 
@@ -59,7 +50,6 @@ def parse_zeek_conn_log(file_path):
             for field, value in zip(fields, values):
                 event[field] = convert_value(value)
 
-            # Convert selected numeric fields
             for port_field in ["id.orig_p", "id.resp_p"]:
                 if event.get(port_field) is not None:
                     try:
@@ -84,7 +74,6 @@ def parse_zeek_conn_log(file_path):
                     except Exception:
                         pass
 
-            # Your risk_engine.py expects this timestamp key
             event["ts"] = convert_zeek_timestamp(event.get("ts"))
 
             events.append(event)

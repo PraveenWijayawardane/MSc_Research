@@ -1,7 +1,1287 @@
 [
     {
-        "_index": "wazuh-alerts-4.x-2026.05.14",
-        "_id": "nfAFKJ4BdNcQERvcTi9A",
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "ARRJe58B-PQ0e09tB9NQ",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 16:50:01 admin-pc-01 sudo[5420]: pam_unix(sudo:session): session closed for user root",
+            "timestamp": "2026-07-19T22:20:03.304+0530"
+        },
+        "sort": [
+            1784479803304
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "ABRJe58B-PQ0e09tB9NQ",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "uid": "0",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 16:50:01 admin-pc-01 sudo[5420]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)",
+            "timestamp": "2026-07-19T22:20:03.285+0530"
+        },
+        "sort": [
+            1784479803285
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "_xRJe58B-PQ0e09tB9JQ",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "srcuser": "root",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "Successful sudo to ROOT executed.",
+                "id": "5402"
+            },
+            "full_log": "Jul 19 16:50:01 admin-pc-01 sudo[5420]:     root : PWD=/root ; USER=root ; COMMAND=/usr/bin/chmod 666 /var/log/admin-pc-telemetry.log",
+            "timestamp": "2026-07-19T22:20:03.275+0530"
+        },
+        "sort": [
+            1784479803275
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "_hRJe58B-PQ0e09tB9JQ",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 16:50:01 admin-pc-01 sudo[5418]: pam_unix(sudo:session): session closed for user root",
+            "timestamp": "2026-07-19T22:20:03.256+0530"
+        },
+        "sort": [
+            1784479803256
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "_BRJe58B-PQ0e09tB9JQ",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "uid": "0",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 16:50:01 admin-pc-01 sudo[5418]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)",
+            "timestamp": "2026-07-19T22:20:03.218+0530"
+        },
+        "sort": [
+            1784479803218
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "_RRJe58B-PQ0e09tB9JQ",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "srcuser": "root",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "Successful sudo to ROOT executed.",
+                "id": "5402"
+            },
+            "full_log": "Jul 19 16:50:01 admin-pc-01 sudo[5418]:     root : PWD=/root ; USER=root ; COMMAND=/usr/bin/touch /var/log/admin-pc-telemetry.log",
+            "timestamp": "2026-07-19T22:20:03.217+0530"
+        },
+        "sort": [
+            1784479803217
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "3BREe58B-PQ0e09tX9GL",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 16:45:01 admin-pc-01 sudo[5388]: pam_unix(sudo:session): session closed for user root",
+            "timestamp": "2026-07-19T22:15:02.209+0530"
+        },
+        "sort": [
+            1784479502209
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "2hREe58B-PQ0e09tX9GL",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "srcuser": "root",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "Successful sudo to ROOT executed.",
+                "id": "5402"
+            },
+            "full_log": "Jul 19 16:45:01 admin-pc-01 sudo[5388]:     root : PWD=/root ; USER=root ; COMMAND=/usr/bin/chmod 666 /var/log/admin-pc-telemetry.log",
+            "timestamp": "2026-07-19T22:15:02.165+0530"
+        },
+        "sort": [
+            1784479502165
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "2xREe58B-PQ0e09tX9GL",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "uid": "0",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 16:45:01 admin-pc-01 sudo[5388]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)",
+            "timestamp": "2026-07-19T22:15:02.165+0530"
+        },
+        "sort": [
+            1784479502165
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "2RREe58B-PQ0e09tX9GL",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 16:45:01 admin-pc-01 sudo[5386]: pam_unix(sudo:session): session closed for user root",
+            "timestamp": "2026-07-19T22:15:02.164+0530"
+        },
+        "sort": [
+            1784479502164
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "2BREe58B-PQ0e09tX9GL",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "uid": "0",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 16:45:01 admin-pc-01 sudo[5386]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)",
+            "timestamp": "2026-07-19T22:15:02.146+0530"
+        },
+        "sort": [
+            1784479502146
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "1xREe58B-PQ0e09tX9GL",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "srcuser": "root",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "Successful sudo to ROOT executed.",
+                "id": "5402"
+            },
+            "full_log": "Jul 19 16:45:01 admin-pc-01 sudo[5386]:     root : PWD=/root ; USER=root ; COMMAND=/usr/bin/touch /var/log/admin-pc-telemetry.log",
+            "timestamp": "2026-07-19T22:15:02.145+0530"
+        },
+        "sort": [
+            1784479502145
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "zxQ_e58B-PQ0e09t3tHn",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "uid": "0",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 16:40:01 admin-pc-01 sudo[5360]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)",
+            "timestamp": "2026-07-19T22:10:02.497+0530"
+        },
+        "sort": [
+            1784479202497
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "zhQ_e58B-PQ0e09t3tHn",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 16:40:01 admin-pc-01 sudo[5360]: pam_unix(sudo:session): session closed for user root",
+            "timestamp": "2026-07-19T22:10:02.497+0530"
+        },
+        "sort": [
+            1784479202497
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "zBQ_e58B-PQ0e09t3tHn",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 16:40:01 admin-pc-01 sudo[5358]: pam_unix(sudo:session): session closed for user root",
+            "timestamp": "2026-07-19T22:10:02.479+0530"
+        },
+        "sort": [
+            1784479202479
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "zRQ_e58B-PQ0e09t3tHn",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "srcuser": "root",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "Successful sudo to ROOT executed.",
+                "id": "5402"
+            },
+            "full_log": "Jul 19 16:40:01 admin-pc-01 sudo[5360]:     root : PWD=/root ; USER=root ; COMMAND=/usr/bin/chmod 666 /var/log/admin-pc-telemetry.log",
+            "timestamp": "2026-07-19T22:10:02.479+0530"
+        },
+        "sort": [
+            1784479202479
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "yxQ_e58B-PQ0e09t3tHn",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "uid": "0",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 16:40:01 admin-pc-01 sudo[5358]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)",
+            "timestamp": "2026-07-19T22:10:02.457+0530"
+        },
+        "sort": [
+            1784479202457
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "yhQ_e58B-PQ0e09t3tHn",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "srcuser": "root",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "Successful sudo to ROOT executed.",
+                "id": "5402"
+            },
+            "full_log": "Jul 19 16:40:01 admin-pc-01 sudo[5358]:     root : PWD=/root ; USER=root ; COMMAND=/usr/bin/touch /var/log/admin-pc-telemetry.log",
+            "timestamp": "2026-07-19T22:10:02.455+0530"
+        },
+        "sort": [
+            1784479202455
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "xxQ7e58B-PQ0e09tN9ET",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 16:35:01 admin-pc-01 sudo[5332]: pam_unix(sudo:session): session closed for user root",
+            "timestamp": "2026-07-19T22:05:02.556+0530"
+        },
+        "sort": [
+            1784478902556
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "xhQ7e58B-PQ0e09tN9ET",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "uid": "0",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 16:35:01 admin-pc-01 sudo[5332]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)",
+            "timestamp": "2026-07-19T22:05:02.514+0530"
+        },
+        "sort": [
+            1784478902514
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "xRQ7e58B-PQ0e09tN9ET",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "srcuser": "root",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "Successful sudo to ROOT executed.",
+                "id": "5402"
+            },
+            "full_log": "Jul 19 16:35:01 admin-pc-01 sudo[5332]:     root : PWD=/root ; USER=root ; COMMAND=/usr/bin/chmod 666 /var/log/admin-pc-telemetry.log",
+            "timestamp": "2026-07-19T22:05:02.482+0530"
+        },
+        "sort": [
+            1784478902482
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "xBQ7e58B-PQ0e09tN9ET",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 16:35:01 admin-pc-01 sudo[5330]: pam_unix(sudo:session): session closed for user root",
+            "timestamp": "2026-07-19T22:05:02.481+0530"
+        },
+        "sort": [
+            1784478902481
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "whQ7e58B-PQ0e09tN9ET",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "uid": "0",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 16:35:01 admin-pc-01 sudo[5330]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)",
+            "timestamp": "2026-07-19T22:05:02.433+0530"
+        },
+        "sort": [
+            1784478902433
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "wxQ7e58B-PQ0e09tN9ET",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "srcuser": "root",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "Successful sudo to ROOT executed.",
+                "id": "5402"
+            },
+            "full_log": "Jul 19 16:35:01 admin-pc-01 sudo[5330]:     root : PWD=/root ; USER=root ; COMMAND=/usr/bin/touch /var/log/admin-pc-telemetry.log",
+            "timestamp": "2026-07-19T22:05:02.433+0530"
+        },
+        "sort": [
+            1784478902433
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "vxQ2e58B-PQ0e09tttF3",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sshd-session"
+            },
+            "agent": {
+                "ip": "192.168.100.50",
+                "name": "file-server-01"
+            },
+            "data": {
+                "dstuser": "vagrant"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 16:30:06 file-server-01 sshd-session[4904]: pam_unix(sshd:session): session closed for user vagrant",
+            "timestamp": "2026-07-19T22:00:07.520+0530"
+        },
+        "sort": [
+            1784478607520
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "vhQ2e58B-PQ0e09tttF3",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sshd-session"
+            },
+            "agent": {
+                "ip": "192.168.100.50",
+                "name": "file-server-01"
+            },
+            "data": {
+                "srcuser": "vagrant",
+                "uid": "0",
+                "dstuser": "vagrant"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 16:30:06 file-server-01 sshd-session[4904]: pam_unix(sshd:session): session opened for user vagrant(uid=1000) by vagrant(uid=0)",
+            "timestamp": "2026-07-19T22:00:07.511+0530"
+        },
+        "sort": [
+            1784478607511
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "vRQ2e58B-PQ0e09tttF3",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sshd-session"
+            },
+            "agent": {
+                "ip": "192.168.100.50",
+                "name": "file-server-01"
+            },
+            "data": {
+                "dstuser": "vagrant"
+            },
+            "rule": {
+                "description": "sshd: authentication success.",
+                "id": "5715"
+            },
+            "full_log": "Jul 19 16:30:05 file-server-01 sshd-session[4904]: Accepted password for vagrant from 192.168.100.21 port 47884 ssh2",
+            "timestamp": "2026-07-19T22:00:07.479+0530"
+        },
+        "sort": [
+            1784478607479
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "vBQ2e58B-PQ0e09tttF3",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sshd-session"
+            },
+            "agent": {
+                "ip": "192.168.100.40",
+                "name": "ehr-db-server-01"
+            },
+            "data": {
+                "dstuser": "vagrant"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 16:30:05 ehr-db-server-01 sshd-session[4852]: pam_unix(sshd:session): session closed for user vagrant",
+            "timestamp": "2026-07-19T22:00:07.461+0530"
+        },
+        "sort": [
+            1784478607461
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "uxQ2e58B-PQ0e09tttF3",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sshd-session"
+            },
+            "agent": {
+                "ip": "192.168.100.40",
+                "name": "ehr-db-server-01"
+            },
+            "data": {
+                "srcuser": "vagrant",
+                "uid": "0",
+                "dstuser": "vagrant"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 16:30:05 ehr-db-server-01 sshd-session[4852]: pam_unix(sshd:session): session opened for user vagrant(uid=1000) by vagrant(uid=0)",
+            "timestamp": "2026-07-19T22:00:07.447+0530"
+        },
+        "sort": [
+            1784478607447
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "uhQ2e58B-PQ0e09tttF3",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sshd-session"
+            },
+            "agent": {
+                "ip": "192.168.100.40",
+                "name": "ehr-db-server-01"
+            },
+            "data": {
+                "dstuser": "vagrant"
+            },
+            "rule": {
+                "description": "sshd: authentication success.",
+                "id": "5715"
+            },
+            "full_log": "Jul 19 16:30:05 ehr-db-server-01 sshd-session[4852]: Accepted password for vagrant from 192.168.100.21 port 50226 ssh2",
+            "timestamp": "2026-07-19T22:00:07.425+0530"
+        },
+        "sort": [
+            1784478607425
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "uRQ2e58B-PQ0e09tttF3",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 16:30:01 admin-pc-01 sudo[5291]: pam_unix(sudo:session): session closed for user root",
+            "timestamp": "2026-07-19T22:00:03.421+0530"
+        },
+        "sort": [
+            1784478603421
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "uBQ2e58B-PQ0e09tttF3",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "uid": "0",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 16:30:01 admin-pc-01 sudo[5291]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)",
+            "timestamp": "2026-07-19T22:00:03.420+0530"
+        },
+        "sort": [
+            1784478603420
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "txQ2e58B-PQ0e09tttF3",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "srcuser": "root",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "Successful sudo to ROOT executed.",
+                "id": "5402"
+            },
+            "full_log": "Jul 19 16:30:01 admin-pc-01 sudo[5291]:     root : PWD=/root ; USER=root ; COMMAND=/usr/bin/chmod 666 /var/log/admin-pc-telemetry.log",
+            "timestamp": "2026-07-19T22:00:03.377+0530"
+        },
+        "sort": [
+            1784478603377
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "thQ2e58B-PQ0e09tttF3",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 16:30:01 admin-pc-01 sudo[5289]: pam_unix(sudo:session): session closed for user root",
+            "timestamp": "2026-07-19T22:00:03.377+0530"
+        },
+        "sort": [
+            1784478603377
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "tRQ2e58B-PQ0e09tttF3",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "uid": "0",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 16:30:01 admin-pc-01 sudo[5289]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)",
+            "timestamp": "2026-07-19T22:00:03.370+0530"
+        },
+        "sort": [
+            1784478603370
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "tBQ2e58B-PQ0e09tttF3",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "srcuser": "root",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "Successful sudo to ROOT executed.",
+                "id": "5402"
+            },
+            "full_log": "Jul 19 16:30:01 admin-pc-01 sudo[5289]:     root : PWD=/root ; USER=root ; COMMAND=/usr/bin/touch /var/log/admin-pc-telemetry.log",
+            "timestamp": "2026-07-19T22:00:03.369+0530"
+        },
+        "sort": [
+            1784478603369
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "rBQye58B-PQ0e09tDtGp",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 16:25:01 admin-pc-01 sudo[5272]: pam_unix(sudo:session): session closed for user root",
+            "timestamp": "2026-07-19T21:55:02.026+0530"
+        },
+        "sort": [
+            1784478302026
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "qxQye58B-PQ0e09tDtGp",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "uid": "0",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 16:25:01 admin-pc-01 sudo[5272]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)",
+            "timestamp": "2026-07-19T21:55:01.983+0530"
+        },
+        "sort": [
+            1784478301983
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "qhQye58B-PQ0e09tDtGp",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "srcuser": "root",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "Successful sudo to ROOT executed.",
+                "id": "5402"
+            },
+            "full_log": "Jul 19 16:25:01 admin-pc-01 sudo[5272]:     root : PWD=/root ; USER=root ; COMMAND=/usr/bin/chmod 666 /var/log/admin-pc-telemetry.log",
+            "timestamp": "2026-07-19T21:55:01.982+0530"
+        },
+        "sort": [
+            1784478301982
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "pxQye58B-PQ0e09tDtGp",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "srcuser": "root",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "Successful sudo to ROOT executed.",
+                "id": "5402"
+            },
+            "full_log": "Jul 19 16:25:01 admin-pc-01 sudo[5270]:     root : PWD=/root ; USER=root ; COMMAND=/usr/bin/touch /var/log/admin-pc-telemetry.log",
+            "timestamp": "2026-07-19T21:55:01.962+0530"
+        },
+        "sort": [
+            1784478301962
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "qBQye58B-PQ0e09tDtGp",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "uid": "0",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 16:25:01 admin-pc-01 sudo[5270]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)",
+            "timestamp": "2026-07-19T21:55:01.962+0530"
+        },
+        "sort": [
+            1784478301962
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "qRQye58B-PQ0e09tDtGp",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 16:25:01 admin-pc-01 sudo[5270]: pam_unix(sudo:session): session closed for user root",
+            "timestamp": "2026-07-19T21:55:01.962+0530"
+        },
+        "sort": [
+            1784478301962
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "pBQte58B-PQ0e09tjtEA",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 16:20:01 admin-pc-01 sudo[5245]: pam_unix(sudo:session): session closed for user root",
+            "timestamp": "2026-07-19T21:50:02.926+0530"
+        },
+        "sort": [
+            1784478002926
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "oxQte58B-PQ0e09tjtEA",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "uid": "0",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 16:20:01 admin-pc-01 sudo[5245]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)",
+            "timestamp": "2026-07-19T21:50:02.916+0530"
+        },
+        "sort": [
+            1784478002916
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "ohQte58B-PQ0e09tjtEA",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "srcuser": "root",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "Successful sudo to ROOT executed.",
+                "id": "5402"
+            },
+            "full_log": "Jul 19 16:20:01 admin-pc-01 sudo[5245]:     root : PWD=/root ; USER=root ; COMMAND=/usr/bin/chmod 666 /var/log/admin-pc-telemetry.log",
+            "timestamp": "2026-07-19T21:50:02.909+0530"
+        },
+        "sort": [
+            1784478002909
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "oRQte58B-PQ0e09tjtEA",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 16:20:01 admin-pc-01 sudo[5243]: pam_unix(sudo:session): session closed for user root",
+            "timestamp": "2026-07-19T21:50:02.901+0530"
+        },
+        "sort": [
+            1784478002901
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "oBQte58B-PQ0e09tjtEA",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "uid": "0",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 16:20:01 admin-pc-01 sudo[5243]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)",
+            "timestamp": "2026-07-19T21:50:02.894+0530"
+        },
+        "sort": [
+            1784478002894
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "nxQte58B-PQ0e09tjtEA",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "srcuser": "root",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "Successful sudo to ROOT executed.",
+                "id": "5402"
+            },
+            "full_log": "Jul 19 16:20:01 admin-pc-01 sudo[5243]:     root : PWD=/root ; USER=root ; COMMAND=/usr/bin/touch /var/log/admin-pc-telemetry.log",
+            "timestamp": "2026-07-19T21:50:02.884+0530"
+        },
+        "sort": [
+            1784478002884
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "nBQre58B-PQ0e09tzNGS",
         "_score": null,
         "_source": {
             "predecoder": {
@@ -19,16 +1299,16 @@
                 "description": "PAM: Login session opened.",
                 "id": "5501"
             },
-            "full_log": "May 14 19:44:49 monitoring-server-01 sshd-session[8621]: pam_unix(sshd:session): session opened for user vagrant(uid=1000) by vagrant(uid=0)",
-            "timestamp": "2026-05-15T01:14:51.017+0530"
+            "full_log": "Jul 19 16:18:13 monitoring-server-01 sshd-session[6332]: pam_unix(sshd:session): session opened for user vagrant(uid=1000) by vagrant(uid=0)",
+            "timestamp": "2026-07-19T21:48:14.430+0530"
         },
         "sort": [
-            1778787891017
+            1784477894430
         ]
     },
     {
-        "_index": "wazuh-alerts-4.x-2026.05.14",
-        "_id": "nPAFKJ4BdNcQERvcTi9A",
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "mxQre58B-PQ0e09tzNGS",
         "_score": null,
         "_source": {
             "predecoder": {
@@ -44,16 +1324,16 @@
                 "description": "sshd: authentication success.",
                 "id": "5715"
             },
-            "full_log": "May 14 19:44:49 monitoring-server-01 sshd-session[8621]: Accepted password for vagrant from 192.168.100.1 port 50291 ssh2",
-            "timestamp": "2026-05-15T01:14:51.016+0530"
+            "full_log": "Jul 19 16:18:12 monitoring-server-01 sshd-session[6332]: Accepted password for vagrant from 192.168.100.1 port 57349 ssh2",
+            "timestamp": "2026-07-19T21:48:14.430+0530"
         },
         "sort": [
-            1778787891016
+            1784477894430
         ]
     },
     {
-        "_index": "wazuh-alerts-4.x-2026.05.14",
-        "_id": "m_ADKJ4BdNcQERvcZS-z",
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "mhQre58B-PQ0e09tsdE9",
         "_score": null,
         "_source": {
             "predecoder": {
@@ -69,16 +1349,226 @@
                 "description": "PAM: Login session closed.",
                 "id": "5502"
             },
-            "full_log": "May 14 19:42:45 monitoring-server-01 sshd-session[8457]: pam_unix(sshd:session): session closed for user vagrant",
-            "timestamp": "2026-05-15T01:12:46.901+0530"
+            "full_log": "Jul 19 16:18:05 monitoring-server-01 sshd-session[6113]: pam_unix(sshd:session): session closed for user vagrant",
+            "timestamp": "2026-07-19T21:48:06.419+0530"
         },
         "sort": [
-            1778787766901
+            1784477886419
         ]
     },
     {
-        "_index": "wazuh-alerts-4.x-2026.05.14",
-        "_id": "mvADKJ4BdNcQERvcKy8M",
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "mRQoe58B-PQ0e09t3tFQ",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 16:15:01 admin-pc-01 sudo[5216]: pam_unix(sudo:session): session closed for user root",
+            "timestamp": "2026-07-19T21:45:01.841+0530"
+        },
+        "sort": [
+            1784477701841
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "mBQoe58B-PQ0e09t3tFQ",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "uid": "0",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 16:15:01 admin-pc-01 sudo[5216]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)",
+            "timestamp": "2026-07-19T21:45:01.840+0530"
+        },
+        "sort": [
+            1784477701840
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "lxQoe58B-PQ0e09t3tFQ",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "srcuser": "root",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "Successful sudo to ROOT executed.",
+                "id": "5402"
+            },
+            "full_log": "Jul 19 16:15:01 admin-pc-01 sudo[5216]:     root : PWD=/root ; USER=root ; COMMAND=/usr/bin/chmod 666 /var/log/admin-pc-telemetry.log",
+            "timestamp": "2026-07-19T21:45:01.829+0530"
+        },
+        "sort": [
+            1784477701829
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "lhQoe58B-PQ0e09t3tFQ",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 16:15:01 admin-pc-01 sudo[5214]: pam_unix(sudo:session): session closed for user root",
+            "timestamp": "2026-07-19T21:45:01.819+0530"
+        },
+        "sort": [
+            1784477701819
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "lRQoe58B-PQ0e09t3tFQ",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "srcuser": "root",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "Successful sudo to ROOT executed.",
+                "id": "5402"
+            },
+            "full_log": "Jul 19 16:15:01 admin-pc-01 sudo[5214]:     root : PWD=/root ; USER=root ; COMMAND=/usr/bin/touch /var/log/admin-pc-telemetry.log",
+            "timestamp": "2026-07-19T21:45:01.799+0530"
+        },
+        "sort": [
+            1784477701799
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "lBQoe58B-PQ0e09t3tFQ",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "uid": "0",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 16:15:01 admin-pc-01 sudo[5214]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)",
+            "timestamp": "2026-07-19T21:45:01.799+0530"
+        },
+        "sort": [
+            1784477701799
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "kxQoe58B-PQ0e09t2tFj",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sshd-session"
+            },
+            "agent": {
+                "name": "monitoring-server-01"
+            },
+            "data": {
+                "dstuser": "vagrant"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 16:15:01 monitoring-server-01 sshd-session[6192]: pam_unix(sshd:session): session closed for user vagrant",
+            "timestamp": "2026-07-19T21:45:01.596+0530"
+        },
+        "sort": [
+            1784477701596
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "ihQoe58B-PQ0e09tztGx",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "su"
+            },
+            "agent": {
+                "name": "monitoring-server-01"
+            },
+            "data": {
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 16:14:56 monitoring-server-01 su[6234]: pam_unix(su:session): session closed for user root",
+            "timestamp": "2026-07-19T21:44:57.593+0530"
+        },
+        "sort": [
+            1784477697593
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "ixQoe58B-PQ0e09tztGx",
         "_score": null,
         "_source": {
             "predecoder": {
@@ -94,16 +1584,16 @@
                 "description": "PAM: Login session closed.",
                 "id": "5502"
             },
-            "full_log": "May 14 19:42:30 monitoring-server-01 sudo[8613]: pam_unix(sudo:session): session closed for user root",
-            "timestamp": "2026-05-15T01:12:30.866+0530"
+            "full_log": "Jul 19 16:14:56 monitoring-server-01 sudo[6231]: pam_unix(sudo:session): session closed for user root",
+            "timestamp": "2026-07-19T21:44:57.593+0530"
         },
         "sort": [
-            1778787750866
+            1784477697593
         ]
     },
     {
-        "_index": "wazuh-alerts-4.x-2026.05.14",
-        "_id": "mfADKJ4BdNcQERvcKy8M",
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "iBQne58B-PQ0e09tW9GD",
         "_score": null,
         "_source": {
             "predecoder": {
@@ -121,16 +1611,43 @@
                 "description": "PAM: Login session opened.",
                 "id": "5501"
             },
-            "full_log": "May 14 19:42:29 monitoring-server-01 sudo[8613]: pam_unix(sudo:session): session opened for user root(uid=0) by vagrant(uid=1000)",
-            "timestamp": "2026-05-15T01:12:30.865+0530"
+            "full_log": "Jul 19 16:13:19 monitoring-server-01 sudo[6231]: pam_unix(sudo:session): session opened for user root(uid=0) by vagrant(uid=1000)",
+            "timestamp": "2026-07-19T21:43:21.531+0530"
         },
         "sort": [
-            1778787750865
+            1784477601531
         ]
     },
     {
-        "_index": "wazuh-alerts-4.x-2026.05.14",
-        "_id": "mPADKJ4BdNcQERvcKy8M",
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "iRQne58B-PQ0e09tW9GD",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "su"
+            },
+            "agent": {
+                "name": "monitoring-server-01"
+            },
+            "data": {
+                "srcuser": "vagrant",
+                "uid": "0",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 16:13:19 monitoring-server-01 su[6234]: pam_unix(su:session): session opened for user root(uid=0) by vagrant(uid=0)",
+            "timestamp": "2026-07-19T21:43:21.531+0530"
+        },
+        "sort": [
+            1784477601531
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "hxQne58B-PQ0e09tW9GD",
         "_score": null,
         "_source": {
             "predecoder": {
@@ -147,16 +1664,16 @@
                 "description": "Successful sudo to ROOT executed.",
                 "id": "5402"
             },
-            "full_log": "May 14 19:42:29 monitoring-server-01 sudo[8613]:  vagrant : TTY=pts/1 ; PWD=/home/vagrant ; USER=root ; COMMAND=/sbin/ss -tulpn",
-            "timestamp": "2026-05-15T01:12:30.864+0530"
+            "full_log": "Jul 19 16:13:19 monitoring-server-01 sudo[6231]:  vagrant : TTY=pts/2 ; PWD=/home/vagrant ; USER=root ; COMMAND=/bin/su",
+            "timestamp": "2026-07-19T21:43:21.530+0530"
         },
         "sort": [
-            1778787750864
+            1784477601530
         ]
     },
     {
-        "_index": "wazuh-alerts-4.x-2026.05.14",
-        "_id": "ffDeJ54BdNcQERvcTy9d",
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "hhQne58B-PQ0e09tINH9",
         "_score": null,
         "_source": {
             "predecoder": {
@@ -174,16 +1691,16 @@
                 "description": "PAM: Login session opened.",
                 "id": "5501"
             },
-            "full_log": "May 14 19:02:16 monitoring-server-01 sshd-session[8457]: pam_unix(sshd:session): session opened for user vagrant(uid=1000) by vagrant(uid=0)",
-            "timestamp": "2026-05-15T00:32:17.660+0530"
+            "full_log": "Jul 19 16:12:58 monitoring-server-01 sshd-session[6192]: pam_unix(sshd:session): session opened for user vagrant(uid=1000) by vagrant(uid=0)",
+            "timestamp": "2026-07-19T21:42:59.464+0530"
         },
         "sort": [
-            1778785337660
+            1784477579464
         ]
     },
     {
-        "_index": "wazuh-alerts-4.x-2026.05.14",
-        "_id": "fPDeJ54BdNcQERvcTy9d",
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "hRQne58B-PQ0e09tINH9",
         "_score": null,
         "_source": {
             "predecoder": {
@@ -199,41 +1716,656 @@
                 "description": "sshd: authentication success.",
                 "id": "5715"
             },
-            "full_log": "May 14 19:02:16 monitoring-server-01 sshd-session[8457]: Accepted password for vagrant from 192.168.100.1 port 61775 ssh2",
-            "timestamp": "2026-05-15T00:32:17.660+0530"
+            "full_log": "Jul 19 16:12:58 monitoring-server-01 sshd-session[6192]: Accepted password for vagrant from 192.168.100.1 port 54032 ssh2",
+            "timestamp": "2026-07-19T21:42:59.463+0530"
         },
         "sort": [
-            1778785337660
+            1784477579463
         ]
     },
     {
-        "_index": "wazuh-alerts-4.x-2026.05.14",
-        "_id": "e_DcJ54BdNcQERvc3S83",
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "hBQke58B-PQ0e09ta9Gh",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 16:10:01 admin-pc-01 sudo[5184]: pam_unix(sudo:session): session closed for user root",
+            "timestamp": "2026-07-19T21:40:03.078+0530"
+        },
+        "sort": [
+            1784477403078
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "gxQke58B-PQ0e09ta9Gh",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "uid": "0",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 16:10:01 admin-pc-01 sudo[5184]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)",
+            "timestamp": "2026-07-19T21:40:03.068+0530"
+        },
+        "sort": [
+            1784477403068
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "ghQke58B-PQ0e09ta9Gh",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "srcuser": "root",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "Successful sudo to ROOT executed.",
+                "id": "5402"
+            },
+            "full_log": "Jul 19 16:10:01 admin-pc-01 sudo[5184]:     root : PWD=/root ; USER=root ; COMMAND=/usr/bin/chmod 666 /var/log/admin-pc-telemetry.log",
+            "timestamp": "2026-07-19T21:40:03.060+0530"
+        },
+        "sort": [
+            1784477403060
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "gRQke58B-PQ0e09ta9Gh",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 16:10:01 admin-pc-01 sudo[5182]: pam_unix(sudo:session): session closed for user root",
+            "timestamp": "2026-07-19T21:40:03.054+0530"
+        },
+        "sort": [
+            1784477403054
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "gBQke58B-PQ0e09ta9Gh",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "uid": "0",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 16:10:01 admin-pc-01 sudo[5182]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)",
+            "timestamp": "2026-07-19T21:40:03.042+0530"
+        },
+        "sort": [
+            1784477403042
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "fxQke58B-PQ0e09ta9Gh",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "srcuser": "root",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "Successful sudo to ROOT executed.",
+                "id": "5402"
+            },
+            "full_log": "Jul 19 16:10:01 admin-pc-01 sudo[5182]:     root : PWD=/root ; USER=root ; COMMAND=/usr/bin/touch /var/log/admin-pc-telemetry.log",
+            "timestamp": "2026-07-19T21:40:02.896+0530"
+        },
+        "sort": [
+            1784477402896
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "fBQfe58B-PQ0e09tw9HD",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "uid": "0",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 16:05:01 admin-pc-01 sudo[5156]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)",
+            "timestamp": "2026-07-19T21:35:01.871+0530"
+        },
+        "sort": [
+            1784477101871
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "exQfe58B-PQ0e09tw9HD",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 16:05:01 admin-pc-01 sudo[5156]: pam_unix(sudo:session): session closed for user root",
+            "timestamp": "2026-07-19T21:35:01.871+0530"
+        },
+        "sort": [
+            1784477101871
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "eRQfe58B-PQ0e09tw9HD",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 16:05:01 admin-pc-01 sudo[5154]: pam_unix(sudo:session): session closed for user root",
+            "timestamp": "2026-07-19T21:35:01.829+0530"
+        },
+        "sort": [
+            1784477101829
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "ehQfe58B-PQ0e09tw9HD",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "srcuser": "root",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "Successful sudo to ROOT executed.",
+                "id": "5402"
+            },
+            "full_log": "Jul 19 16:05:01 admin-pc-01 sudo[5156]:     root : PWD=/root ; USER=root ; COMMAND=/usr/bin/chmod 666 /var/log/admin-pc-telemetry.log",
+            "timestamp": "2026-07-19T21:35:01.829+0530"
+        },
+        "sort": [
+            1784477101829
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "dxQfe58B-PQ0e09tw9HD",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "uid": "0",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 16:05:01 admin-pc-01 sudo[5154]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)",
+            "timestamp": "2026-07-19T21:35:01.812+0530"
+        },
+        "sort": [
+            1784477101812
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "eBQfe58B-PQ0e09tw9HD",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "srcuser": "root",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "Successful sudo to ROOT executed.",
+                "id": "5402"
+            },
+            "full_log": "Jul 19 16:05:01 admin-pc-01 sudo[5154]:     root : PWD=/root ; USER=root ; COMMAND=/usr/bin/touch /var/log/admin-pc-telemetry.log",
+            "timestamp": "2026-07-19T21:35:01.812+0530"
+        },
+        "sort": [
+            1784477101812
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "dBQbe58B-PQ0e09tQ9EM",
         "_score": null,
         "_source": {
             "predecoder": {
                 "program_name": "sshd-session"
             },
             "agent": {
-                "name": "monitoring-server-01"
+                "ip": "192.168.100.50",
+                "name": "file-server-01"
             },
             "data": {
-                "dstuser": "by"
+                "dstuser": "vagrant"
             },
             "rule": {
-                "description": "sshd: connection reset",
-                "id": "5762"
+                "description": "PAM: Login session closed.",
+                "id": "5502"
             },
-            "full_log": "May 14 19:00:43 monitoring-server-01 sshd-session[8453]: Connection reset by 192.168.100.1 port 61774 [preauth]",
-            "timestamp": "2026-05-15T00:30:43.555+0530"
+            "full_log": "Jul 19 16:00:05 file-server-01 sshd-session[4766]: pam_unix(sshd:session): session closed for user vagrant",
+            "timestamp": "2026-07-19T21:30:06.935+0530"
         },
         "sort": [
-            1778785243555
+            1784476806935
         ]
     },
     {
-        "_index": "wazuh-alerts-4.x-2026.05.14",
-        "_id": "evDcJ54BdNcQERvc3S83",
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "cxQbe58B-PQ0e09tQ9EM",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sshd-session"
+            },
+            "agent": {
+                "ip": "192.168.100.50",
+                "name": "file-server-01"
+            },
+            "data": {
+                "srcuser": "vagrant",
+                "uid": "0",
+                "dstuser": "vagrant"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 16:00:05 file-server-01 sshd-session[4766]: pam_unix(sshd:session): session opened for user vagrant(uid=1000) by vagrant(uid=0)",
+            "timestamp": "2026-07-19T21:30:06.927+0530"
+        },
+        "sort": [
+            1784476806927
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "chQbe58B-PQ0e09tQ9EM",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sshd-session"
+            },
+            "agent": {
+                "ip": "192.168.100.50",
+                "name": "file-server-01"
+            },
+            "data": {
+                "dstuser": "vagrant"
+            },
+            "rule": {
+                "description": "sshd: authentication success.",
+                "id": "5715"
+            },
+            "full_log": "Jul 19 16:00:05 file-server-01 sshd-session[4766]: Accepted password for vagrant from 192.168.100.21 port 42952 ssh2",
+            "timestamp": "2026-07-19T21:30:06.911+0530"
+        },
+        "sort": [
+            1784476806911
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "cRQbe58B-PQ0e09tQ9EM",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sshd-session"
+            },
+            "agent": {
+                "ip": "192.168.100.40",
+                "name": "ehr-db-server-01"
+            },
+            "data": {
+                "dstuser": "vagrant"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 16:00:05 ehr-db-server-01 sshd-session[4705]: pam_unix(sshd:session): session closed for user vagrant",
+            "timestamp": "2026-07-19T21:30:06.653+0530"
+        },
+        "sort": [
+            1784476806653
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "cBQbe58B-PQ0e09tQ9EM",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sshd-session"
+            },
+            "agent": {
+                "ip": "192.168.100.40",
+                "name": "ehr-db-server-01"
+            },
+            "data": {
+                "srcuser": "vagrant",
+                "uid": "0",
+                "dstuser": "vagrant"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 16:00:04 ehr-db-server-01 sshd-session[4705]: pam_unix(sshd:session): session opened for user vagrant(uid=1000) by vagrant(uid=0)",
+            "timestamp": "2026-07-19T21:30:06.650+0530"
+        },
+        "sort": [
+            1784476806650
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "bxQbe58B-PQ0e09tQ9EM",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sshd-session"
+            },
+            "agent": {
+                "ip": "192.168.100.40",
+                "name": "ehr-db-server-01"
+            },
+            "data": {
+                "dstuser": "vagrant"
+            },
+            "rule": {
+                "description": "sshd: authentication success.",
+                "id": "5715"
+            },
+            "full_log": "Jul 19 16:00:04 ehr-db-server-01 sshd-session[4705]: Accepted password for vagrant from 192.168.100.21 port 38574 ssh2",
+            "timestamp": "2026-07-19T21:30:06.627+0530"
+        },
+        "sort": [
+            1784476806627
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "bhQbe58B-PQ0e09tQ9EM",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 16:00:01 admin-pc-01 sudo[5061]: pam_unix(sudo:session): session closed for user root",
+            "timestamp": "2026-07-19T21:30:01.515+0530"
+        },
+        "sort": [
+            1784476801515
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "bRQbe58B-PQ0e09tQ9EM",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "uid": "0",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 16:00:01 admin-pc-01 sudo[5061]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)",
+            "timestamp": "2026-07-19T21:30:01.514+0530"
+        },
+        "sort": [
+            1784476801514
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "axQbe58B-PQ0e09tQ9EM",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 16:00:01 admin-pc-01 sudo[5059]: pam_unix(sudo:session): session closed for user root",
+            "timestamp": "2026-07-19T21:30:01.470+0530"
+        },
+        "sort": [
+            1784476801470
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "bBQbe58B-PQ0e09tQ9EM",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "srcuser": "root",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "Successful sudo to ROOT executed.",
+                "id": "5402"
+            },
+            "full_log": "Jul 19 16:00:01 admin-pc-01 sudo[5061]:     root : PWD=/root ; USER=root ; COMMAND=/usr/bin/chmod 666 /var/log/admin-pc-telemetry.log",
+            "timestamp": "2026-07-19T21:30:01.470+0530"
+        },
+        "sort": [
+            1784476801470
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "ahQbe58B-PQ0e09tQ9EM",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "uid": "0",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 16:00:01 admin-pc-01 sudo[5059]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)",
+            "timestamp": "2026-07-19T21:30:01.469+0530"
+        },
+        "sort": [
+            1784476801469
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "aRQbe58B-PQ0e09tQ9EL",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "srcuser": "root",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "Successful sudo to ROOT executed.",
+                "id": "5402"
+            },
+            "full_log": "Jul 19 16:00:01 admin-pc-01 sudo[5059]:     root : PWD=/root ; USER=root ; COMMAND=/usr/bin/touch /var/log/admin-pc-telemetry.log",
+            "timestamp": "2026-07-19T21:30:01.450+0530"
+        },
+        "sort": [
+            1784476801450
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "YBQXe58B-PQ0e09thdGZ",
         "_score": null,
         "_source": {
             "predecoder": {
@@ -249,11 +2381,276 @@
                 "description": "PAM: Login session closed.",
                 "id": "5502"
             },
-            "full_log": "May 14 19:00:40 monitoring-server-01 sshd-session[7908]: pam_unix(sshd:session): session closed for user vagrant",
-            "timestamp": "2026-05-15T00:30:41.544+0530"
+            "full_log": "Jul 19 15:56:02 monitoring-server-01 sshd-session[6141]: pam_unix(sshd:session): session closed for user vagrant",
+            "timestamp": "2026-07-19T21:26:02.944+0530"
         },
         "sort": [
-            1778785241544
+            1784476562944
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "XxQXe58B-PQ0e09thdGZ",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sshd-session"
+            },
+            "agent": {
+                "name": "monitoring-server-01"
+            },
+            "data": {
+                "srcuser": "vagrant",
+                "uid": "0",
+                "dstuser": "vagrant"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 15:56:02 monitoring-server-01 sshd-session[6141]: pam_unix(sshd:session): session opened for user vagrant(uid=1000) by vagrant(uid=0)",
+            "timestamp": "2026-07-19T21:26:02.944+0530"
+        },
+        "sort": [
+            1784476562944
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "YRQXe58B-PQ0e09thdGZ",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sshd-session"
+            },
+            "agent": {
+                "name": "monitoring-server-01"
+            },
+            "data": {
+                "dstuser": "vagrant"
+            },
+            "rule": {
+                "description": "sshd: authentication success.",
+                "id": "5715"
+            },
+            "full_log": "Jul 19 15:56:02 monitoring-server-01 sshd-session[6141]: Accepted password for vagrant from 192.168.1.22 port 41254 ssh2",
+            "timestamp": "2026-07-19T21:26:02.944+0530"
+        },
+        "sort": [
+            1784476562944
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "XhQWe58B-PQ0e09trtHH",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 15:55:01 admin-pc-01 sudo[5041]: pam_unix(sudo:session): session closed for user root",
+            "timestamp": "2026-07-19T21:25:02.627+0530"
+        },
+        "sort": [
+            1784476502627
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "XRQWe58B-PQ0e09trtHH",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 15:55:01 admin-pc-01 sudo[5039]: pam_unix(sudo:session): session closed for user root",
+            "timestamp": "2026-07-19T21:25:02.583+0530"
+        },
+        "sort": [
+            1784476502583
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "XBQWe58B-PQ0e09trtHH",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "uid": "0",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 15:55:01 admin-pc-01 sudo[5041]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)",
+            "timestamp": "2026-07-19T21:25:02.582+0530"
+        },
+        "sort": [
+            1784476502582
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "WxQWe58B-PQ0e09trtHH",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "srcuser": "root",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "Successful sudo to ROOT executed.",
+                "id": "5402"
+            },
+            "full_log": "Jul 19 15:55:01 admin-pc-01 sudo[5041]:     root : PWD=/root ; USER=root ; COMMAND=/usr/bin/chmod 666 /var/log/admin-pc-telemetry.log",
+            "timestamp": "2026-07-19T21:25:02.581+0530"
+        },
+        "sort": [
+            1784476502581
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "WRQWe58B-PQ0e09trtHH",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "uid": "0",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 15:55:01 admin-pc-01 sudo[5039]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)",
+            "timestamp": "2026-07-19T21:25:02.564+0530"
+        },
+        "sort": [
+            1784476502564
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "WhQWe58B-PQ0e09trtHH",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "srcuser": "root",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "Successful sudo to ROOT executed.",
+                "id": "5402"
+            },
+            "full_log": "Jul 19 15:55:01 admin-pc-01 sudo[5039]:     root : PWD=/root ; USER=root ; COMMAND=/usr/bin/touch /var/log/admin-pc-telemetry.log",
+            "timestamp": "2026-07-19T21:25:02.564+0530"
+        },
+        "sort": [
+            1784476502564
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "VhQSe58B-PQ0e09tBtH7",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session closed.",
+                "id": "5502"
+            },
+            "full_log": "Jul 19 15:50:01 admin-pc-01 sudo[5015]: pam_unix(sudo:session): session closed for user root",
+            "timestamp": "2026-07-19T21:20:03.837+0530"
+        },
+        "sort": [
+            1784476203837
+        ]
+    },
+    {
+        "_index": "wazuh-alerts-4.x-2026.07.19",
+        "_id": "VRQSe58B-PQ0e09tBtH7",
+        "_score": null,
+        "_source": {
+            "predecoder": {
+                "program_name": "sudo"
+            },
+            "agent": {
+                "ip": "192.168.100.21",
+                "name": "admin-pc-01"
+            },
+            "data": {
+                "uid": "0",
+                "dstuser": "root"
+            },
+            "rule": {
+                "description": "PAM: Login session opened.",
+                "id": "5501"
+            },
+            "full_log": "Jul 19 15:50:01 admin-pc-01 sudo[5015]: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=0)",
+            "timestamp": "2026-07-19T21:20:03.831+0530"
+        },
+        "sort": [
+            1784476203831
         ]
     }
 ]

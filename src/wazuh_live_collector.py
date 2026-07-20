@@ -1,15 +1,26 @@
 import json
+import os
 import requests
+import urllib3
+from dotenv import load_dotenv
 from requests.auth import HTTPBasicAuth
 
 
-WAZUH_INDEXER_URL = "https://localhost:9200"
-WAZUH_INDEX = "wazuh-alerts-*"
-USERNAME = "readall"
-PASSWORD = "NQcWO3yRfScBUZw45nH*tbu?4QiNsCBH"
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+load_dotenv()
 
 
-def fetch_latest_wazuh_alerts(size=20):
+WAZUH_INDEXER_URL = os.getenv("WAZUH_INDEXER_URL", "https://localhost:9200")
+WAZUH_INDEX = os.getenv("WAZUH_INDEX", "wazuh-alerts-*")
+USERNAME = os.getenv("WAZUH_USERNAME", "readall")
+PASSWORD = os.getenv("WAZUH_PASSWORD")
+OUTPUT_FILE = "data/live_wazuh_events.json"
+
+
+def fetch_latest_wazuh_alerts(size=100):
+    if not PASSWORD:
+        raise ValueError("WAZUH_PASSWORD is missing. Add it to the .env file.")
+
     url = f"{WAZUH_INDEXER_URL}/{WAZUH_INDEX}/_search"
 
     query = {
@@ -40,27 +51,24 @@ def fetch_latest_wazuh_alerts(size=20):
         auth=HTTPBasicAuth(USERNAME, PASSWORD),
         headers={"Content-Type": "application/json"},
         json=query,
-        verify=False
+        verify=False,
+        timeout=30
     )
 
     response.raise_for_status()
 
     data = response.json()
-    hits = data.get("hits", {}).get("hits", [])
-
-    return hits
+    return data.get("hits", {}).get("hits", [])
 
 
 def main():
-    alerts = fetch_latest_wazuh_alerts(size=10)
+    alerts = fetch_latest_wazuh_alerts(size=100)
 
-    output_file = "data/live_wazuh_events.json"
-
-    with open(output_file, "w", encoding="utf-8") as file:
+    with open(OUTPUT_FILE, "w", encoding="utf-8") as file:
         json.dump(alerts, file, indent=4)
 
     print(f"Fetched {len(alerts)} Wazuh alerts")
-    print(f"Saved to {output_file}")
+    print(f"Saved to {OUTPUT_FILE}")
 
 
 if __name__ == "__main__":
