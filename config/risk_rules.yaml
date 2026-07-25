@@ -1,34 +1,240 @@
-scores:
-  correlated_host_network_activity: 5
-  correlated_privilege_and_db_access: 8
-  correlated_privilege_and_smb_activity: 8
-  correlated_privilege_and_ssh_activity: 6
+version: 2
 
-  wazuh_success_login: 1
-  wazuh_failed_login: 4
-  wazuh_root_escalation: 5
-  wazuh_sudo_usage: 4
-  wazuh_new_user_created: 7
-  wazuh_service_restart: 2
+working_hours:
+  timezone: Asia/Colombo
+  start_hour: 8
+  end_hour: 18
 
-  zeek_internal_ssh: 2
-  zeek_unauthorized_port: 5
-  zeek_new_internal_destination: 4
-  zeek_smb_activity: 6
-  zeek_rdp_activity: 6
-  zeek_port_scan: 8
-  zeek_large_data_transfer: 5
-
-  off_hours_activity: 3
-  unknown_source_host: 4
-  direct_db_access_from_workstation: 7
-
-reductions:
-  trusted_admin_host: -3
-  expected_communication: -5
-  normal_working_hours: -1
+  # Saturday and Sunday.
+  weekend_days:
+  - 5
+  - 6
 
 classification:
   legitimate_max: 5
   low_suspicion_max: 10
-  suspicious_max: 15
+  suspicious_max: 17
+
+limits:
+  max_asset_score: 10
+  max_policy_score: 15
+  max_behavior_score: 20
+  max_wazuh_score: 20
+  max_correlation_score: 15
+  max_total_score: 30
+
+# Contextual importance of the destination asset.
+asset_scoring:
+  sensitivity:
+    normal: 0
+    medium: 1
+    high: 3
+    critical: 5
+    unknown: 0
+
+  destination_role:
+    workstation: 0
+    admin_workstation: 1
+    ehr_app: 3
+    database: 5
+    file_server: 4
+    monitoring: 3
+    network_sensor: 2
+    internal_unknown: 1
+    external: 0
+    attacker: 0
+    unknown: 0
+
+  trust_level:
+    trusted: -1
+    protected: 0
+    internal: 0
+    standard: 0
+    untrusted: 4
+    unknown: 1
+
+  external_source_to_internal_destination: 4
+  unknown_source_to_critical_destination: 3
+
+behavior:
+  # Events from the same source are examined within this period.
+  window_minutes: 5
+
+  connection_frequency:
+    medium_threshold: 10
+    high_threshold: 30
+    medium_points: 2
+    high_points: 5
+
+  destination_fanout:
+    medium_threshold: 5
+    high_threshold: 10
+    medium_points: 3
+    high_points: 6
+
+  port_fanout:
+    medium_threshold: 5
+    high_threshold: 10
+    medium_points: 4
+    high_points: 7
+
+  rejected_connections:
+    states:
+    - S0
+    - REJ
+    - RSTO
+    - RSTR
+    - SH
+    - SHR
+
+    medium_threshold: 5
+    high_threshold: 15
+    medium_points: 3
+    high_points: 6
+
+  data_transfer:
+    medium_bytes: 10000000
+    high_bytes: 100000000
+    medium_points: 2
+    high_points: 5
+
+  connection_duration:
+    long_seconds: 300
+    very_long_seconds: 1800
+    long_points: 1
+    very_long_points: 3
+
+  off_hours:
+    points: 2
+
+  weekend_activity:
+    points: 2
+
+  rare_service:
+    minimum_observations: 20
+    maximum_occurrences: 1
+    points: 3
+
+  new_role_pair:
+    minimum_observations: 20
+    points: 3
+
+  suspicious_services:
+    smb:
+      ports:
+      - 445
+      points: 2
+
+    ssh:
+      ports:
+      - 22
+      points: 2
+
+    rdp:
+      ports:
+      - 3389
+      points: 3
+
+    database:
+      ports:
+      - 5432
+      - 3306
+      - 1433
+      - 1521
+      points: 3
+
+# Wazuh host-event scoring.
+wazuh:
+  rule_level:
+    medium_minimum: 5
+    medium_points: 2
+
+    high_minimum: 8
+    high_points: 4
+
+    critical_minimum: 12
+    critical_points: 7
+
+  indicators:
+    failed_authentication:
+      points: 4
+      phrases:
+      - authentication failure
+      - failed password
+      - login failed
+      - invalid user
+
+    privilege_activity:
+      points: 5
+      phrases:
+      - privilege escalation
+      - root session
+      - sudo
+      - user changed to root
+
+    account_creation:
+      points: 6
+      phrases:
+      - new user
+      - user added
+      - account created
+
+    service_change:
+      points: 2
+      phrases:
+      - service started
+      - service stopped
+      - service restarted
+
+    file_integrity_change:
+      points: 4
+      phrases:
+      - integrity checksum changed
+      - file added
+      - file deleted
+      - file modified
+
+    malware_indicator:
+      points: 10
+      phrases:
+      - ransomware
+      - malware
+      - trojan
+      - encrypting files
+      - malicious file
+
+  trusted_admin_reduction: -2
+  off_hours_points: 2
+
+correlation:
+  window_minutes: 5
+
+  # Applied when at least one Wazuh event matches a Zeek connection.
+  base_points: 2
+
+  # The strongest matching Wazuh score contributes up to this value.
+  max_wazuh_contribution: 8
+
+  privilege_and_database_access:
+    points: 5
+
+  privilege_and_smb_activity:
+    points: 4
+
+  failed_authentication_and_remote_service:
+    remote_ports:
+    - 22
+    - 3389
+    - 445
+    points: 4
+
+  malware_and_smb_activity:
+    points: 7
+
+output:
+  include_unmatched_wazuh_events: true
+  include_unmatched_zeek_events: true
+  include_score_components: true
+  include_behavior_metrics: true
+  include_policy_details: true
+  include_asset_context: true

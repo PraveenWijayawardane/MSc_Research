@@ -1,0 +1,397 @@
+version: 1
+
+policy_settings:
+  # Policies with larger priority values are evaluated first.
+  priority_order: descending
+
+  # First matching policy is used.
+  match_strategy: first_match
+
+  # Applied when no explicit policy matches a connection.
+  default_action: observe
+  default_risk_points: 3
+  default_reason: Communication does not match a known role policy
+
+role_policies:
+
+# ------------------------------------------------------------
+# Explicitly suspicious or prohibited communication
+# ------------------------------------------------------------
+
+- name: attacker_to_internal_asset
+  description: Simulated attacker communicating with an internal asset
+  priority: 1000
+
+  source_roles:
+  - attacker
+
+  destination_roles:
+  - workstation
+  - admin_workstation
+  - ehr_app
+  - database
+  - file_server
+  - monitoring
+  - network_sensor
+
+  action: deny
+  risk_points: 12
+  reason: Attacker system communicated with an internal organizational asset
+
+- name: external_to_database
+  description: External source directly communicating with the EHR database
+  priority: 950
+
+  source_roles:
+  - external
+  - unknown
+
+  destination_roles:
+  - database
+
+  action: deny
+  risk_points: 12
+  reason: External or unknown source attempted direct database access
+
+- name: workstation_direct_database_access
+  description: Normal workstations must not directly access the EHR database
+  priority: 900
+
+  source_roles:
+  - workstation
+
+  destination_roles:
+  - database
+
+  ports:
+  - 5432
+
+  protocols:
+  - tcp
+
+  action: deny
+  risk_points: 10
+  reason: Workstation directly accessed the EHR database
+
+- name: workstation_remote_management
+  description: Normal workstations must not remotely administer protected servers
+  priority: 880
+
+  source_roles:
+  - workstation
+
+  destination_roles:
+  - ehr_app
+  - database
+  - file_server
+  - monitoring
+  - network_sensor
+
+  ports:
+  - 22
+  - 3389
+
+  protocols:
+  - tcp
+
+  action: deny
+  risk_points: 8
+  reason: Normal workstation attempted remote administration of a protected system
+
+- name: workstation_to_monitoring_interface
+  description: Normal workstations must not directly access monitoring management services
+  priority: 870
+
+  source_roles:
+  - workstation
+
+  destination_roles:
+  - monitoring
+
+  ports:
+  - 9200
+  - 55000
+
+  protocols:
+  - tcp
+
+  action: deny
+  risk_points: 9
+  reason: Workstation accessed a protected monitoring management interface
+
+- name: unknown_internal_to_critical_asset
+  description: Unclassified internal devices communicating with critical assets
+  priority: 850
+
+  source_roles:
+  - internal_unknown
+  - unknown
+
+  destination_roles:
+  - ehr_app
+  - database
+  - file_server
+  - monitoring
+
+  action: monitor
+  risk_points: 5
+  reason: Unclassified internal device communicated with a protected asset
+
+# ------------------------------------------------------------
+# Approved workstation communication
+# ------------------------------------------------------------
+
+- name: workstation_to_ehr_application
+  description: Employee workstation accessing the EHR web application
+  priority: 700
+
+  source_roles:
+  - workstation
+  - admin_workstation
+
+  destination_roles:
+  - ehr_app
+
+  ports:
+  - 80
+  - 443
+  - 5000
+
+  protocols:
+  - tcp
+
+  action: allow
+  risk_points: -2
+  reason: Workstation communication matches the approved EHR application policy
+
+- name: workstation_to_file_server
+  description: Employee workstation accessing the organizational file server
+  priority: 690
+
+  source_roles:
+  - workstation
+  - admin_workstation
+
+  destination_roles:
+  - file_server
+
+  ports:
+  - 445
+
+  protocols:
+  - tcp
+
+  action: allow
+  risk_points: -2
+  reason: Workstation communication matches the approved file-server policy
+
+# ------------------------------------------------------------
+# Approved application and server communication
+# ------------------------------------------------------------
+
+- name: ehr_application_to_database
+  description: EHR application server connecting to the PostgreSQL database
+  priority: 680
+
+  source_roles:
+  - ehr_app
+
+  destination_roles:
+  - database
+
+  ports:
+  - 5432
+
+  protocols:
+  - tcp
+
+  action: allow
+  risk_points: -3
+  reason: EHR application communication matches the approved database policy
+
+- name: protected_server_to_monitoring
+  description: Protected systems forwarding security telemetry to monitoring
+  priority: 670
+
+  source_roles:
+  - ehr_app
+  - database
+  - file_server
+  - workstation
+  - admin_workstation
+  - network_sensor
+
+  destination_roles:
+  - monitoring
+
+  ports:
+  - 1514
+  - 1515
+
+  protocols:
+  - tcp
+  - udp
+
+  action: allow
+  risk_points: -2
+  reason: System communication matches the approved monitoring-agent policy
+
+- name: zeek_sensor_to_monitoring
+  description: Zeek sensor transferring telemetry to the monitoring server
+  priority: 660
+
+  source_roles:
+  - network_sensor
+
+  destination_roles:
+  - monitoring
+
+  ports:
+  - 22
+  - 9200
+
+  protocols:
+  - tcp
+
+  action: allow
+  risk_points: -2
+  reason: Network sensor communication matches the approved monitoring policy
+
+# ------------------------------------------------------------
+# Approved administrative communication
+# ------------------------------------------------------------
+
+- name: administrator_remote_management
+  description: Privileged administrator remotely managing protected systems
+  priority: 650
+
+  source_roles:
+  - admin_workstation
+  - monitoring
+
+  destination_roles:
+  - ehr_app
+  - database
+  - file_server
+  - monitoring
+  - network_sensor
+  - workstation
+
+  ports:
+  - 22
+  - 3389
+
+  protocols:
+  - tcp
+
+  action: allow
+  risk_points: -2
+  reason: Trusted administrator communication matches the remote-management policy
+
+- name: administrator_database_management
+  description: Privileged administrator directly managing the EHR database
+  priority: 640
+
+  source_roles:
+  - admin_workstation
+
+  destination_roles:
+  - database
+
+  ports:
+  - 5432
+
+  protocols:
+  - tcp
+
+  action: allow
+  risk_points: -1
+  reason: Trusted administrator communication matches the database-management policy
+
+- name: administrator_monitoring_access
+  description: Privileged administrator accessing Wazuh and OpenSearch services
+  priority: 630
+
+  source_roles:
+  - admin_workstation
+
+  destination_roles:
+  - monitoring
+
+  ports:
+  - 443
+  - 5601
+  - 9200
+  - 55000
+
+  protocols:
+  - tcp
+
+  action: allow
+  risk_points: -2
+  reason: Trusted administrator communication matches the monitoring-access policy
+
+# ------------------------------------------------------------
+# General internal communication
+# ------------------------------------------------------------
+
+- name: internal_web_access
+  description: Internal systems accessing approved web services
+  priority: 300
+
+  source_roles:
+  - workstation
+  - admin_workstation
+  - ehr_app
+  - database
+  - file_server
+  - monitoring
+  - network_sensor
+
+  destination_roles:
+  - workstation
+  - ehr_app
+  - file_server
+  - monitoring
+
+  ports:
+  - 80
+  - 443
+
+  protocols:
+  - tcp
+
+  action: allow
+  risk_points: -1
+  reason: Communication matches the general internal web-service policy
+
+- name: internal_dns
+  description: Internal DNS communication
+  priority: 290
+
+  source_roles:
+  - workstation
+  - admin_workstation
+  - ehr_app
+  - database
+  - file_server
+  - monitoring
+  - network_sensor
+
+  destination_roles:
+  - workstation
+  - ehr_app
+  - database
+  - file_server
+  - monitoring
+
+  ports:
+  - 53
+
+  protocols:
+  - tcp
+  - udp
+
+  action: allow
+  risk_points: 0
+  reason: Communication matches the approved DNS policy
