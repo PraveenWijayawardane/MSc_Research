@@ -18,9 +18,14 @@ from __future__ import annotations
 import argparse
 import json
 from copy import deepcopy
-from ipaddress import IPv4Address, IPv6Address, ip_address, ip_network
+from ipaddress import (
+    IPv4Address,
+    IPv6Address,
+    ip_address,
+    ip_network,
+)
 from pathlib import Path
-from typing import Any
+from typing import Any, Iterable
 
 import yaml
 
@@ -38,7 +43,7 @@ class AssetConfigurationError(RuntimeError):
 
 class AssetResolver:
     """
-    Resolve an IP address into organizational context.
+    Resolve an IP address into organisational context.
 
     The returned context contains fields such as:
 
@@ -57,17 +62,41 @@ class AssetResolver:
     - is_critical
     """
 
-    def __init__(self, configuration: dict[str, Any]) -> None:
-        self.configuration = configuration
+    def __init__(
+        self,
+        configuration: dict[str, Any],
+    ) -> None:
+        if not isinstance(configuration, dict):
+            raise AssetConfigurationError(
+                "Asset configuration must be a dictionary"
+            )
 
-        self.organization = configuration.get("organization", {})
-        self.network_zones = configuration.get("network_zones", {})
-        self.critical_assets = configuration.get("critical_assets", {})
-        self.asset_overrides = configuration.get("asset_overrides", {})
-        self.fallback_context = configuration.get("fallback_context", {})
+        self.configuration = deepcopy(configuration)
+        self.organization = configuration.get(
+            "organization",
+            {},
+        )
+        self.network_zones = configuration.get(
+            "network_zones",
+            {},
+        )
+        self.critical_assets = configuration.get(
+            "critical_assets",
+            {},
+        )
+        self.asset_overrides = configuration.get(
+            "asset_overrides",
+            {},
+        )
+        self.fallback_context = configuration.get(
+            "fallback_context",
+            {},
+        )
 
         self._validate_configuration()
-        self._compiled_zones = self._compile_network_zones()
+        self._compiled_zones = (
+            self._compile_network_zones()
+        )
 
     @classmethod
     def from_file(
@@ -75,7 +104,6 @@ class AssetResolver:
         file_path: str | Path = DEFAULT_ASSET_CONTEXT_FILE,
     ) -> "AssetResolver":
         """Create a resolver from a YAML configuration file."""
-
         path = Path(file_path)
 
         if not path.exists():
@@ -83,8 +111,16 @@ class AssetResolver:
                 f"Asset context file was not found: {path}"
             )
 
+        if not path.is_file():
+            raise AssetConfigurationError(
+                f"Asset context path is not a file: {path}"
+            )
+
         try:
-            with path.open("r", encoding="utf-8-sig") as file:
+            with path.open(
+                "r",
+                encoding="utf-8-sig",
+            ) as file:
                 configuration = yaml.safe_load(file)
         except yaml.YAMLError as exc:
             raise AssetConfigurationError(
@@ -98,9 +134,70 @@ class AssetResolver:
 
         return cls(configuration)
 
+    @classmethod
+    def from_environment_configuration(
+        cls,
+        configuration: dict[str, Any],
+    ) -> "AssetResolver":
+        """
+        Create a resolver from EnvironmentRegistry output.
+
+        EnvironmentRegistry currently returns both:
+
+        - asset_context: the already-loaded asset configuration
+        - paths.asset_context_file: the source YAML file
+
+        The in-memory asset_context is preferred. The path is retained as
+        a compatibility fallback.
+        """
+        if not isinstance(configuration, dict):
+            raise ValueError(
+                "Environment configuration must be a dictionary"
+            )
+
+        asset_context = configuration.get(
+            "asset_context"
+        )
+
+        if isinstance(asset_context, dict):
+            if not asset_context:
+                raise ValueError(
+                    "Environment asset_context is empty"
+                )
+
+            return cls(asset_context)
+
+        paths = configuration.get("paths", {})
+
+        if not isinstance(paths, dict):
+            raise ValueError(
+                "Environment configuration has invalid paths"
+            )
+
+        asset_context_file = paths.get(
+            "asset_context_file"
+        )
+
+        if not asset_context_file:
+            raise ValueError(
+                "Environment configuration does not contain "
+                "asset_context or paths.asset_context_file"
+            )
+
+        asset_context_path = Path(
+            asset_context_file
+        )
+
+        if not asset_context_path.exists():
+            raise FileNotFoundError(
+                "Asset context file not found: "
+                f"{asset_context_path}"
+            )
+
+        return cls.from_file(asset_context_path)
+
     def _validate_configuration(self) -> None:
         """Validate important configuration sections."""
-
         for section_name, section_value in (
             ("network_zones", self.network_zones),
             ("critical_assets", self.critical_assets),
@@ -112,8 +209,9 @@ class AssetResolver:
                     f"{section_name} must be a YAML object"
                 )
 
-        for ip_value in list(self.critical_assets) + list(
-            self.asset_overrides
+        for ip_value in (
+            list(self.critical_assets)
+            + list(self.asset_overrides)
         ):
             try:
                 ip_address(ip_value)
@@ -122,25 +220,37 @@ class AssetResolver:
                     f"Invalid asset IP address: {ip_value}"
                 ) from exc
 
-        for zone_name, zone_config in self.network_zones.items():
+        for (
+            zone_name,
+            zone_config,
+        ) in self.network_zones.items():
             if not isinstance(zone_config, dict):
                 raise AssetConfigurationError(
-                    f"Network zone {zone_name} must be an object"
+                    f"Network zone {zone_name} "
+                    "must be an object"
                 )
 
-            subnets = zone_config.get("subnets", [])
+            subnets = zone_config.get(
+                "subnets",
+                [],
+            )
 
             if not isinstance(subnets, list):
                 raise AssetConfigurationError(
-                    f"subnets for zone {zone_name} must be a list"
+                    f"subnets for zone {zone_name} "
+                    "must be a list"
                 )
 
             for subnet in subnets:
                 try:
-                    ip_network(str(subnet), strict=False)
+                    ip_network(
+                        str(subnet),
+                        strict=False,
+                    )
                 except ValueError as exc:
                     raise AssetConfigurationError(
-                        f"Invalid subnet {subnet} in zone {zone_name}"
+                        f"Invalid subnet {subnet} "
+                        f"in zone {zone_name}"
                     ) from exc
 
     def _compile_network_zones(
@@ -158,11 +268,16 @@ class AssetResolver:
         More-specific subnets are checked first. For example, /28 is
         evaluated before /24.
         """
-
         compiled = []
 
-        for zone_name, zone_config in self.network_zones.items():
-            for subnet_value in zone_config.get("subnets", []):
+        for (
+            zone_name,
+            zone_config,
+        ) in self.network_zones.items():
+            for subnet_value in zone_config.get(
+                "subnets",
+                [],
+            ):
                 network = ip_network(
                     str(subnet_value),
                     strict=False,
@@ -186,10 +301,16 @@ class AssetResolver:
     def _find_zone(
         self,
         address: IPv4Address | IPv6Address,
-    ) -> tuple[str | None, dict[str, Any] | None]:
+    ) -> tuple[
+        str | None,
+        dict[str, Any] | None,
+    ]:
         """Find the most-specific network zone for an address."""
-
-        for zone_name, zone_config, network in self._compiled_zones:
+        for (
+            zone_name,
+            zone_config,
+            network,
+        ) in self._compiled_zones:
             if address.version != network.version:
                 continue
 
@@ -199,7 +320,10 @@ class AssetResolver:
         return None, None
 
     @staticmethod
-    def _normalise_tags(value: Any) -> list[str]:
+    def _normalise_tags(
+        value: Any,
+    ) -> list[str]:
+        """Return a unique, ordered list of non-empty tags."""
         if not isinstance(value, list):
             return []
 
@@ -209,7 +333,10 @@ class AssetResolver:
         for tag in value:
             normalized = str(tag).strip()
 
-            if normalized and normalized not in seen:
+            if (
+                normalized
+                and normalized not in seen
+            ):
                 seen.add(normalized)
                 unique_tags.append(normalized)
 
@@ -221,9 +348,12 @@ class AssetResolver:
         address: IPv4Address | IPv6Address,
     ) -> dict[str, Any]:
         """Create the common result structure."""
+        zone_name, _ = self._find_zone(address)
 
-        zone_name, zone_config = self._find_zone(address)
-        is_internal = zone_name is not None or address.is_private
+        is_internal = (
+            zone_name is not None
+            or address.is_private
+        )
 
         return {
             "ip": ip_value,
@@ -248,7 +378,6 @@ class AssetResolver:
         zone_config: dict[str, Any],
     ) -> dict[str, Any]:
         """Apply network-zone defaults to an asset context."""
-
         result = deepcopy(context)
 
         result.update(
@@ -283,7 +412,10 @@ class AssetResolver:
                     result["criticality"],
                 ),
                 "tags": self._normalise_tags(
-                    zone_config.get("tags", [])
+                    zone_config.get(
+                        "tags",
+                        [],
+                    )
                 ),
                 "resolution_source": "network_zone",
                 "is_internal": True,
@@ -305,7 +437,6 @@ class AssetResolver:
         Existing zone information is preserved unless explicitly overridden
         by the exact asset entry.
         """
-
         result = deepcopy(context)
 
         for field in (
@@ -321,16 +452,25 @@ class AssetResolver:
                 result[field] = asset_data[field]
 
         if "managed" in asset_data:
-            result["managed"] = bool(asset_data["managed"])
+            result["managed"] = bool(
+                asset_data["managed"]
+            )
 
         if "trusted" in asset_data:
-            result["trusted"] = bool(asset_data["trusted"])
+            result["trusted"] = bool(
+                asset_data["trusted"]
+            )
 
         result["tags"] = self._normalise_tags(
-            asset_data.get("tags", result.get("tags", []))
+            asset_data.get(
+                "tags",
+                result.get("tags", []),
+            )
         )
 
-        result["resolution_source"] = resolution_source
+        result["resolution_source"] = (
+            resolution_source
+        )
         result["is_critical"] = is_critical
 
         return result
@@ -346,7 +486,6 @@ class AssetResolver:
         Metadata is used only when there is no exact critical asset or
         asset override.
         """
-
         result = deepcopy(context)
 
         allowed_metadata_fields = (
@@ -369,14 +508,21 @@ class AssetResolver:
                 metadata_applied = True
 
         if "managed" in metadata:
-            result["managed"] = bool(metadata["managed"])
+            result["managed"] = bool(
+                metadata["managed"]
+            )
             metadata_applied = True
 
         if "trusted" in metadata:
-            result["trusted"] = bool(metadata["trusted"])
+            result["trusted"] = bool(
+                metadata["trusted"]
+            )
             metadata_applied = True
 
-        if isinstance(metadata.get("tags"), list):
+        if isinstance(
+            metadata.get("tags"),
+            list,
+        ):
             result["tags"] = self._normalise_tags(
                 list(result.get("tags", []))
                 + list(metadata["tags"])
@@ -384,7 +530,9 @@ class AssetResolver:
             metadata_applied = True
 
         if metadata_applied:
-            result["resolution_source"] = "agent_metadata"
+            result["resolution_source"] = (
+                "agent_metadata"
+            )
 
         return result
 
@@ -393,14 +541,16 @@ class AssetResolver:
         context: dict[str, Any],
     ) -> dict[str, Any]:
         """Apply internal or external fallback context."""
-
         fallback_type = (
             "internal"
             if context["is_internal"]
             else "external"
         )
 
-        fallback = self.fallback_context.get(fallback_type, {})
+        fallback = self.fallback_context.get(
+            fallback_type,
+            {},
+        )
 
         if not isinstance(fallback, dict):
             fallback = {}
@@ -430,17 +580,26 @@ class AssetResolver:
                     "unknown",
                 ),
                 "managed": bool(
-                    fallback.get("managed", False)
+                    fallback.get(
+                        "managed",
+                        False,
+                    )
                 ),
                 "trusted": bool(
-                    fallback.get("trusted", False)
+                    fallback.get(
+                        "trusted",
+                        False,
+                    )
                 ),
                 "criticality": fallback.get(
                     "criticality",
                     "unknown",
                 ),
                 "tags": self._normalise_tags(
-                    fallback.get("tags", [])
+                    fallback.get(
+                        "tags",
+                        [],
+                    )
                 ),
                 "resolution_source": (
                     "internal_fallback"
@@ -459,7 +618,7 @@ class AssetResolver:
         metadata: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
         """
-        Resolve one IP address into organizational context.
+        Resolve one IP address into organisational context.
 
         Args:
             ip_value:
@@ -477,8 +636,9 @@ class AssetResolver:
                     "tags": ["wazuh-agent"]
                 }
         """
-
-        normalized_ip = str(ip_value or "").strip()
+        normalized_ip = str(
+            ip_value or ""
+        ).strip()
 
         try:
             address = ip_address(normalized_ip)
@@ -504,7 +664,9 @@ class AssetResolver:
             address,
         )
 
-        zone_name, zone_config = self._find_zone(address)
+        zone_name, zone_config = (
+            self._find_zone(address)
+        )
 
         if zone_name and zone_config:
             context = self._apply_zone_context(
@@ -514,16 +676,19 @@ class AssetResolver:
             )
 
         # Exact exceptional device definitions have the highest priority.
-        override = self.asset_overrides.get(normalized_ip)
+        override = self.asset_overrides.get(
+            normalized_ip
+        )
 
         if isinstance(override, dict):
             context = self._apply_asset_context(
                 context,
                 override,
-                resolution_source="asset_override",
+                resolution_source=(
+                    "asset_override"
+                ),
                 is_critical=False,
             )
-
         else:
             critical_asset = self.critical_assets.get(
                 normalized_ip
@@ -533,20 +698,29 @@ class AssetResolver:
                 context = self._apply_asset_context(
                     context,
                     critical_asset,
-                    resolution_source="critical_asset",
+                    resolution_source=(
+                        "critical_asset"
+                    ),
                     is_critical=True,
                 )
-
-            elif metadata and isinstance(metadata, dict):
-                context = self._apply_metadata_context(
-                    context,
-                    metadata,
+            elif (
+                metadata
+                and isinstance(metadata, dict)
+            ):
+                context = (
+                    self._apply_metadata_context(
+                        context,
+                        metadata,
+                    )
+                )
+            elif zone_name is None:
+                context = self._apply_fallback(
+                    context
                 )
 
-            elif zone_name is None:
-                context = self._apply_fallback(context)
-
-        if hostname and context.get("hostname") in (
+        if hostname and context.get(
+            "hostname"
+        ) in (
             None,
             "",
             "unknown",
@@ -560,7 +734,6 @@ class AssetResolver:
         ip_values: Iterable[str],
     ) -> list[dict[str, Any]]:
         """Resolve multiple IP addresses."""
-
         return [
             self.resolve(ip_value)
             for ip_value in ip_values
@@ -569,7 +742,10 @@ class AssetResolver:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Resolve an IP address using asset_context.yaml"
+        description=(
+            "Resolve an IP address using "
+            "asset_context.yaml"
+        )
     )
 
     parser.add_argument(
@@ -585,13 +761,17 @@ def main() -> int:
 
     parser.add_argument(
         "--config",
-        default=str(DEFAULT_ASSET_CONTEXT_FILE),
+        default=str(
+            DEFAULT_ASSET_CONTEXT_FILE
+        ),
         help="Path to asset_context.yaml",
     )
 
     args = parser.parse_args()
 
-    resolver = AssetResolver.from_file(args.config)
+    resolver = AssetResolver.from_file(
+        args.config
+    )
 
     result = resolver.resolve(
         ip_value=args.ip,

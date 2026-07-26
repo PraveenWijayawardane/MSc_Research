@@ -6,3 +6,31 @@ data/live_wazuh_events.json
 data/live_zeek_conn.json
 data/live_zeek_conn.log
 output/scored_events.json
+
+# Secrets
+.env
+*.pem
+*.key
+*.crt
+
+# Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Runtime data
+data/*/
+output/*/
+logs/*/
+
+# Uploaded profiles and backups
+config/uploads/pending/*
+config/uploads/accepted/*
+config/uploads/rejected/*
+config/backups/
+
+# Temporary backup files
+*.backup
+*.before-versioning
+*.tmp

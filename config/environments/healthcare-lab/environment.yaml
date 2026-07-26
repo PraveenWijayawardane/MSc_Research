@@ -1,0 +1,24 @@
+schema_version: '1.0'
+environment:
+  id: healthcare-lab
+  name: Healthcare Security Research Lab
+  site_id: research-lab
+  environment_type: lab
+  infrastructure_type: bare-metal
+  timezone: Asia/Colombo
+business_hours:
+  start: 08:00
+  end: '18:00'
+  working_days:
+  - Monday
+  - Tuesday
+  - Wednesday
+  - Thursday
+  - Friday
+data_sources:
+  wazuh:
+    enabled: true
+  zeek:
+    enabled: true
+output:
+  index: healthcare-risk-events

@@ -1,0 +1,163 @@
+organization:
+  name: Hospital A
+  environment: production
+  infrastructure_type: bare-metal
+  timezone: Asia/Colombo
+
+network_zones:
+  user_network:
+    subnets:
+    - 10.50.10.0/24
+    default_role: workstation
+    trust_level: standard
+    sensitivity: normal
+    managed: true
+    trusted: false
+    criticality: normal
+    tags:
+    - user-network
+    - workstation
+
+  admin_network:
+    subnets:
+    - 10.50.20.0/24
+    default_role: admin_workstation
+    trust_level: elevated
+    sensitivity: high
+    managed: true
+    trusted: true
+    criticality: high
+    tags:
+    - admin-network
+    - management
+
+  application_network:
+    subnets:
+    - 10.50.30.0/24
+    default_role: application_server
+    trust_level: protected
+    sensitivity: high
+    managed: true
+    trusted: false
+    criticality: high
+    tags:
+    - application-network
+
+  database_network:
+    subnets:
+    - 10.50.40.0/24
+    default_role: database
+    trust_level: protected
+    sensitivity: critical
+    managed: true
+    trusted: false
+    criticality: critical
+    tags:
+    - database-network
+
+  file_server_network:
+    subnets:
+    - 10.50.50.0/24
+    default_role: file_server
+    trust_level: protected
+    sensitivity: high
+    managed: true
+    trusted: false
+    criticality: high
+    tags:
+    - file-server-network
+
+  monitoring_network:
+    subnets:
+    - 10.50.100.0/24
+    default_role: monitoring_server
+    trust_level: elevated
+    sensitivity: high
+    managed: true
+    trusted: true
+    criticality: high
+    tags:
+    - monitoring
+    - security
+
+critical_assets:
+  10.50.30.15:
+    hostname: hospital-a-ehr-app-01
+    role: ehr_app
+    zone: application_network
+    asset_type: application_server
+    trust_level: protected
+    sensitivity: high
+    managed: true
+    trusted: false
+    criticality: high
+    tags:
+    - ehr
+    - application
+    - production
+
+  10.50.40.10:
+    hostname: hospital-a-ehr-db-01
+    role: database
+    zone: database_network
+    asset_type: database_server
+    trust_level: protected
+    sensitivity: critical
+    managed: true
+    trusted: false
+    criticality: critical
+    tags:
+    - ehr
+    - database
+    - production
+
+  10.50.50.10:
+    hostname: hospital-a-file-server-01
+    role: file_server
+    zone: file_server_network
+    asset_type: file_server
+    trust_level: protected
+    sensitivity: high
+    managed: true
+    trusted: false
+    criticality: high
+    tags:
+    - file-server
+    - production
+
+asset_overrides:
+  10.50.20.21:
+    hostname: hospital-a-admin-pc-01
+    role: admin_workstation
+    zone: admin_network
+    asset_type: admin_workstation
+    trust_level: elevated
+    sensitivity: high
+    managed: true
+    trusted: true
+    criticality: high
+    tags:
+    - administrator
+    - management
+    - trusted
+
+fallback_context:
+  internal:
+    role: internal_unknown
+    trust_level: internal
+    sensitivity: unknown
+    managed: false
+    trusted: false
+    criticality: unknown
+    tags:
+    - unknown-internal
+
+  external:
+    role: external
+    trust_level: untrusted
+    sensitivity: unknown
+    managed: false
+    trusted: false
+    criticality: unknown
+    tags:
+    - external

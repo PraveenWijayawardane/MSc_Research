@@ -4,7 +4,12 @@ from pathlib import Path
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(PROJECT_ROOT / "src"))
+
+sys.path.insert(
+    0,
+    str(PROJECT_ROOT / "src"),
+)
+
 
 from risk_engine import ContextualRiskEngine  # noqa: E402
 
@@ -13,22 +18,17 @@ class ContextualRiskEngineTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.engine = ContextualRiskEngine.from_files(
-            asset_context_file=(
-                PROJECT_ROOT
-                / "config"
-                / "asset_context.yaml"
-            ),
-            role_policies_file=(
-                PROJECT_ROOT
-                / "config"
-                / "role_policies.yaml"
-            ),
-            risk_rules_file=(
-                PROJECT_ROOT
-                / "config"
-                / "risk_rules.yaml"
-            ),
+        cls.engine = (
+            ContextualRiskEngine
+            .from_environment(
+                environment_id=(
+                    "healthcare-lab"
+                ),
+                config_root=(
+                    PROJECT_ROOT
+                    / "config"
+                ),
+            )
         )
 
     @staticmethod
@@ -80,33 +80,86 @@ class ContextualRiskEngineTests(unittest.TestCase):
             },
         }
 
+    def test_selected_environment_is_loaded(self):
+        self.assertEqual(
+            self.engine.environment_id,
+            "healthcare-lab",
+        )
+
+        self.assertEqual(
+            self.engine.environment["name"],
+            "Healthcare Security Research Lab",
+        )
+
+    def test_results_include_environment_metadata(self):
+        output = self.engine.build_output(
+            wazuh_data=[],
+            zeek_data=[
+                self.zeek_event(
+                    uid="C-environment-test"
+                )
+            ],
+        )
+
+        result = output[
+            "zeek_results"
+        ][0]
+
+        self.assertEqual(
+            result["environment_id"],
+            "healthcare-lab",
+        )
+
+        self.assertEqual(
+            result[
+                "environment_name"
+            ],
+            "Healthcare Security Research Lab",
+        )
+
+        self.assertEqual(
+            output["environment"][
+                "environment_id"
+            ],
+            "healthcare-lab",
+        )
+
     def test_unlisted_workstation_is_resolved_by_network_zone(self):
         output = self.engine.build_output(
             wazuh_data=[],
-            zeek_data=[self.zeek_event()],
+            zeek_data=[
+                self.zeek_event()
+            ],
         )
 
-        result = output["zeek_results"][0]
+        result = output[
+            "zeek_results"
+        ][0]
 
         self.assertEqual(
             result["source_role"],
             "workstation",
         )
+
         self.assertEqual(
             result["source_zone"],
             "healthcare_lab",
         )
+
         self.assertEqual(
             result["policy_name"],
             "workstation_to_ehr_application",
         )
+
         self.assertEqual(
             result["policy_action"],
             "allow",
         )
 
     def test_duplicate_zeek_event_is_scored_once(self):
-        event = self.zeek_event(uid="C-duplicate")
+        event = self.zeek_event(
+            uid="C-duplicate"
+        )
 
         output = self.engine.build_output(
             wazuh_data=[],
@@ -118,11 +171,16 @@ class ContextualRiskEngineTests(unittest.TestCase):
         )
 
         self.assertEqual(
-            output["summary"]["raw_zeek_event_count"],
+            output["summary"][
+                "raw_zeek_event_count"
+            ],
             3,
         )
+
         self.assertEqual(
-            output["summary"]["unique_zeek_result_count"],
+            output["summary"][
+                "unique_zeek_result_count"
+            ],
             1,
         )
 
@@ -132,24 +190,34 @@ class ContextualRiskEngineTests(unittest.TestCase):
             zeek_data=[
                 self.zeek_event(
                     uid="C-database",
-                    destination_ip="192.168.100.40",
+                    destination_ip=(
+                        "192.168.100.40"
+                    ),
                     destination_port=5432,
                     service="postgresql",
                 )
             ],
         )
 
-        result = output["zeek_results"][0]
+        result = output[
+            "zeek_results"
+        ][0]
 
         self.assertEqual(
             result["policy_name"],
             "workstation_direct_database_access",
         )
+
         self.assertEqual(
             result["policy_action"],
             "deny",
         )
-        self.assertGreaterEqual(result["risk_score"], 18)
+
+        self.assertGreaterEqual(
+            result["risk_score"],
+            18,
+        )
+
         self.assertEqual(
             result["classification"],
             "Likely Malicious",
@@ -171,25 +239,40 @@ class ContextualRiskEngineTests(unittest.TestCase):
                 self.zeek_event(
                     uid="C-correlation",
                     destination_port=445,
-                    destination_ip="192.168.100.50",
+                    destination_ip=(
+                        "192.168.100.50"
+                    ),
                     service="smb",
                 )
             ],
         )
 
         self.assertEqual(
-            len(output["correlated_results"]),
+            len(
+                output[
+                    "correlated_results"
+                ]
+            ),
             1,
         )
 
-        result = output["correlated_results"][0]
+        result = output[
+            "correlated_results"
+        ][0]
 
         self.assertEqual(
-            result["matched_wazuh_count"],
+            result[
+                "matched_wazuh_count"
+            ],
             2,
         )
+
         self.assertEqual(
-            len(result["matched_wazuh_event_ids"]),
+            len(
+                result[
+                    "matched_wazuh_event_ids"
+                ]
+            ),
             2,
         )
 
@@ -205,26 +288,40 @@ class ContextualRiskEngineTests(unittest.TestCase):
                 self.zeek_event(
                     uid="C-stable-id",
                     destination_port=445,
-                    destination_ip="192.168.100.50",
+                    destination_ip=(
+                        "192.168.100.50"
+                    ),
                     service="smb",
                 )
             ],
         )
 
-        zeek_result = output["zeek_results"][0]
-        correlated_result = output["correlated_results"][0]
+        zeek_result = output[
+            "zeek_results"
+        ][0]
+
+        correlated_result = output[
+            "correlated_results"
+        ][0]
 
         self.assertEqual(
             zeek_result["event_id"],
-            correlated_result["event_id"],
+            correlated_result[
+                "event_id"
+            ],
         )
+
         self.assertEqual(
-            correlated_result["event_id"],
+            correlated_result[
+                "event_id"
+            ],
             "zeek:C-stable-id",
         )
 
     def test_same_input_produces_same_score_and_classification(self):
-        event = self.zeek_event(uid="C-deterministic")
+        event = self.zeek_event(
+            uid="C-deterministic"
+        )
 
         first = self.engine.build_output(
             wazuh_data=[],
@@ -240,18 +337,78 @@ class ContextualRiskEngineTests(unittest.TestCase):
             first["event_id"],
             second["event_id"],
         )
+
         self.assertEqual(
             first["risk_score"],
             second["risk_score"],
         )
+
         self.assertEqual(
             first["classification"],
             second["classification"],
         )
+
         self.assertEqual(
             first["reasons"],
             second["reasons"],
         )
+
+
+    def test_matching_tagged_environment_is_accepted(self):
+        event = self.zeek_event(
+            uid="C-correct-environment"
+        )
+        event["environment_id"] = (
+            "healthcare-lab"
+        )
+
+        output = self.engine.build_output(
+            wazuh_data=[],
+            zeek_data=[event],
+        )
+
+        self.assertEqual(
+            output["zeek_results"][0][
+                "environment_id"
+            ],
+            "healthcare-lab",
+        )
+
+    def test_wrong_zeek_environment_is_rejected(self):
+        event = self.zeek_event(
+            uid="C-wrong-environment"
+        )
+        event["environment_id"] = (
+            "hospital-a-prod"
+        )
+
+        with self.assertRaisesRegex(
+            ValueError,
+            "selected environment is healthcare-lab",
+        ):
+            self.engine.build_output(
+                wazuh_data=[],
+                zeek_data=[event],
+            )
+
+    def test_wrong_wazuh_environment_is_rejected(self):
+        event = self.wazuh_event(
+            "w-wrong-environment",
+            "authentication failure",
+        )
+        event["_source"]["environment_id"] = (
+            "hospital-a-prod"
+        )
+
+        with self.assertRaisesRegex(
+            ValueError,
+            "selected environment is healthcare-lab",
+        ):
+            self.engine.build_output(
+                wazuh_data=[event],
+                zeek_data=[],
+            )
+
 
 
 if __name__ == "__main__":

@@ -1,0 +1,8 @@
+{
+    "schema_version": "1.0",
+    "environment_id": "healthcare-lab",
+    "active_version": "20260726T183413Z",
+    "previous_version": "20260726T182914Z",
+    "activated_at": "2026-07-26T18:35:04Z",
+    "configuration_sha256": "76c8cb55bf1ede11f2d0a68f999028bc5d67dcd8b748609ad06ffa07bb83e1fa"
+}

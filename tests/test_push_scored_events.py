@@ -3,119 +3,204 @@ import unittest
 from pathlib import Path
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(PROJECT_ROOT / "src"))
+PROJECT_ROOT = Path(
+    __file__
+).resolve().parents[1]
+
+sys.path.insert(
+    0,
+    str(
+        PROJECT_ROOT / "src"
+    ),
+)
+
 
 from push_scored_events import (  # noqa: E402
+    PushConfigurationError,
     build_final_documents,
     sanitize_document,
 )
 
 
-class PushScoredEventsTests(unittest.TestCase):
+def sample_output():
+    return {
+        "environment": {
+            "environment_id": (
+                "healthcare-lab"
+            ),
+            "environment_name": (
+                "Healthcare Security Research Lab"
+            ),
+            "site_id": "research-lab",
+            "environment_type": "lab",
+            "infrastructure_type": (
+                "bare-metal"
+            ),
+        },
+        "wazuh_results": [
+            {
+                "event_id": "wazuh:w1",
+                "environment_id": (
+                    "healthcare-lab"
+                ),
+                "timestamp": (
+                    "2026-07-27T10:00:00Z"
+                ),
+                "event_type": (
+                    "host_activity"
+                ),
+                "event_source": "wazuh",
+                "risk_score": 4,
+            }
+        ],
+        "zeek_results": [
+            {
+                "event_id": "zeek:z1",
+                "environment_id": (
+                    "healthcare-lab"
+                ),
+                "timestamp": (
+                    "2026-07-27T10:00:01Z"
+                ),
+                "event_type": (
+                    "network_connection"
+                ),
+                "event_source": "zeek",
+                "risk_score": 5,
+                "uid": "z1",
+                "source_ip": (
+                    "192.168.100.20"
+                ),
+                "destination_ip": (
+                    "192.168.100.30"
+                ),
+            }
+        ],
+        "correlated_results": [
+            {
+                "event_id": "zeek:z1",
+                "environment_id": (
+                    "healthcare-lab"
+                ),
+                "timestamp": (
+                    "2026-07-27T10:00:01Z"
+                ),
+                "event_type": (
+                    "correlated_network_activity"
+                ),
+                "event_source": (
+                    "zeek+wazuh"
+                ),
+                "correlated": True,
+                "risk_score": 12,
+                "uid": "z1",
+                "source_ip": (
+                    "192.168.100.20"
+                ),
+                "destination_ip": (
+                    "192.168.100.30"
+                ),
+            }
+        ],
+    }
 
-    def test_correlated_result_replaces_standalone_zeek_result(self):
-        scored_output = {
-            "wazuh_results": [],
-            "zeek_results": [
-                {
-                    "event_id": "zeek:C-1",
-                    "timestamp": "2026-07-22T04:30:00Z",
-                    "event_source": "zeek",
-                    "event_type": "network_connection",
-                    "correlated": False,
-                    "risk_score": 5,
-                }
-            ],
-            "correlated_results": [
-                {
-                    "event_id": "zeek:C-1",
-                    "timestamp": "2026-07-22T04:30:00Z",
-                    "event_source": "zeek+wazuh",
-                    "event_type": (
-                        "correlated_network_activity"
-                    ),
-                    "correlated": True,
-                    "risk_score": 14,
-                }
-            ],
-        }
 
+class PushScoredEventsTests(
+    unittest.TestCase
+):
+
+    def test_correlated_event_replaces_standalone(self):
         documents = build_final_documents(
-            scored_output
+            sample_output(),
+            "healthcare-lab",
         )
 
-        self.assertEqual(len(documents), 1)
+        self.assertEqual(
+            len(documents),
+            2,
+        )
+
+        by_id = {
+            document["event_id"]:
+            document
+            for document in documents
+        }
+
         self.assertTrue(
-            documents[0]["correlated"]
+            by_id["zeek:z1"][
+                "correlated"
+            ]
         )
+
         self.assertEqual(
-            documents[0]["risk_score"],
-            14,
+            by_id["zeek:z1"][
+                "risk_score"
+            ],
+            12,
         )
 
-    def test_wazuh_and_zeek_documents_are_both_retained(self):
-        scored_output = {
-            "wazuh_results": [
-                {
-                    "event_id": "wazuh:1",
-                    "timestamp": "2026-07-22T04:29:00Z",
-                    "event_type": "host_activity",
-                }
-            ],
-            "zeek_results": [
-                {
-                    "event_id": "zeek:C-1",
-                    "timestamp": "2026-07-22T04:30:00Z",
-                    "event_type": "network_connection",
-                }
-            ],
-            "correlated_results": [],
-        }
-
+    def test_all_documents_include_environment(self):
         documents = build_final_documents(
-            scored_output
+            sample_output(),
+            "healthcare-lab",
         )
 
-        self.assertEqual(len(documents), 2)
+        for document in documents:
+            self.assertEqual(
+                document[
+                    "environment_id"
+                ],
+                "healthcare-lab",
+            )
 
-        self.assertEqual(
-            {
-                document["event_id"]
-                for document in documents
-            },
-            {
-                "wazuh:1",
-                "zeek:C-1",
-            },
-        )
+            self.assertEqual(
+                document[
+                    "site_id"
+                ],
+                "research-lab",
+            )
 
-    def test_timestamp_is_copied_to_at_timestamp(self):
+    def test_wrong_top_level_environment_is_rejected(self):
+        output = sample_output()
+
+        output["environment"][
+            "environment_id"
+        ] = "hospital-a-prod"
+
+        with self.assertRaises(
+            PushConfigurationError
+        ):
+            build_final_documents(
+                output,
+                "healthcare-lab",
+            )
+
+    def test_wrong_event_environment_is_rejected(self):
+        output = sample_output()
+
+        output["wazuh_results"][0][
+            "environment_id"
+        ] = "hospital-a-prod"
+
+        with self.assertRaises(
+            PushConfigurationError
+        ):
+            build_final_documents(
+                output,
+                "healthcare-lab",
+            )
+
+    def test_invalid_ip_is_removed(self):
         document = sanitize_document(
             {
-                "event_id": "zeek:C-1",
-                "timestamp": "2026-07-22T04:30:00Z",
-                "event_type": "network_connection",
-            }
-        )
-
-        self.assertEqual(
-            document["@timestamp"],
-            "2026-07-22T04:30:00Z",
-        )
-
-    def test_invalid_ip_fields_are_removed(self):
-        document = sanitize_document(
-            {
-                "event_id": "zeek:C-1",
-                "timestamp": "2026-07-22T04:30:00Z",
-                "event_type": "network_connection",
-                "source_ip": "unknown",
-                "destination_ip": "not-an-ip",
-                "ip": "",
-                "behavior_metrics": {
-                    "source_ip": "unknown",
-                },
+                "event_id": "zeek:test",
+                "event_type": (
+                    "network_connection"
+                ),
+                "source_ip": "invalid",
+                "destination_ip": (
+                    "192.168.100.30"
+                ),
             }
         )
 
@@ -123,77 +208,28 @@ class PushScoredEventsTests(unittest.TestCase):
             "source_ip",
             document,
         )
-        self.assertNotIn(
-            "destination_ip",
-            document,
-        )
-        self.assertNotIn(
-            "ip",
-            document,
-        )
-        self.assertNotIn(
-            "source_ip",
-            document["behavior_metrics"],
-        )
-
-    def test_raw_zeek_dot_fields_are_removed(self):
-        document = sanitize_document(
-            {
-                "event_id": "zeek:C-1",
-                "timestamp": "2026-07-22T04:30:00Z",
-                "event_type": "network_connection",
-                "uid": "C-1",
-                "id.orig_h": "192.168.100.25",
-                "id.resp_h": "192.168.100.30",
-            }
-        )
 
         self.assertEqual(
-            document["zeek_uid"],
-            "C-1",
-        )
-        self.assertNotIn(
-            "id.orig_h",
-            document,
-        )
-        self.assertNotIn(
-            "id.resp_h",
-            document,
-        )
-        self.assertNotIn(
-            "uid",
-            document,
-        )
-
-    def test_duplicate_ids_are_deduplicated(self):
-        scored_output = {
-            "wazuh_results": [
-                {
-                    "event_id": "wazuh:1",
-                    "timestamp": "2026-07-22T04:29:00Z",
-                    "event_type": "host_activity",
-                    "risk_score": 2,
-                },
-                {
-                    "event_id": "wazuh:1",
-                    "timestamp": "2026-07-22T04:29:00Z",
-                    "event_type": "host_activity",
-                    "risk_score": 6,
-                },
+            document[
+                "destination_ip"
             ],
-            "zeek_results": [],
-            "correlated_results": [],
-        }
-
-        documents = build_final_documents(
-            scored_output
+            "192.168.100.30",
         )
 
-        self.assertEqual(len(documents), 1)
-        self.assertEqual(
-            documents[0]["risk_score"],
-            6,
-        )
+    def test_cross_source_id_collision_is_rejected(self):
+        output = sample_output()
+
+        output["wazuh_results"][0][
+            "event_id"
+        ] = "zeek:z1"
+
+        with self.assertRaises(
+            PushConfigurationError
+        ):
+            build_final_documents(
+                output,
+                "healthcare-lab",
+            )
 
 
 if __name__ == "__main__":

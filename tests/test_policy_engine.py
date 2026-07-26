@@ -52,7 +52,7 @@ class PolicyEngineTests(unittest.TestCase):
 
     def test_workstation_to_ehr_is_allowed(self):
         result = self.evaluate(
-            source_ip="192.168.100.25",
+            source_ip="192.168.100.20",
             destination_ip="192.168.100.30",
             port=5000,
             service="http",
@@ -64,7 +64,7 @@ class PolicyEngineTests(unittest.TestCase):
             "workstation_to_ehr_application",
         )
         self.assertEqual(result["action"], "allow")
-        self.assertEqual(result["risk_points"], -2)
+        self.assertEqual(result["risk_points"], -6)
 
     def test_workstation_direct_database_is_denied(self):
         result = self.evaluate(

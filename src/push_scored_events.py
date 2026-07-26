@@ -1,17 +1,16 @@
 #!/usr/bin/env python3
 """
-Idempotently publish scored healthcare-risk events to OpenSearch.
+Idempotently publish environment-isolated healthcare-risk events.
 
-Key behavior:
+Important behaviour:
 
-1. Uses event_id as the OpenSearch document _id.
-2. Replaces a standalone Zeek document with its correlated version.
-3. Keeps Wazuh host events as separate documents.
-4. Creates the target index from healthcare-risk-events-mapping.json.
-5. Uses the OpenSearch Bulk API for efficient indexing.
-6. Sanitizes invalid IP/date values before indexing.
-
-The same input can be pushed repeatedly without creating duplicate documents.
+1. Reads output/<environment-id>/scored_events.json by default.
+2. Rejects output belonging to a different hospital environment.
+3. Uses event_id as the OpenSearch document _id.
+4. Replaces standalone Zeek documents with correlated versions.
+5. Keeps Wazuh host events as separate documents.
+6. Publishes through the environment-specific write alias.
+7. Automatically ensures the backing index and aliases exist.
 """
 
 from __future__ import annotations
@@ -21,98 +20,86 @@ import ipaddress
 import json
 import logging
 import os
-import sys
 from pathlib import Path
 from typing import Any, Iterable
 
-import requests
-import urllib3
 from dotenv import load_dotenv
-from requests import Response, Session
-from requests.auth import HTTPBasicAuth
 
-
-LOGGER = logging.getLogger("push_scored_events")
-
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
-
-DEFAULT_INPUT_FILE = (
-    PROJECT_ROOT / "output" / "scored_events.json"
+from environment_paths import EnvironmentPaths
+from event_environment import (
+    get_event_environment,
+    resolve_environment_id,
+)
+from opensearch_index_manager import (
+    DEFAULT_CONFIG_ROOT,
+    DEFAULT_MAPPING_FILE,
+    OpenSearchClient,
+    OpenSearchConfigurationError,
+    OpenSearchConnectionSettings,
+    OpenSearchIndexManager,
+    OpenSearchRequestError,
+    build_index_names,
+    load_environment_base_index,
+    load_json_object,
+    validate_index_name,
 )
 
-DEFAULT_MAPPING_FILE = (
-    PROJECT_ROOT / "healthcare-risk-events-mapping.json"
+
+LOGGER = logging.getLogger(
+    "push_scored_events"
 )
 
-DEFAULT_INDEX_NAME = "healthcare-risk-events-v2"
+PROJECT_ROOT = Path(
+    __file__
+).resolve().parents[1]
 
 
-class PushConfigurationError(RuntimeError):
-    """Raised when the publisher configuration is incomplete or invalid."""
+class PushConfigurationError(
+    RuntimeError
+):
+    """Raised when publisher input or configuration is invalid."""
 
 
-class BulkIndexError(RuntimeError):
+class BulkIndexError(
+    RuntimeError
+):
     """Raised when one or more OpenSearch bulk operations fail."""
 
 
-def parse_boolean(
-    value: Any,
-    default: bool = False,
-) -> bool:
-    if value is None:
-        return default
-
-    if isinstance(value, bool):
-        return value
-
-    normalized = str(value).strip().lower()
-
-    if normalized in {
-        "1",
-        "true",
-        "yes",
-        "y",
-        "on",
-    }:
-        return True
-
-    if normalized in {
-        "0",
-        "false",
-        "no",
-        "n",
-        "off",
-    }:
-        return False
-
-    return default
-
-
 def load_json(
-    path: Path,
+    path: str | Path,
 ) -> Any:
+    """Load JSON from disk."""
+    resolved = Path(
+        path
+    ).resolve()
+
     try:
-        with path.open(
+        with resolved.open(
             "r",
             encoding="utf-8-sig",
         ) as file:
             return json.load(file)
-
     except FileNotFoundError as exc:
         raise FileNotFoundError(
-            f"JSON file was not found: {path}"
+            f"JSON file was not found: {resolved}"
         ) from exc
-
     except json.JSONDecodeError as exc:
         raise ValueError(
-            f"Invalid JSON in {path}: {exc}"
+            f"Invalid JSON in {resolved}: {exc}"
         ) from exc
 
 
 def valid_ip_or_none(
     value: Any,
 ) -> str | None:
-    if value in (None, "", "-", "unknown"):
+    """Return a normalized IP address or None."""
+    if value in (
+        None,
+        "",
+        "-",
+        "unknown",
+    ):
         return None
 
     try:
@@ -121,7 +108,6 @@ def valid_ip_or_none(
                 str(value).strip()
             )
         )
-
     except ValueError:
         return None
 
@@ -129,7 +115,13 @@ def valid_ip_or_none(
 def valid_timestamp_or_none(
     value: Any,
 ) -> str | int | float | None:
-    if value in (None, "", "-", "unknown"):
+    """Return an OpenSearch-compatible date value or None."""
+    if value in (
+        None,
+        "",
+        "-",
+        "unknown",
+    ):
         return None
 
     if isinstance(
@@ -138,29 +130,26 @@ def valid_timestamp_or_none(
     ):
         return value
 
-    text = str(value).strip()
+    text = str(
+        value
+    ).strip()
 
-    if not text:
-        return None
-
-    return text
+    return text or None
 
 
 def clean_private_fields(
     value: Any,
 ) -> Any:
-    """
-    Recursively remove internal keys beginning with an underscore.
-
-    OpenSearch metadata such as _id is supplied separately through the
-    Bulk API and must not be embedded in the document source.
-    """
-
+    """Recursively remove internal fields beginning with an underscore."""
     if isinstance(value, dict):
         return {
-            key: clean_private_fields(item)
+            key: clean_private_fields(
+                item
+            )
             for key, item in value.items()
-            if not str(key).startswith("_")
+            if not str(
+                key
+            ).startswith("_")
         }
 
     if isinstance(value, list):
@@ -175,16 +164,16 @@ def clean_private_fields(
 def sanitize_document(
     source_document: dict[str, Any],
 ) -> dict[str, Any]:
-    """
-    Prepare one event for the healthcare-risk-events-v2 mapping.
-    """
-
+    """Prepare one risk event for the strict index mapping."""
     document = clean_private_fields(
         dict(source_document)
     )
 
     event_id = str(
-        document.get("event_id") or ""
+        document.get(
+            "event_id"
+        )
+        or ""
     ).strip()
 
     if not event_id:
@@ -194,42 +183,73 @@ def sanitize_document(
 
     document["event_id"] = event_id
 
-    timestamp = valid_timestamp_or_none(
-        document.get("timestamp")
-        or document.get("@timestamp")
+    timestamp = (
+        valid_timestamp_or_none(
+            document.get(
+                "timestamp"
+            )
+            or document.get(
+                "@timestamp"
+            )
+        )
     )
 
     if timestamp is None:
-        document.pop("timestamp", None)
-        document.pop("@timestamp", None)
+        document.pop(
+            "timestamp",
+            None,
+        )
+        document.pop(
+            "@timestamp",
+            None,
+        )
     else:
-        document["timestamp"] = timestamp
-        document["@timestamp"] = timestamp
+        document[
+            "timestamp"
+        ] = timestamp
+        document[
+            "@timestamp"
+        ] = timestamp
 
     for field_name in (
         "ip",
         "source_ip",
         "destination_ip",
     ):
-        normalized_ip = valid_ip_or_none(
-            document.get(field_name)
+        normalized_ip = (
+            valid_ip_or_none(
+                document.get(
+                    field_name
+                )
+            )
         )
 
         if normalized_ip is None:
-            document.pop(field_name, None)
+            document.pop(
+                field_name,
+                None,
+            )
         else:
-            document[field_name] = normalized_ip
+            document[
+                field_name
+            ] = normalized_ip
 
-    behavior_metrics = document.get(
-        "behavior_metrics"
+    behavior_metrics = (
+        document.get(
+            "behavior_metrics"
+        )
     )
 
     if isinstance(
         behavior_metrics,
         dict,
     ):
-        behavior_ip = valid_ip_or_none(
-            behavior_metrics.get("source_ip")
+        behavior_ip = (
+            valid_ip_or_none(
+                behavior_metrics.get(
+                    "source_ip"
+                )
+            )
         )
 
         if behavior_ip is None:
@@ -264,26 +284,32 @@ def sanitize_document(
                     date_field
                 ] = normalized_date
 
-    if not document.get("event_type"):
-        document["event_type"] = (
-            "unknown_activity"
-        )
+    if not document.get(
+        "event_type"
+    ):
+        document[
+            "event_type"
+        ] = "unknown_activity"
 
-    document["detection_type"] = (
-        document["event_type"]
-    )
+    document[
+        "detection_type"
+    ] = document[
+        "event_type"
+    ]
 
     zeek_uid = str(
-        document.get("zeek_uid")
+        document.get(
+            "zeek_uid"
+        )
         or document.get("uid")
         or ""
     ).strip()
 
     if zeek_uid:
-        document["zeek_uid"] = zeek_uid
+        document[
+            "zeek_uid"
+        ] = zeek_uid
 
-    # These raw Zeek fields have canonical equivalents and contain dots,
-    # which can create mapping conflicts in OpenSearch.
     for redundant_field in (
         "uid",
         "ts",
@@ -301,48 +327,208 @@ def sanitize_document(
     return document
 
 
-def build_final_documents(
+def _environment_metadata(
     scored_output: dict[str, Any],
-) -> list[dict[str, Any]]:
-    """
-    Build the final OpenSearch snapshot.
+) -> dict[str, Any]:
+    environment = scored_output.get(
+        "environment",
+        {},
+    )
 
-    Correlated Zeek results replace standalone Zeek results using the same
-    event_id. Wazuh results remain independent host-event documents.
+    if not isinstance(
+        environment,
+        dict,
+    ):
+        raise PushConfigurationError(
+            "scored_events.environment "
+            "must be an object"
+        )
+
+    return environment
+
+
+def validate_scored_environment(
+    scored_output: dict[str, Any],
+    environment_id: str,
+) -> dict[str, Any]:
     """
+    Validate top-level and event-level environment identities.
+
+    Missing event fields are filled from the selected environment. Explicit
+    mismatches are rejected.
+    """
+    environment_id = resolve_environment_id(
+        environment_id
+    )
 
     if not isinstance(
         scored_output,
         dict,
     ):
         raise PushConfigurationError(
-            "scored_events.json must contain a JSON object"
+            "scored_events.json must "
+            "contain a JSON object"
         )
 
-    wazuh_results = scored_output.get(
-        "wazuh_results",
-        [],
+    metadata = _environment_metadata(
+        scored_output
     )
-    zeek_results = scored_output.get(
-        "zeek_results",
-        [],
+
+    configured_environment = str(
+        metadata.get(
+            "environment_id",
+            "",
+        )
+    ).strip().lower()
+
+    if not configured_environment:
+        raise PushConfigurationError(
+            "scored_events.environment."
+            "environment_id is required"
+        )
+
+    if (
+        configured_environment
+        != environment_id
+    ):
+        raise PushConfigurationError(
+            "Scored output belongs to "
+            f"environment "
+            f"{configured_environment}, "
+            "but the selected environment is "
+            f"{environment_id}"
+        )
+
+    return {
+        "environment_id": (
+            environment_id
+        ),
+        "environment_name": (
+            metadata.get(
+                "environment_name",
+                environment_id,
+            )
+        ),
+        "site_id": (
+            metadata.get(
+                "site_id",
+                "unknown",
+            )
+        ),
+        "environment_type": (
+            metadata.get(
+                "environment_type",
+                "unknown",
+            )
+        ),
+        "infrastructure_type": (
+            metadata.get(
+                "infrastructure_type",
+                "unknown",
+            )
+        ),
+    }
+
+
+def _prepare_event(
+    event: dict[str, Any],
+    environment_fields: dict[str, Any],
+) -> dict[str, Any]:
+    event_environment = (
+        get_event_environment(
+            event
+        )
     )
-    correlated_results = scored_output.get(
-        "correlated_results",
-        [],
+
+    selected_environment = str(
+        environment_fields[
+            "environment_id"
+        ]
+    )
+
+    if (
+        event_environment
+        and event_environment
+        != selected_environment
+    ):
+        raise PushConfigurationError(
+            "Event "
+            f"{event.get('event_id', 'unknown')} "
+            "belongs to environment "
+            f"{event_environment}, but the "
+            "selected environment is "
+            f"{selected_environment}"
+        )
+
+    prepared_source = {
+        **event,
+        **environment_fields,
+    }
+
+    return sanitize_document(
+        prepared_source
+    )
+
+
+def build_final_documents(
+    scored_output: dict[str, Any],
+    environment_id: str,
+) -> list[dict[str, Any]]:
+    """
+    Build the final environment-isolated OpenSearch snapshot.
+
+    Correlated Zeek results replace standalone Zeek results with the same
+    event_id. Wazuh results remain separate.
+    """
+    environment_fields = (
+        validate_scored_environment(
+            scored_output,
+            environment_id,
+        )
+    )
+
+    wazuh_results = (
+        scored_output.get(
+            "wazuh_results",
+            [],
+        )
+    )
+
+    zeek_results = (
+        scored_output.get(
+            "zeek_results",
+            [],
+        )
+    )
+
+    correlated_results = (
+        scored_output.get(
+            "correlated_results",
+            [],
+        )
     )
 
     for section_name, section in (
-        ("wazuh_results", wazuh_results),
-        ("zeek_results", zeek_results),
+        (
+            "wazuh_results",
+            wazuh_results,
+        ),
+        (
+            "zeek_results",
+            zeek_results,
+        ),
         (
             "correlated_results",
             correlated_results,
         ),
     ):
-        if not isinstance(section, list):
+        if not isinstance(
+            section,
+            list,
+        ):
             raise PushConfigurationError(
-                f"{section_name} must be a JSON list"
+                f"{section_name} must "
+                "be a JSON list"
             )
 
     wazuh_by_id: dict[
@@ -356,58 +542,92 @@ def build_final_documents(
     ] = {}
 
     for event in wazuh_results:
-        if not isinstance(event, dict):
+        if not isinstance(
+            event,
+            dict,
+        ):
             continue
 
-        prepared = sanitize_document(event)
+        prepared = _prepare_event(
+            event,
+            environment_fields,
+        )
 
         wazuh_by_id[
             prepared["event_id"]
         ] = prepared
 
     for event in zeek_results:
-        if not isinstance(event, dict):
+        if not isinstance(
+            event,
+            dict,
+        ):
             continue
 
-        prepared = sanitize_document(event)
+        prepared = _prepare_event(
+            event,
+            environment_fields,
+        )
 
         network_by_id[
             prepared["event_id"]
         ] = prepared
 
-    # Correlated versions intentionally overwrite their standalone Zeek
-    # document. This prevents two dashboard rows for the same connection.
     for event in correlated_results:
-        if not isinstance(event, dict):
+        if not isinstance(
+            event,
+            dict,
+        ):
             continue
 
-        prepared = sanitize_document(event)
+        prepared = _prepare_event(
+            event,
+            environment_fields,
+        )
 
         network_by_id[
             prepared["event_id"]
         ] = prepared
 
-    combined: dict[
-        str,
-        dict[str, Any],
-    ] = {}
+    collisions = set(
+        wazuh_by_id
+    ).intersection(
+        network_by_id
+    )
 
-    combined.update(wazuh_by_id)
-    combined.update(network_by_id)
+    if collisions:
+        raise PushConfigurationError(
+            "Wazuh and network events share "
+            "the same event_id: "
+            + ", ".join(
+                sorted(collisions)
+            )
+        )
+
+    combined = {
+        **wazuh_by_id,
+        **network_by_id,
+    }
 
     return [
         combined[event_id]
-        for event_id in sorted(combined)
+        for event_id in sorted(
+            combined
+        )
     ]
 
 
 def chunked(
     values: list[dict[str, Any]],
     chunk_size: int,
-) -> Iterable[list[dict[str, Any]]]:
+) -> Iterable[
+    list[dict[str, Any]]
+]:
+    """Yield fixed-size batches."""
     if chunk_size <= 0:
         raise ValueError(
-            "chunk_size must be greater than zero"
+            "chunk_size must be "
+            "greater than zero"
         )
 
     for start in range(
@@ -416,170 +636,26 @@ def chunked(
         chunk_size,
     ):
         yield values[
-            start:start + chunk_size
+            start:
+            start + chunk_size
         ]
 
 
 class OpenSearchPublisher:
-    """Minimal requests-based OpenSearch publisher."""
+    """Bulk publisher using deterministic event IDs."""
 
     def __init__(
         self,
-        base_url: str,
-        username: str,
-        password: str,
-        verify_tls: bool | str,
-        timeout_seconds: int = 30,
+        client: OpenSearchClient,
     ) -> None:
-        self.base_url = (
-            base_url.rstrip("/")
-        )
-        self.verify_tls = verify_tls
-        self.timeout_seconds = (
-            timeout_seconds
-        )
-
-        self.session = requests.Session()
-        self.session.auth = HTTPBasicAuth(
-            username,
-            password,
-        )
-        self.session.headers.update(
-            {
-                "Accept": "application/json",
-            }
-        )
-
-        if verify_tls is False:
-            urllib3.disable_warnings(
-                urllib3.exceptions
-                .InsecureRequestWarning
-            )
-
-    def _url(
-        self,
-        path: str,
-    ) -> str:
-        return (
-            f"{self.base_url}/"
-            f"{path.lstrip('/')}"
-        )
-
-    def _request(
-        self,
-        method: str,
-        path: str,
-        *,
-        expected_statuses: set[int],
-        **kwargs: Any,
-    ) -> Response:
-        try:
-            response = self.session.request(
-                method=method,
-                url=self._url(path),
-                verify=self.verify_tls,
-                timeout=self.timeout_seconds,
-                **kwargs,
-            )
-
-        except requests.RequestException as exc:
-            raise RuntimeError(
-                (
-                    "Unable to communicate with "
-                    f"OpenSearch at {self.base_url}: "
-                    f"{exc}"
-                )
-            ) from exc
-
-        if response.status_code not in (
-            expected_statuses
-        ):
-            body = response.text[:2000]
-
-            raise RuntimeError(
-                (
-                    f"OpenSearch request failed: "
-                    f"{method} {path} returned "
-                    f"HTTP {response.status_code}: "
-                    f"{body}"
-                )
-            )
-
-        return response
-
-    def index_exists(
-        self,
-        index_name: str,
-    ) -> bool:
-        response = self._request(
-            "HEAD",
-            index_name,
-            expected_statuses={200, 404},
-        )
-
-        return response.status_code == 200
-
-    def create_index(
-        self,
-        index_name: str,
-        mapping: dict[str, Any],
-    ) -> None:
-        self._request(
-            "PUT",
-            index_name,
-            expected_statuses={200},
-            json=mapping,
-        )
-
-        LOGGER.info(
-            "Created OpenSearch index %s",
-            index_name,
-        )
-
-    def delete_index(
-        self,
-        index_name: str,
-    ) -> None:
-        self._request(
-            "DELETE",
-            index_name,
-            expected_statuses={200, 404},
-        )
-
-        LOGGER.info(
-            "Deleted OpenSearch index %s",
-            index_name,
-        )
-
-    def ensure_index(
-        self,
-        index_name: str,
-        mapping: dict[str, Any],
-        recreate: bool = False,
-    ) -> None:
-        exists = self.index_exists(
-            index_name
-        )
-
-        if recreate and exists:
-            self.delete_index(index_name)
-            exists = False
-
-        if not exists:
-            self.create_index(
-                index_name=index_name,
-                mapping=mapping,
-            )
-        else:
-            LOGGER.info(
-                "OpenSearch index already exists: %s",
-                index_name,
-            )
+        self.client = client
 
     def bulk_index(
         self,
-        index_name: str,
-        documents: list[dict[str, Any]],
+        target: str,
+        documents: list[
+            dict[str, Any]
+        ],
         batch_size: int = 500,
     ) -> dict[str, int]:
         counters = {
@@ -605,17 +681,22 @@ class OpenSearchPublisher:
                     document["event_id"]
                 )
 
-                action = {
-                    "index": {
-                        "_index": index_name,
-                        "_id": event_id,
-                    }
-                }
-
                 lines.append(
                     json.dumps(
-                        action,
-                        separators=(",", ":"),
+                        {
+                            "index": {
+                                "_index": (
+                                    target
+                                ),
+                                "_id": (
+                                    event_id
+                                ),
+                            }
+                        },
+                        separators=(
+                            ",",
+                            ":",
+                        ),
                         ensure_ascii=False,
                     )
                 )
@@ -623,49 +704,89 @@ class OpenSearchPublisher:
                 lines.append(
                     json.dumps(
                         document,
-                        separators=(",", ":"),
+                        separators=(
+                            ",",
+                            ":",
+                        ),
                         ensure_ascii=False,
                         default=str,
                     )
                 )
 
-            payload = "\n".join(lines) + "\n"
+            payload = (
+                "\n".join(lines)
+                + "\n"
+            )
 
-            response = self._request(
-                "POST",
-                "_bulk",
-                expected_statuses={200},
-                data=payload.encode("utf-8"),
-                headers={
-                    "Content-Type":
-                        "application/x-ndjson"
-                },
+            response = (
+                self.client.request(
+                    "POST",
+                    "_bulk",
+                    expected_statuses={
+                        200,
+                    },
+                    data=payload.encode(
+                        "utf-8"
+                    ),
+                    headers={
+                        "Content-Type": (
+                            "application/x-ndjson"
+                        )
+                    },
+                )
             )
 
             result = response.json()
-            items = result.get("items", [])
+            items = result.get(
+                "items",
+                [],
+            )
 
-            counters["submitted"] += len(batch)
+            counters[
+                "submitted"
+            ] += len(batch)
+
+            if len(items) != len(batch):
+                raise BulkIndexError(
+                    "OpenSearch bulk response "
+                    "item count does not match "
+                    "the submitted document count"
+                )
 
             for item in items:
-                operation = item.get("index", {})
-                status = int(
-                    operation.get("status", 0)
+                operation = item.get(
+                    "index",
+                    {},
                 )
+
+                status = int(
+                    operation.get(
+                        "status",
+                        0,
+                    )
+                )
+
                 operation_result = str(
-                    operation.get("result", "")
+                    operation.get(
+                        "result",
+                        "",
+                    )
                 )
 
                 if 200 <= status < 300:
-                    if (
-                        operation_result
-                        in counters
+                    if operation_result in (
+                        "created",
+                        "updated",
+                        "noop",
                     ):
                         counters[
                             operation_result
                         ] += 1
                     else:
-                        counters["updated"] += 1
+                        counters[
+                            "updated"
+                        ] += 1
+
                     continue
 
                 counters["failed"] += 1
@@ -685,72 +806,55 @@ class OpenSearchPublisher:
 
         if counters["failed"]:
             raise BulkIndexError(
-                (
-                    f"{counters['failed']} bulk "
-                    f"operation(s) failed. "
-                    f"First failures: "
-                    f"{json.dumps(failures, indent=2)}"
+                f"{counters['failed']} bulk "
+                "operation(s) failed. "
+                "First failures: "
+                + json.dumps(
+                    failures,
+                    indent=2,
                 )
             )
 
         return counters
 
-    def refresh_index(
-        self,
-        index_name: str,
-    ) -> None:
-        self._request(
-            "POST",
-            f"{index_name}/_refresh",
-            expected_statuses={200},
-        )
 
-
-def resolve_tls_verification() -> bool | str:
-    ca_certificate = str(
-        os.getenv(
-            "RISK_INDEXER_CA_CERT",
-            "",
-        )
-    ).strip()
-
-    if ca_certificate:
-        ca_path = Path(ca_certificate)
-
-        if not ca_path.exists():
-            raise PushConfigurationError(
-                (
-                    "RISK_INDEXER_CA_CERT does "
-                    f"not exist: {ca_path}"
-                )
-            )
-
-        return str(ca_path)
-
-    return parse_boolean(
-        os.getenv(
-            "RISK_INDEXER_VERIFY_TLS",
-            "false",
-        ),
-        default=False,
-    )
-
-
-def build_argument_parser() -> argparse.ArgumentParser:
+def build_argument_parser(
+) -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
-            "Publish scored healthcare-risk "
-            "events to OpenSearch"
+            "Publish environment-isolated "
+            "healthcare-risk events"
         )
+    )
+
+    parser.add_argument(
+        "--environment",
+        default=os.getenv(
+            "ENVIRONMENT_ID"
+        ),
+        help=(
+            "Hospital environment ID. "
+            "ENVIRONMENT_ID may also be used."
+        ),
     )
 
     parser.add_argument(
         "--input",
         type=Path,
-        default=DEFAULT_INPUT_FILE,
+        default=None,
         help=(
-            "Path to output/scored_events.json"
+            "Optional scored-events file. "
+            "Defaults to output/<environment-id>/"
+            "scored_events.json."
         ),
+    )
+
+    parser.add_argument(
+        "--config-root",
+        default=str(
+            DEFAULT_CONFIG_ROOT
+        ),
+        help="Configuration root directory",
     )
 
     parser.add_argument(
@@ -758,18 +862,16 @@ def build_argument_parser() -> argparse.ArgumentParser:
         type=Path,
         default=DEFAULT_MAPPING_FILE,
         help=(
-            "Path to the OpenSearch index "
-            "mapping JSON"
+            "OpenSearch index mapping JSON"
         ),
     )
 
     parser.add_argument(
-        "--index",
+        "--base-index",
         default=None,
         help=(
-            "Target index. Defaults to "
-            "RISK_OUTPUT_INDEX or "
-            "healthcare-risk-events-v2"
+            "Optional base index override. "
+            "Defaults to environment output.index."
         ),
     )
 
@@ -781,19 +883,11 @@ def build_argument_parser() -> argparse.ArgumentParser:
     )
 
     parser.add_argument(
-        "--recreate-index",
-        action="store_true",
-        help=(
-            "Delete and recreate the target "
-            "index before publishing"
-        ),
-    )
-
-    parser.add_argument(
         "--refresh",
         action="store_true",
         help=(
-            "Refresh the index after publishing"
+            "Refresh the read alias "
+            "after publishing"
         ),
     )
 
@@ -801,8 +895,17 @@ def build_argument_parser() -> argparse.ArgumentParser:
         "--dry-run",
         action="store_true",
         help=(
-            "Prepare and validate documents "
+            "Validate and prepare documents "
             "without contacting OpenSearch"
+        ),
+    )
+
+    parser.add_argument(
+        "--skip-ensure",
+        action="store_true",
+        help=(
+            "Do not ensure the backing index "
+            "and aliases before publishing"
         ),
     )
 
@@ -810,13 +913,6 @@ def build_argument_parser() -> argparse.ArgumentParser:
 
 
 def main() -> int:
-    load_dotenv(
-        PROJECT_ROOT / ".env"
-    )
-
-    parser = build_argument_parser()
-    args = parser.parse_args()
-
     logging.basicConfig(
         level=logging.INFO,
         format=(
@@ -825,17 +921,57 @@ def main() -> int:
         ),
     )
 
-    scored_output = load_json(
-        args.input
+    load_dotenv(
+        PROJECT_ROOT / ".env"
     )
 
-    documents = build_final_documents(
-        scored_output
+    args = (
+        build_argument_parser()
+        .parse_args()
+    )
+
+    environment_id = (
+        resolve_environment_id(
+            args.environment
+        )
+    )
+
+    environment_paths = (
+        EnvironmentPaths(
+            project_root=PROJECT_ROOT,
+            environment_id=(
+                environment_id
+            ),
+        )
+    )
+
+    environment_paths.ensure_directories()
+
+    input_file = (
+        args.input.resolve()
+        if args.input
+        else (
+            environment_paths
+            .scored_events_file
+        )
+    )
+
+    scored_output = load_json(
+        input_file
+    )
+
+    documents = (
+        build_final_documents(
+            scored_output,
+            environment_id,
+        )
     )
 
     LOGGER.info(
-        "Prepared %s unique document(s).",
+        "Prepared %s unique document(s) "
+        "for environment %s.",
         len(documents),
+        environment_id,
     )
 
     if args.dry_run:
@@ -847,8 +983,9 @@ def main() -> int:
         if len(event_ids) != len(
             set(event_ids)
         ):
-            raise RuntimeError(
-                "Duplicate event IDs remain after preparation"
+            raise PushConfigurationError(
+                "Duplicate event IDs remain "
+                "after preparation"
             )
 
         LOGGER.info(
@@ -857,108 +994,69 @@ def main() -> int:
 
         return 0
 
-    mapping = load_json(
+    base_index = (
+        validate_index_name(
+            args.base_index,
+            "base index",
+        )
+        if args.base_index
+        else load_environment_base_index(
+            environment_id,
+            args.config_root,
+        )
+    )
+
+    names = build_index_names(
+        environment_id,
+        base_index,
+    )
+
+    mapping = load_json_object(
         args.mapping
     )
 
-    base_url = str(
-        os.getenv(
-            "RISK_INDEXER_URL",
-            os.getenv(
-                "WAZUH_INDEXER_URL",
-                "https://localhost:9200",
-            ),
-        )
-    ).strip()
+    settings = (
+        OpenSearchConnectionSettings
+        .from_environment()
+    )
 
-    username = str(
-        os.getenv(
-            "RISK_INDEXER_USERNAME",
-            os.getenv(
-                "WAZUH_USERNAME",
-                "",
-            ),
-        )
-    ).strip()
+    client = OpenSearchClient(
+        settings
+    )
 
-    password = str(
-        os.getenv(
-            "RISK_INDEXER_PASSWORD",
-            os.getenv(
-                "WAZUH_PASSWORD",
-                "",
-            ),
+    manager = (
+        OpenSearchIndexManager(
+            client=client,
+            names=names,
+            mapping=mapping,
         )
     )
 
-    index_name = str(
-        args.index
-        or os.getenv(
-            "RISK_OUTPUT_INDEX",
-            DEFAULT_INDEX_NAME,
-        )
-    ).strip()
-
-    if not base_url:
-        raise PushConfigurationError(
-            "RISK_INDEXER_URL is empty"
+    if not args.skip_ensure:
+        ensure_result = (
+            manager.ensure()
         )
 
-    if not username:
-        raise PushConfigurationError(
-            (
-                "RISK_INDEXER_USERNAME or "
-                "WAZUH_USERNAME is required"
-            )
+        LOGGER.info(
+            "OpenSearch index ready: %s",
+            ensure_result[
+                "write_index"
+            ],
         )
-
-    if not password:
-        raise PushConfigurationError(
-            (
-                "RISK_INDEXER_PASSWORD or "
-                "WAZUH_PASSWORD is required"
-            )
-        )
-
-    if not index_name:
-        raise PushConfigurationError(
-            "Target index name is empty"
-        )
-
-    verify_tls = (
-        resolve_tls_verification()
-    )
-
-    timeout_seconds = int(
-        os.getenv(
-            "RISK_INDEXER_TIMEOUT_SECONDS",
-            "30",
-        )
-    )
 
     publisher = OpenSearchPublisher(
-        base_url=base_url,
-        username=username,
-        password=password,
-        verify_tls=verify_tls,
-        timeout_seconds=timeout_seconds,
-    )
-
-    publisher.ensure_index(
-        index_name=index_name,
-        mapping=mapping,
-        recreate=args.recreate_index,
+        client
     )
 
     counters = publisher.bulk_index(
-        index_name=index_name,
+        target=names.write_alias,
         documents=documents,
         batch_size=args.batch_size,
     )
 
     if args.refresh:
-        publisher.refresh_index(
-            index_name
+        client.refresh(
+            names.read_alias
         )
 
     LOGGER.info(
@@ -975,8 +1073,18 @@ def main() -> int:
     )
 
     LOGGER.info(
-        "Target index: %s",
-        index_name,
+        "Environment: %s",
+        environment_id,
+    )
+
+    LOGGER.info(
+        "Write alias: %s",
+        names.write_alias,
+    )
+
+    LOGGER.info(
+        "Dashboard read alias: %s",
+        names.read_alias,
     )
 
     return 0
@@ -985,13 +1093,13 @@ def main() -> int:
 if __name__ == "__main__":
     try:
         raise SystemExit(main())
-
     except (
-        PushConfigurationError,
         BulkIndexError,
         FileNotFoundError,
+        OpenSearchConfigurationError,
+        OpenSearchRequestError,
+        PushConfigurationError,
         ValueError,
-        RuntimeError,
     ) as exc:
         LOGGER.error("%s", exc)
         raise SystemExit(1)
