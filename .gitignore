@@ -1,36 +1,30 @@
-__pycache__/
-*.py[cod]
-.pytest_cache/
-.env
-data/live_wazuh_events.json
-data/live_zeek_conn.json
-data/live_zeek_conn.log
-output/scored_events.json
+@'
 
-# Secrets
-.env
+# Secret material
+.env.*
+!.env.example
+secrets/
+*.secrets.*
 *.pem
 *.key
 *.crt
 
-# Python
-venv/
-.venv/
-__pycache__/
-*.pyc
+# Runtime telemetry
+data/**/live_*
+data/**/*.log
+output/**/*.json
+logs/**
+!logs/.gitkeep
 
-# Runtime data
-data/*/
-output/*/
-logs/*/
-
-# Uploaded profiles and backups
+# Environment profile runtime history
 config/uploads/pending/*
 config/uploads/accepted/*
 config/uploads/rejected/*
 config/backups/
+config/versions/
 
-# Temporary backup files
+# Local backup and temporary files
 *.backup
-*.before-versioning
+*.before-*
 *.tmp
+'@ | Add-Content .gitignore

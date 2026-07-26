@@ -101,6 +101,20 @@ asset_overrides:
     tags:
     - ehr_user
     - workstation
+  192.168.100.10:
+    hostname: attacker-kali
+    role: attacker
+    zone: healthcare_lab
+    asset_type: penetration_test_host
+    trust_level: untrusted
+    sensitivity: normal
+    managed: false
+    trusted: false
+    criticality: low
+    tags:
+    - attacker
+    - kali
+    - security-testing
   192.168.100.21:
     hostname: admin-pc-01
     role: admin_workstation

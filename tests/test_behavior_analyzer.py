@@ -20,6 +20,7 @@ class BehaviorAnalyzerTests(unittest.TestCase):
         cls.analyzer = BehaviorAnalyzer.from_file(
             PROJECT_ROOT
             / "config"
+            / "base"
             / "risk_rules.yaml"
         )
 

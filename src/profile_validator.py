@@ -62,6 +62,7 @@ RESERVED_ENVIRONMENT_IDS = {
 }
 
 ALLOWED_ROLES = {
+    "attacker",
     "workstation",
     "admin_workstation",
     "application_server",

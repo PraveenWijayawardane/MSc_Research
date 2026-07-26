@@ -4,7 +4,11 @@ from pathlib import Path
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(PROJECT_ROOT / "src"))
+
+sys.path.insert(
+    0,
+    str(PROJECT_ROOT / "src"),
+)
 
 from asset_resolver import AssetResolver  # noqa: E402
 from policy_engine import PolicyEngine  # noqa: E402
@@ -17,12 +21,15 @@ class PolicyEngineTests(unittest.TestCase):
         cls.asset_resolver = AssetResolver.from_file(
             PROJECT_ROOT
             / "config"
+            / "environments"
+            / "healthcare-lab"
             / "asset_context.yaml"
         )
 
         cls.policy_engine = PolicyEngine.from_file(
             PROJECT_ROOT
             / "config"
+            / "base"
             / "role_policies.yaml"
         )
 
@@ -59,12 +66,21 @@ class PolicyEngineTests(unittest.TestCase):
         )
 
         self.assertTrue(result["matched"])
+
         self.assertEqual(
             result["policy_name"],
             "workstation_to_ehr_application",
         )
-        self.assertEqual(result["action"], "allow")
-        self.assertEqual(result["risk_points"], -6)
+
+        self.assertEqual(
+            result["action"],
+            "allow",
+        )
+
+        self.assertEqual(
+            result["risk_points"],
+            -6,
+        )
 
     def test_workstation_direct_database_is_denied(self):
         result = self.evaluate(
@@ -75,12 +91,21 @@ class PolicyEngineTests(unittest.TestCase):
         )
 
         self.assertTrue(result["matched"])
+
         self.assertEqual(
             result["policy_name"],
             "workstation_direct_database_access",
         )
-        self.assertEqual(result["action"], "deny")
-        self.assertEqual(result["risk_points"], 10)
+
+        self.assertEqual(
+            result["action"],
+            "deny",
+        )
+
+        self.assertEqual(
+            result["risk_points"],
+            10,
+        )
 
     def test_admin_database_access_is_allowed(self):
         result = self.evaluate(
@@ -94,7 +119,11 @@ class PolicyEngineTests(unittest.TestCase):
             result["policy_name"],
             "administrator_database_management",
         )
-        self.assertEqual(result["action"], "allow")
+
+        self.assertEqual(
+            result["action"],
+            "allow",
+        )
 
     def test_attacker_to_internal_asset_is_denied(self):
         result = self.evaluate(
@@ -108,8 +137,16 @@ class PolicyEngineTests(unittest.TestCase):
             result["policy_name"],
             "attacker_to_internal_asset",
         )
-        self.assertEqual(result["action"], "deny")
-        self.assertEqual(result["risk_points"], 12)
+
+        self.assertEqual(
+            result["action"],
+            "deny",
+        )
+
+        self.assertEqual(
+            result["risk_points"],
+            12,
+        )
 
     def test_unknown_connection_uses_default_policy(self):
         result = self.evaluate(
@@ -120,12 +157,21 @@ class PolicyEngineTests(unittest.TestCase):
         )
 
         self.assertFalse(result["matched"])
+
         self.assertEqual(
             result["policy_name"],
             "default_policy",
         )
-        self.assertEqual(result["action"], "observe")
-        self.assertEqual(result["risk_points"], 3)
+
+        self.assertEqual(
+            result["action"],
+            "observe",
+        )
+
+        self.assertEqual(
+            result["risk_points"],
+            3,
+        )
 
     def test_udp_dns_policy_is_allowed(self):
         result = self.evaluate(
@@ -140,8 +186,16 @@ class PolicyEngineTests(unittest.TestCase):
             result["policy_name"],
             "internal_dns",
         )
-        self.assertEqual(result["action"], "allow")
-        self.assertEqual(result["risk_points"], 0)
+
+        self.assertEqual(
+            result["action"],
+            "allow",
+        )
+
+        self.assertEqual(
+            result["risk_points"],
+            0,
+        )
 
 
 if __name__ == "__main__":

@@ -114,6 +114,19 @@ asset_overrides:
     - network_monitoring
     - security_sensor
 
+  192.168.100.20:
+    hostname: user-pc-01
+    role: workstation
+    asset_type: employee_workstation
+    sensitivity: normal
+    trust_level: standard
+    managed: true
+    trusted: false
+    criticality: normal
+    tags:
+    - ehr_user
+    - workstation
+
 # Used when an IP does not match any configured zone or exact asset.
 fallback_context:
   internal:

@@ -1,0 +1,16 @@
+[
+  {
+    "uid": "hospital-a-live-test",
+    "ts": "2026-07-27T04:30:00Z",
+    "id.orig_h": "10.50.10.25",
+    "id.orig_p": 45000,
+    "id.resp_h": "10.50.30.15",
+    "id.resp_p": 5000,
+    "proto": "tcp",
+    "service": "http",
+    "conn_state": "SF",
+    "orig_bytes": 100,
+    "resp_bytes": 200,
+    "duration": 1
+  }
+]
