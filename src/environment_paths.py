@@ -2,8 +2,8 @@
 """
 Environment-specific file-path management.
 
-Each hospital receives isolated input, output, and log directories so
-telemetry from one environment cannot overwrite another environment's files.
+Each hospital receives isolated input, output, log, state, and lock files so
+telemetry and pipeline processes cannot overwrite another environment.
 """
 
 from __future__ import annotations
@@ -16,7 +16,7 @@ from event_environment import resolve_environment_id
 
 @dataclass(frozen=True)
 class EnvironmentPaths:
-    """Resolved file paths for one hospital environment."""
+    """Resolved runtime paths for one hospital environment."""
 
     project_root: Path
     environment_id: str
@@ -103,8 +103,22 @@ class EnvironmentPaths:
             / "live_pipeline.log"
         )
 
+    @property
+    def pipeline_state_file(self) -> Path:
+        return (
+            self.logs_directory
+            / "live_pipeline_state.json"
+        )
+
+    @property
+    def pipeline_lock_file(self) -> Path:
+        return (
+            self.logs_directory
+            / "live_pipeline.lock"
+        )
+
     def ensure_directories(self) -> None:
-        """Create all environment-specific directories."""
+        """Create all environment-specific runtime directories."""
         self.data_directory.mkdir(
             parents=True,
             exist_ok=True,
