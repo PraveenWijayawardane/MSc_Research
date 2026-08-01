@@ -20,6 +20,7 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+from logging.handlers import TimedRotatingFileHandler
 import os
 import shutil
 import socket
@@ -1522,8 +1523,9 @@ class LivePipeline:
 def configure_logging(
     log_file: Path,
     verbose: bool = False,
+    retention_days: int = 30,
 ) -> None:
-    """Configure console and environment-specific file logging."""
+    """Configure console and daily rotating environment-specific logging."""
     log_file.parent.mkdir(
         parents=True,
         exist_ok=True,
@@ -1562,10 +1564,16 @@ def configure_logging(
         formatter
     )
 
-    file_handler = logging.FileHandler(
+    file_handler = TimedRotatingFileHandler(
         log_file,
+        when="midnight",
+        interval=1,
+        backupCount=max(1, retention_days),
         encoding="utf-8",
+        delay=True,
+        utc=False,
     )
+    file_handler.suffix = "%Y-%m-%d"
     file_handler.setLevel(level)
     file_handler.setFormatter(
         formatter
@@ -1736,6 +1744,15 @@ def build_argument_parser(
     )
 
     parser.add_argument(
+        "--log-retention-days",
+        type=positive_integer,
+        default=positive_integer(
+            os.getenv("PIPELINE_LOG_RETENTION_DAYS", "30")
+        ),
+        help="Number of rotated daily pipeline logs to retain",
+    )
+
+    parser.add_argument(
         "--verbose",
         action="store_true",
         help="Enable debug logging",
@@ -1772,6 +1789,7 @@ def main() -> int:
     configure_logging(
         paths.pipeline_log_file,
         verbose=args.verbose,
+        retention_days=args.log_retention_days,
     )
 
     options = PipelineOptions(
