@@ -1,0 +1,12 @@
+# Keep raw experimental evidence locally
+pilots/**/live_wazuh_events.json
+pilots/**/live_zeek_conn.log
+pilots/**/live_zeek_conn.json
+pilots/**/scored_events.json
+pilots/**/pipeline_log_tail.txt
+
+final/**/live_wazuh_events.json
+final/**/live_zeek_conn.log
+final/**/live_zeek_conn.json
+final/**/scored_events.json
+final/**/pipeline_log_tail.txt

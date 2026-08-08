@@ -1,6 +1,5 @@
-@'
-
 # Secret material
+.env
 .env.*
 !.env.example
 secrets/
@@ -27,7 +26,11 @@ config/versions/
 *.backup
 *.before-*
 *.tmp
-'@ | Add-Content .gitignorelive-pipeline-tests.txt
+
+# Test/runtime files
+live-pipeline-tests.txt
 test-results.txt
+
+# Python
 __pycache__/
 *.pyc
