@@ -1,0 +1,5 @@
+Test=Repeated identical OpenSearch publication
+InputFile=.\evaluation\chapter6\pilots\A3-PILOT\scored_events.json
+FirstPublication=2026-08-08 23:49:07,349 INFO push_scored_events: Published 529 document(s): 0 created, 529 updated, 0 no-op, 0 failed.
+SecondPublication=2026-08-08 23:53:23,447 INFO push_scored_events: Published 529 document(s): 0 created, 529 updated, 0 no-op, 0 failed.
+EvaluationPurpose=Verify deterministic event IDs prevent creation of duplicate logical documents

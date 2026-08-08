@@ -3,6 +3,7 @@
 "A2-PILOT","89.01","0","6","0",,"","27","Likely Malicious",,"",,,
 "A3-PILOT","83.67","1","18","1","8","Low Suspicion","28","Likely Malicious","30","Likely Malicious","0.013","0.013","0.013"
 "A4-PILOT","132.86","0","4","0",,"","11","Suspicious",,"",,,
+"A5-PILOT","128.75","9","5","2","7","Low Suspicion","14","Suspicious","28","Likely Malicious","0.285","0.484","0.683"
 "B2-PILOT","167.57","0","108","0",,"","26","Likely Malicious",,"",,,
 "B3-PILOT","447.8","0","292","0",,"","21","Likely Malicious",,"",,,
 "U1-PILOT","109.99","0","8","8",,"","25","Likely Malicious","30","Likely Malicious","0.575","1.034","1.883"

@@ -1,6 +1,8 @@
 "RunID","Timestamp","SourceIP","DestinationIP","DestinationPort","PolicyName","AssetScore","PolicyScore","BehaviorScore","WazuhScore","CorrelationScore","RiskScore","Classification","MatchedWazuhCount","MatchedHostSides","MatchedRuleIDs","TimeDifferenceMinutes"
 "A1-PILOT","2026-08-08T16:23:18.684Z","192.168.100.20","192.168.100.40","22","workstation_remote_management","10","8","6","8","6","30","Likely Malicious","6","destination","2502;5503;5710","0.094"
 "A3-PILOT","2026-08-08T16:40:41.228Z","192.168.100.20","192.168.100.40","22","workstation_remote_management","10","8","9","8","6","30","Likely Malicious","1","destination","5710","0.013"
+"A5-PILOT","2026-08-08T18:31:44.956Z","192.168.100.30","192.168.100.40","5432","ehr_application_to_database","10","-3","7","7","7","28","Likely Malicious","9","source","5402;5501;5502","0.285"
+"A5-PILOT","2026-08-08T18:32:08.781Z","192.168.100.30","192.168.100.40","5432","ehr_application_to_database","10","-3","7","7","7","28","Likely Malicious","9","source","5402;5501;5502","0.683"
 "U1-PILOT","2026-08-08T16:56:59.790Z","192.168.101.60","192.168.100.40","5432","unknown_internal_to_critical_asset","10","5","7","7","7","30","Likely Malicious","12","destination","5402;5501;5502;5715","0.575"
 "U1-PILOT","2026-08-08T16:57:04.954Z","192.168.101.60","192.168.100.40","5432","unknown_internal_to_critical_asset","10","5","7","7","7","30","Likely Malicious","12","destination","5402;5501;5502;5715","0.661"
 "U1-PILOT","2026-08-08T16:57:11.127Z","192.168.101.60","192.168.100.40","5432","unknown_internal_to_critical_asset","10","5","7","7","7","30","Likely Malicious","12","destination","5402;5501;5502;5715","0.764"
