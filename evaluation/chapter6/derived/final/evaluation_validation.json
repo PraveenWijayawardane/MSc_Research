@@ -1,0 +1,38 @@
+{
+  "environment": "healthcare-lab",
+  "runs_directory": "D:\\MSc-Research\\Healthcare-risk-engine\\evaluation\\chapter6\\final",
+  "scenario_configuration": "D:\\MSc-Research\\Healthcare-risk-engine\\evaluation\\chapter6\\scenario_ground_truth.csv",
+  "total_runs_discovered": 5,
+  "accepted_runs": 5,
+  "excluded_runs": 0,
+  "expected_total_runs": 40,
+  "validation_problems": [
+    "B1: found 0 run(s), expected 5",
+    "B1: accepted 0 run(s), expected 5",
+    "B2: found 0 run(s), expected 5",
+    "B2: accepted 0 run(s), expected 5",
+    "A1: found 0 run(s), expected 5",
+    "A1: accepted 0 run(s), expected 5",
+    "A2: found 0 run(s), expected 5",
+    "A2: accepted 0 run(s), expected 5",
+    "A3: found 0 run(s), expected 5",
+    "A3: accepted 0 run(s), expected 5",
+    "A5: found 0 run(s), expected 5",
+    "A5: accepted 0 run(s), expected 5",
+    "U1: found 0 run(s), expected 5",
+    "U1: accepted 0 run(s), expected 5"
+  ],
+  "processing_errors": [],
+  "severity_only_mapping": {
+    "0-4": "Legitimate",
+    "5-7": "Low Suspicion",
+    "8-11": "Suspicious",
+    "12-15": "Likely Malicious"
+  },
+  "binary_mapping": {
+    "Legitimate": "Negative",
+    "Low Suspicion": "Negative",
+    "Suspicious": "Positive",
+    "Likely Malicious": "Positive"
+  }
+}

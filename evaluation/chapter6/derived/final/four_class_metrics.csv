@@ -1,0 +1,20 @@
+Evaluation variant,Classification,Support,Precision,Recall,F1,Most frequent confusion
+Severity-only host baseline,Legitimate,0,0.0,,,NONE
+Severity-only host baseline,Low Suspicion,0,,,,NONE
+Severity-only host baseline,Suspicious,5,,0.0,,Legitimate
+Severity-only host baseline,Likely Malicious,0,,,,NONE
+Network-only contextual analysis,Legitimate,0,,,,NONE
+Network-only contextual analysis,Low Suspicion,0,,,,NONE
+Network-only contextual analysis,Suspicious,5,1.0,1.0,1.0,NONE
+Network-only contextual analysis,Likely Malicious,0,,,,NONE
+Network-only contextual analysis,Macro average,5,1.0,1.0,1.0,–
+Contextual analysis without correlation,Legitimate,0,,,,NONE
+Contextual analysis without correlation,Low Suspicion,0,,,,NONE
+Contextual analysis without correlation,Suspicious,5,1.0,1.0,1.0,NONE
+Contextual analysis without correlation,Likely Malicious,0,,,,NONE
+Contextual analysis without correlation,Macro average,5,1.0,1.0,1.0,–
+Full proposed framework,Legitimate,0,,,,NONE
+Full proposed framework,Low Suspicion,0,,,,NONE
+Full proposed framework,Suspicious,5,1.0,1.0,1.0,NONE
+Full proposed framework,Likely Malicious,0,,,,NONE
+Full proposed framework,Macro average,5,1.0,1.0,1.0,–

@@ -1,0 +1,169 @@
+organization:
+  name: Healthcare Security Research Lab
+  site_id: research-lab
+  environment: lab
+  infrastructure_type: bare-metal
+  timezone: Asia/Colombo
+network_zones:
+  healthcare_lab:
+    subnets:
+    - 192.168.100.0/24
+    default_role: workstation
+    trust_level: standard
+    sensitivity: normal
+    managed: true
+    trusted: false
+    criticality: normal
+    tags:
+    - healthcare-lab
+    - internal
+critical_assets:
+  192.168.100.30:
+    hostname: ehr-app-server-01
+    role: ehr_app
+    zone: healthcare_lab
+    asset_type: application_server
+    trust_level: protected
+    sensitivity: high
+    managed: true
+    trusted: false
+    criticality: high
+    tags:
+    - ehr
+    - application
+    - healthcare
+  192.168.100.40:
+    hostname: ehr-db-server-01
+    role: database
+    zone: healthcare_lab
+    asset_type: database_server
+    trust_level: protected
+    sensitivity: critical
+    managed: true
+    trusted: false
+    criticality: critical
+    tags:
+    - ehr
+    - database
+    - healthcare
+  192.168.100.50:
+    hostname: file-server-01
+    role: file_server
+    zone: healthcare_lab
+    asset_type: file_server
+    trust_level: protected
+    sensitivity: high
+    managed: true
+    trusted: false
+    criticality: high
+    tags:
+    - file-server
+    - healthcare
+  192.168.100.100:
+    hostname: monitoring-server-01
+    role: monitoring_server
+    zone: healthcare_lab
+    asset_type: security_server
+    trust_level: elevated
+    sensitivity: high
+    managed: true
+    trusted: true
+    criticality: high
+    tags:
+    - monitoring
+    - wazuh
+    - security
+  192.168.100.120:
+    hostname: zeek-sensor-02
+    role: zeek_sensor
+    zone: healthcare_lab
+    asset_type: network_sensor
+    trust_level: elevated
+    sensitivity: high
+    managed: true
+    trusted: true
+    criticality: high
+    tags:
+    - zeek
+    - network-sensor
+    - security
+asset_overrides:
+  192.168.100.20:
+    hostname: user-pc-01
+    role: workstation
+    zone: healthcare_lab
+    asset_type: employee_workstation
+    trust_level: standard
+    sensitivity: normal
+    managed: true
+    trusted: false
+    criticality: normal
+    tags:
+    - ehr_user
+    - workstation
+  192.168.100.10:
+    hostname: attacker-kali
+    role: attacker
+    zone: healthcare_lab
+    asset_type: penetration_test_host
+    trust_level: untrusted
+    sensitivity: normal
+    managed: false
+    trusted: false
+    criticality: low
+    tags:
+    - attacker
+    - kali
+    - security-testing
+  192.168.100.21:
+    hostname: admin-pc-01
+    role: admin_workstation
+    zone: healthcare_lab
+    asset_type: admin_workstation
+    trust_level: elevated
+    sensitivity: high
+    managed: true
+    trusted: true
+    criticality: high
+    tags:
+    - administrator
+    - management
+    - trusted
+fallback_context:
+  internal:
+    role: internal_unknown
+    trust_level: internal
+    sensitivity: unknown
+    managed: false
+    trusted: false
+    criticality: unknown
+    tags:
+    - unknown-internal
+  external:
+    role: external
+    trust_level: untrusted
+    sensitivity: unknown
+    managed: false
+    trusted: false
+    criticality: unknown
+    tags:
+    - external
+services:
+  ehr_web:
+    protocol: tcp
+    ports:
+    - 80
+    - 443
+    - 5000
+  postgresql:
+    protocol: tcp
+    ports:
+    - 5432
+  ssh:
+    protocol: tcp
+    ports:
+    - 22
+  smb:
+    protocol: tcp
+    ports:
+    - 445

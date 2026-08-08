@@ -1,0 +1,5 @@
+MeanProcessingMs=437.31
+MedianProcessingMs=429.65
+MaximumProcessingMs=475.99
+InputEvents=529
+ThroughputEventsPerSecond=1209.64

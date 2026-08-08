@@ -1,0 +1,6 @@
+RunID,ScenarioID,ExpectedCorrelation,ObservedCorrelation,CorrelatedEventCount,MinCorrelationMinutes,HighestCorrelatedScore,HighestCorrelatedClass
+A4-R01,A4,False,False,0,,,
+A4-R02,A4,False,False,0,,,
+A4-R03,A4,False,False,0,,,
+A4-R04,A4,False,False,0,,,
+A4-R05,A4,False,False,0,,,
