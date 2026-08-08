@@ -1,17 +1,17 @@
 Evaluation variant,Actual,Predicted,Count
 Severity-only host baseline,Negative,Negative,0
 Severity-only host baseline,Negative,Positive,0
-Severity-only host baseline,Positive,Negative,10
+Severity-only host baseline,Positive,Negative,5
 Severity-only host baseline,Positive,Positive,0
 Network-only contextual analysis,Negative,Negative,0
 Network-only contextual analysis,Negative,Positive,0
-Network-only contextual analysis,Positive,Negative,5
+Network-only contextual analysis,Positive,Negative,0
 Network-only contextual analysis,Positive,Positive,5
 Contextual analysis without correlation,Negative,Negative,0
 Contextual analysis without correlation,Negative,Positive,0
-Contextual analysis without correlation,Positive,Negative,5
+Contextual analysis without correlation,Positive,Negative,0
 Contextual analysis without correlation,Positive,Positive,5
 Full proposed framework,Negative,Negative,0
 Full proposed framework,Negative,Positive,0
 Full proposed framework,Positive,Negative,0
-Full proposed framework,Positive,Positive,10
+Full proposed framework,Positive,Positive,5

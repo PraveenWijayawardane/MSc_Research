@@ -1,2 +1,2 @@
 ExpectedCorrelatedSequences,CorrectCorrelations,MissedCorrelations,UnexpectedCorrelatedRuns,CorrelationSuccessRate,AccidentalCorrelationRate,MedianMatchedTimeDifferenceMinutes,AcceptedRuns
-5,5,0,0,1.0,0.0,0.102,10
+0,0,0,0,,0.0,,5

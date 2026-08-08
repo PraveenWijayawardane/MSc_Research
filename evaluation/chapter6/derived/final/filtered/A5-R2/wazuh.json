@@ -1,0 +1,105 @@
+[
+  {
+    "_index": "wazuh-alerts-4.x-2026.08.08",
+    "_id": "CGVV458BhDBYu2t1B-gN",
+    "_score": null,
+    "_source": {
+      "predecoder": {
+        "program_name": "sudo"
+      },
+      "agent": {
+        "ip": "192.168.100.30",
+        "name": "ehr-app-server-01"
+      },
+      "@timestamp": "2026-08-08T21:43:42.467Z",
+      "data": {
+        "dstuser": "root"
+      },
+      "rule": {
+        "level": 3,
+        "description": "PAM: Login session closed.",
+        "groups": [
+          "pam",
+          "syslog"
+        ],
+        "id": "5502"
+      },
+      "full_log": "Aug 08 21:43:41 ehr-app-server-01 sudo[4509]: pam_unix(sudo:session): session closed for user root",
+      "timestamp": "2026-08-10T04:30:13.321Z",
+      "environment_id": "healthcare-lab"
+    },
+    "sort": [
+      1786225422467
+    ]
+  },
+  {
+    "_index": "wazuh-alerts-4.x-2026.08.08",
+    "_id": "B2VV458BhDBYu2t1B-gN",
+    "_score": null,
+    "_source": {
+      "predecoder": {
+        "program_name": "sudo"
+      },
+      "agent": {
+        "ip": "192.168.100.30",
+        "name": "ehr-app-server-01"
+      },
+      "@timestamp": "2026-08-08T21:43:42.413Z",
+      "data": {
+        "srcuser": "vagrant",
+        "uid": "1000",
+        "dstuser": "root"
+      },
+      "rule": {
+        "level": 3,
+        "description": "PAM: Login session opened.",
+        "groups": [
+          "pam",
+          "syslog",
+          "authentication_success"
+        ],
+        "id": "5501"
+      },
+      "full_log": "Aug 08 21:43:41 ehr-app-server-01 sudo[4509]: pam_unix(sudo:session): session opened for user root(uid=0) by vagrant(uid=1000)",
+      "timestamp": "2026-08-10T04:30:13.267Z",
+      "environment_id": "healthcare-lab"
+    },
+    "sort": [
+      1786225422413
+    ]
+  },
+  {
+    "_index": "wazuh-alerts-4.x-2026.08.08",
+    "_id": "BmVV458BhDBYu2t1B-gM",
+    "_score": null,
+    "_source": {
+      "predecoder": {
+        "program_name": "sudo"
+      },
+      "agent": {
+        "ip": "192.168.100.30",
+        "name": "ehr-app-server-01"
+      },
+      "@timestamp": "2026-08-08T21:43:42.412Z",
+      "data": {
+        "srcuser": "vagrant",
+        "dstuser": "root"
+      },
+      "rule": {
+        "level": 3,
+        "description": "Successful sudo to ROOT executed.",
+        "groups": [
+          "syslog",
+          "sudo"
+        ],
+        "id": "5402"
+      },
+      "full_log": "Aug 08 21:43:41 ehr-app-server-01 sudo[4509]:  vagrant : TTY=pts/0 ; PWD=/home/vagrant ; USER=root ; COMMAND=/usr/bin/whoami",
+      "timestamp": "2026-08-10T04:30:13.266Z",
+      "environment_id": "healthcare-lab"
+    },
+    "sort": [
+      1786225422412
+    ]
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "environment": {
+    "environment_id": "healthcare-lab",
+    "environment_name": "Healthcare Security Research Lab",
+    "site_id": "research-lab",
+    "environment_type": "lab",
+    "infrastructure_type": "bare-metal"
+  },
+  "generated_at": "2026-08-08T20:26:41Z",
+  "wazuh_results": [],
+  "zeek_results": [],
+  "correlated_results": [],
+  "summary": {
+    "raw_wazuh_event_count": 0,
+    "raw_zeek_event_count": 0,
+    "unique_wazuh_result_count": 0,
+    "unique_zeek_result_count": 0,
+    "correlated_result_count": 0,
+    "final_document_count": 0,
+    "classification_counts": {}
+  }
+}

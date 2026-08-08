@@ -1,5 +1,5 @@
 Evaluation variant,TP,TN,FP,FN,Accuracy,Precision,Recall,F1,FPR,FNR,AcceptedRuns
-Severity-only host baseline,0,0,0,5,0.0,,0.0,,,1.0,5
-Network-only contextual analysis,5,0,0,0,1.0,1.0,1.0,1.0,,0.0,5
-Contextual analysis without correlation,5,0,0,0,1.0,1.0,1.0,1.0,,0.0,5
-Full proposed framework,5,0,0,0,1.0,1.0,1.0,1.0,,0.0,5
+Severity-only host baseline,0,0,0,10,0.0,,0.0,,,1.0,10
+Network-only contextual analysis,5,0,0,5,0.5,1.0,0.5,0.6667,,0.5,10
+Contextual analysis without correlation,5,0,0,5,0.5,1.0,0.5,0.6667,,0.5,10
+Full proposed framework,10,0,0,0,1.0,1.0,1.0,1.0,,0.0,10
