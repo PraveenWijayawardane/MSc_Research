@@ -1,0 +1,11 @@
+{
+    "Benchmark":  "A3 frozen evidence offline risk-engine replay",
+    "Repetitions":  10,
+    "InputEvents":  529,
+    "MeanProcessingMs":  592.28,
+    "MedianProcessingMs":  490.81,
+    "MinimumProcessingMs":  427.08,
+    "MaximumProcessingMs":  1534.92,
+    "MeanProcessingSeconds":  0.5923,
+    "ThroughputEventsPerSecond":  893.16
+}

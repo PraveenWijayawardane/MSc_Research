@@ -1,0 +1,6 @@
+{
+    "WazuhEventIDDifferences":  0,
+    "ZeekEventIDDifferences":  0,
+    "CorrelatedEventIDDifferences":  0,
+    "DeterministicIDs":  true
+}

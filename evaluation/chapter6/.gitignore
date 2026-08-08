@@ -10,3 +10,6 @@ final/**/live_zeek_conn.log
 final/**/live_zeek_conn.json
 final/**/scored_events.json
 final/**/pipeline_log_tail.txt
+
+# Temporary benchmark replay outputs
+runtime/*.json
