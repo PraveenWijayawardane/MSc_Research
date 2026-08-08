@@ -1,0 +1,9 @@
+ScenarioID,GroundTruth,ExpectedClass,SourceIP,DestinationIP,DestinationPort,Protocol,WazuhAgentIPs,WazuhKeywords,RequireWazuh,RequireZeek,ExpectedCorrelation
+B1,Benign,Legitimate,192.168.100.30,192.168.100.40,5432,tcp,192.168.100.30;192.168.100.40,,False,True,False
+B2,Benign,Low Suspicion,192.168.100.21,192.168.100.30,22,tcp,192.168.100.30,,False,True,False
+A1,Attack,Likely Malicious,192.168.100.20,192.168.100.40,22,tcp,192.168.100.40,authentication failure;failed password;login failed;invalid user,True,True,True
+A2,Attack,Suspicious,192.168.100.20,192.168.100.40,5432,tcp,192.168.100.40,,False,True,False
+A3,Attack,Suspicious,192.168.100.20,192.168.100.30,22,tcp,192.168.100.30,,False,True,False
+A4,Attack,Suspicious,192.168.100.20,192.168.100.50,445,tcp,192.168.100.50,,False,True,False
+A5,Attack,Likely Malicious,192.168.100.30,192.168.100.40,5432,tcp,192.168.100.30,privilege escalation;root session;sudo;user changed to root,True,True,True
+U1,Attack,Suspicious,192.168.101.60,192.168.100.40,5432,tcp,192.168.100.40,,False,True,False
