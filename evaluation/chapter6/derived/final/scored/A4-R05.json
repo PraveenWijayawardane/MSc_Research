@@ -6,7 +6,7 @@
     "environment_type": "lab",
     "infrastructure_type": "bare-metal"
   },
-  "generated_at": "2026-08-08T21:48:43Z",
+  "generated_at": "2026-08-08T22:25:03Z",
   "wazuh_results": [],
   "zeek_results": [
     {

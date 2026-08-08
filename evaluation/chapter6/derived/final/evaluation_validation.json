@@ -2,8 +2,8 @@
   "environment": "healthcare-lab",
   "runs_directory": "D:\\MSc-Research\\Healthcare-risk-engine\\evaluation\\chapter6\\final",
   "scenario_configuration": "D:\\MSc-Research\\Healthcare-risk-engine\\evaluation\\chapter6\\scenario_ground_truth.csv",
-  "total_runs_discovered": 10,
-  "accepted_runs": 10,
+  "total_runs_discovered": 15,
+  "accepted_runs": 15,
   "excluded_runs": 0,
   "expected_total_runs": 40,
   "validation_problems": [
@@ -16,9 +16,7 @@
     "A2: found 0 run(s), expected 5",
     "A2: accepted 0 run(s), expected 5",
     "A3: found 0 run(s), expected 5",
-    "A3: accepted 0 run(s), expected 5",
-    "U1: found 0 run(s), expected 5",
-    "U1: accepted 0 run(s), expected 5"
+    "A3: accepted 0 run(s), expected 5"
   ],
   "processing_errors": [],
   "severity_only_mapping": {

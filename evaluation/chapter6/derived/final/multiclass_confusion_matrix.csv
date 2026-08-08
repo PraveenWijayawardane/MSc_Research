@@ -7,7 +7,7 @@ Severity-only host baseline,Low Suspicion,Legitimate,0
 Severity-only host baseline,Low Suspicion,Low Suspicion,0
 Severity-only host baseline,Low Suspicion,Suspicious,0
 Severity-only host baseline,Low Suspicion,Likely Malicious,0
-Severity-only host baseline,Suspicious,Legitimate,5
+Severity-only host baseline,Suspicious,Legitimate,10
 Severity-only host baseline,Suspicious,Low Suspicion,0
 Severity-only host baseline,Suspicious,Suspicious,0
 Severity-only host baseline,Suspicious,Likely Malicious,0
@@ -26,7 +26,7 @@ Network-only contextual analysis,Low Suspicion,Likely Malicious,0
 Network-only contextual analysis,Suspicious,Legitimate,0
 Network-only contextual analysis,Suspicious,Low Suspicion,0
 Network-only contextual analysis,Suspicious,Suspicious,5
-Network-only contextual analysis,Suspicious,Likely Malicious,0
+Network-only contextual analysis,Suspicious,Likely Malicious,5
 Network-only contextual analysis,Likely Malicious,Legitimate,0
 Network-only contextual analysis,Likely Malicious,Low Suspicion,5
 Network-only contextual analysis,Likely Malicious,Suspicious,0
@@ -42,7 +42,7 @@ Contextual analysis without correlation,Low Suspicion,Likely Malicious,0
 Contextual analysis without correlation,Suspicious,Legitimate,0
 Contextual analysis without correlation,Suspicious,Low Suspicion,0
 Contextual analysis without correlation,Suspicious,Suspicious,5
-Contextual analysis without correlation,Suspicious,Likely Malicious,0
+Contextual analysis without correlation,Suspicious,Likely Malicious,5
 Contextual analysis without correlation,Likely Malicious,Legitimate,0
 Contextual analysis without correlation,Likely Malicious,Low Suspicion,5
 Contextual analysis without correlation,Likely Malicious,Suspicious,0
@@ -58,7 +58,7 @@ Full proposed framework,Low Suspicion,Likely Malicious,0
 Full proposed framework,Suspicious,Legitimate,0
 Full proposed framework,Suspicious,Low Suspicion,0
 Full proposed framework,Suspicious,Suspicious,5
-Full proposed framework,Suspicious,Likely Malicious,0
+Full proposed framework,Suspicious,Likely Malicious,5
 Full proposed framework,Likely Malicious,Legitimate,0
 Full proposed framework,Likely Malicious,Low Suspicion,0
 Full proposed framework,Likely Malicious,Suspicious,0
