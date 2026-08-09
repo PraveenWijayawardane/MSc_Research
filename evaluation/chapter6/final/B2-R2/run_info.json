@@ -1,0 +1,8 @@
+{
+    "run_id":  "B2-R2",
+    "scenario_id":  "B2",
+    "start_utc":  "2026-08-08T23:39:55.0515455+00:00",
+    "end_utc":  "2026-08-08T23:40:03.1890818+00:00",
+    "environment":  "healthcare-lab",
+    "evaluation_start_utc":  "2026-08-10T04:30:00Z"
+}

@@ -1,4 +1,19 @@
 RunID,ScenarioID,ExpectedCorrelation,ObservedCorrelation,CorrelatedEventCount,MinCorrelationMinutes,HighestCorrelatedScore,HighestCorrelatedClass
+A1-R1,A1,True,True,3,0.005,30,Likely Malicious
+A1-R2,A1,True,True,3,0.009,30,Likely Malicious
+A1-R3,A1,True,True,3,0.002,30,Likely Malicious
+A1-R4,A1,True,True,3,0.008,30,Likely Malicious
+A1-R5,A1,True,True,3,0.004,30,Likely Malicious
+A2-R1,A2,False,False,0,,,
+A2-R2,A2,False,False,0,,,
+A2-R3,A2,False,False,0,,,
+A2-R4,A2,False,False,0,,,
+A2-R5,A2,False,False,0,,,
+A3-R1,A3,False,False,0,,,
+A3-R2,A3,False,False,0,,,
+A3-R3,A3,False,False,0,,,
+A3-R4,A3,False,False,0,,,
+A3-R5,A3,False,False,0,,,
 A4-R01,A4,False,False,0,,,
 A4-R02,A4,False,False,0,,,
 A4-R03,A4,False,False,0,,,
@@ -9,6 +24,16 @@ A5-R2,A5,True,True,2,0.102,22,Likely Malicious
 A5-R3,A5,True,True,2,0.102,22,Likely Malicious
 A5-R4,A5,True,True,2,0.102,22,Likely Malicious
 A5-R5,A5,True,True,2,0.102,22,Likely Malicious
+B1-R1,B1,False,False,0,,,
+B1-R2,B1,False,False,0,,,
+B1-R3,B1,False,False,0,,,
+B1-R4,B1,False,False,0,,,
+B1-R5,B1,False,False,0,,,
+B2-R1,B2,False,False,0,,,
+B2-R2,B2,False,False,0,,,
+B2-R3,B2,False,False,0,,,
+B2-R4,B2,False,False,0,,,
+B2-R5,B2,False,False,0,,,
 U1-R1,U1,False,False,0,,,
 U1-R2,U1,False,False,0,,,
 U1-R3,U1,False,False,0,,,

@@ -1,0 +1,27 @@
+[
+  {
+    "ts": "2026-08-10T04:30:08.366Z",
+    "uid": "CpK4nW3P4GOcG46RCc",
+    "id.orig_h": "192.168.100.21",
+    "id.orig_p": 50814,
+    "id.resp_h": "192.168.100.30",
+    "id.resp_p": 22,
+    "proto": "tcp",
+    "service": null,
+    "duration": 0.027102,
+    "orig_bytes": 0.0,
+    "resp_bytes": 42.0,
+    "conn_state": "SF",
+    "local_orig": "T",
+    "local_resp": "T",
+    "missed_bytes": 0.0,
+    "history": "ShAFadRf",
+    "orig_pkts": 5.0,
+    "orig_ip_bytes": 244.0,
+    "resp_pkts": 4.0,
+    "resp_ip_bytes": 258.0,
+    "tunnel_parents": null,
+    "ip_proto": 6,
+    "environment_id": "healthcare-lab"
+  }
+]

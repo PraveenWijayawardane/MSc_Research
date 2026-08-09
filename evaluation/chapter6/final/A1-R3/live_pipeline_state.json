@@ -1,0 +1,95 @@
+{
+    "schema_version": "1.0",
+    "environment_id": "healthcare-lab",
+    "pid": 19900,
+    "hostname": "Sajana",
+    "status": "success",
+    "last_started_at": "2026-08-08T23:56:35Z",
+    "last_completed_at": "2026-08-08T23:56:37Z",
+    "duration_seconds": 1.581,
+    "wazuh_events": 500,
+    "zeek_events": 56,
+    "wazuh_results": 500,
+    "zeek_results": 56,
+    "correlated_events": 17,
+    "published_documents": 556,
+    "error": null,
+    "steps": [
+        {
+            "name": "collect_wazuh",
+            "status": "success",
+            "started_at": "2026-08-08T23:56:35Z",
+            "completed_at": "2026-08-08T23:56:36Z",
+            "duration_seconds": 0.478,
+            "command": [
+                "C:\\Python314\\python.exe",
+                "D:\\MSc-Research\\Healthcare-risk-engine\\src\\wazuh_live_collector.py",
+                "--environment",
+                "healthcare-lab",
+                "--size",
+                "500"
+            ],
+            "message": "Completed in 0.478 second(s)"
+        },
+        {
+            "name": "collect_zeek_log",
+            "status": "success",
+            "started_at": "2026-08-08T23:56:36Z",
+            "completed_at": "2026-08-08T23:56:36Z",
+            "duration_seconds": 0.406,
+            "command": [
+                "scp",
+                "-o",
+                "BatchMode=yes",
+                "-o",
+                "StrictHostKeyChecking=accept-new",
+                "-o",
+                "ConnectTimeout=30",
+                "-P",
+                "22",
+                "-i",
+                "D:\\vagrant-lab\\.vagrant\\machines\\zeek-sensor-02\\virtualbox\\private_key",
+                "vagrant@192.168.100.120:/opt/zeek/logs/current/conn.log",
+                "D:\\MSc-Research\\Healthcare-risk-engine\\data\\healthcare-lab\\live_zeek_conn.log.download"
+            ],
+            "message": "Completed in 0.406 second(s)"
+        },
+        {
+            "name": "parse_zeek",
+            "status": "success",
+            "started_at": "2026-08-08T23:56:36Z",
+            "completed_at": "2026-08-08T23:56:36Z",
+            "duration_seconds": 0.146,
+            "command": [
+                "C:\\Python314\\python.exe",
+                "D:\\MSc-Research\\Healthcare-risk-engine\\src\\zeek_log_parser.py",
+                "--environment",
+                "healthcare-lab"
+            ],
+            "message": "Completed in 0.146 second(s)"
+        },
+        {
+            "name": "risk_engine",
+            "status": "success",
+            "started_at": "2026-08-08T23:56:36Z",
+            "completed_at": "2026-08-08T23:56:37Z",
+            "duration_seconds": 0.516,
+            "command": [
+                "C:\\Python314\\python.exe",
+                "D:\\MSc-Research\\Healthcare-risk-engine\\src\\risk_engine.py",
+                "--environment",
+                "healthcare-lab"
+            ],
+            "message": "Completed in 0.516 second(s)"
+        },
+        {
+            "name": "publish",
+            "status": "skipped",
+            "started_at": "2026-08-08T23:56:37Z",
+            "completed_at": "2026-08-08T23:56:37Z",
+            "duration_seconds": 0.0,
+            "command": [],
+            "message": "OpenSearch publishing was skipped"
+        }
+    ]
+}

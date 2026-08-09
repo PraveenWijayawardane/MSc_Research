@@ -1,0 +1,110 @@
+[
+  {
+    "_index": "wazuh-alerts-4.x-2026.08.08",
+    "_id": "2WXQ458BhDBYu2t1TOh3",
+    "_score": null,
+    "_source": {
+      "predecoder": {
+        "program_name": "sshd-session"
+      },
+      "agent": {
+        "ip": "192.168.100.40",
+        "name": "ehr-db-server-01"
+      },
+      "@timestamp": "2026-08-08T23:58:24.077Z",
+      "data": {
+        "srcuser": "invalid-a1",
+        "srcip": "192.168.100.20"
+      },
+      "rule": {
+        "level": 5,
+        "description": "sshd: Attempt to login using a non-existent user",
+        "groups": [
+          "syslog",
+          "sshd",
+          "authentication_failed",
+          "invalid_login"
+        ],
+        "id": "5710"
+      },
+      "full_log": "Aug 08 23:58:23 ehr-db-server-01 sshd-session[9233]: Invalid user invalid-a1 from 192.168.100.20 port 39632",
+      "timestamp": "2026-08-10T04:30:09.943Z",
+      "environment_id": "healthcare-lab"
+    },
+    "sort": [
+      1786233504077
+    ]
+  },
+  {
+    "_index": "wazuh-alerts-4.x-2026.08.08",
+    "_id": "2GXQ458BhDBYu2t1TOh3",
+    "_score": null,
+    "_source": {
+      "predecoder": {
+        "program_name": "sshd-session"
+      },
+      "agent": {
+        "ip": "192.168.100.40",
+        "name": "ehr-db-server-01"
+      },
+      "@timestamp": "2026-08-08T23:58:24.043Z",
+      "data": {
+        "srcuser": "invalid-a1",
+        "srcip": "192.168.100.20"
+      },
+      "rule": {
+        "level": 5,
+        "description": "sshd: Attempt to login using a non-existent user",
+        "groups": [
+          "syslog",
+          "sshd",
+          "authentication_failed",
+          "invalid_login"
+        ],
+        "id": "5710"
+      },
+      "full_log": "Aug 08 23:58:22 ehr-db-server-01 sshd-session[9231]: Invalid user invalid-a1 from 192.168.100.20 port 39630",
+      "timestamp": "2026-08-10T04:30:09.909Z",
+      "environment_id": "healthcare-lab"
+    },
+    "sort": [
+      1786233504043
+    ]
+  },
+  {
+    "_index": "wazuh-alerts-4.x-2026.08.08",
+    "_id": "1WXQ458BhDBYu2t1TOh3",
+    "_score": null,
+    "_source": {
+      "predecoder": {
+        "program_name": "sshd-session"
+      },
+      "agent": {
+        "ip": "192.168.100.40",
+        "name": "ehr-db-server-01"
+      },
+      "@timestamp": "2026-08-08T23:58:22.002Z",
+      "data": {
+        "srcuser": "invalid-a1",
+        "srcip": "192.168.100.20"
+      },
+      "rule": {
+        "level": 5,
+        "description": "sshd: Attempt to login using a non-existent user",
+        "groups": [
+          "syslog",
+          "sshd",
+          "authentication_failed",
+          "invalid_login"
+        ],
+        "id": "5710"
+      },
+      "full_log": "Aug 08 23:58:21 ehr-db-server-01 sshd-session[9229]: Invalid user invalid-a1 from 192.168.100.20 port 39622",
+      "timestamp": "2026-08-10T04:30:07.868Z",
+      "environment_id": "healthcare-lab"
+    },
+    "sort": [
+      1786233502002
+    ]
+  }
+]
