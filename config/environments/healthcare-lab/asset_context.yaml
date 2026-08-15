@@ -10,13 +10,14 @@ network_zones:
     - 192.168.100.0/24
     default_role: workstation
     trust_level: standard
-    sensitivity: normal
-    managed: true
+    sensitivity: unknown
+    managed: false
     trusted: false
-    criticality: normal
+    criticality: unknown
     tags:
     - healthcare-lab
     - internal
+
 critical_assets:
   192.168.100.30:
     hostname: ehr-app-server-01
@@ -61,7 +62,7 @@ critical_assets:
     - healthcare
   192.168.100.100:
     hostname: monitoring-server-01
-    role: monitoring_server
+    role: monitoring
     zone: healthcare_lab
     asset_type: security_server
     trust_level: elevated
@@ -75,7 +76,7 @@ critical_assets:
     - security
   192.168.100.120:
     hostname: zeek-sensor-02
-    role: zeek_sensor
+    role: network_sensor
     zone: healthcare_lab
     asset_type: network_sensor
     trust_level: elevated
@@ -115,6 +116,21 @@ asset_overrides:
     - attacker
     - kali
     - security-testing
+  192.168.100.1:
+    hostname: research-host
+    role: admin_workstation
+    zone: healthcare_lab
+    asset_type: management_workstation
+    trust_level: elevated
+    sensitivity: normal
+    managed: true
+    trusted: true
+    criticality: normal
+    tags:
+    - research-host
+    - management
+    - virtualbox-host
+    - trusted
   192.168.100.21:
     hostname: admin-pc-01
     role: admin_workstation
