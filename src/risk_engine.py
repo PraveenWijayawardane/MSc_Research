@@ -35,6 +35,9 @@ from behavior_analyzer import BehaviorAnalyzer
 from environment_registry import EnvironmentRegistry
 from event_environment import get_event_environment
 from environment_paths import EnvironmentPaths
+from network_traffic_classifier import (
+    classify_zeek_traffic,
+)
 from policy_engine import PolicyEngine
 
 
@@ -2213,7 +2216,13 @@ class ContextualRiskEngine:
         wazuh_data: Any,
         zeek_data: Any,
     ) -> dict[str, Any]:
-        """Score and correlate all supplied Wazuh and Zeek events."""
+        """
+        Score and correlate supplied Wazuh and Zeek events.
+
+        Routine Zeek discovery/network-control events remain in parsed/raw
+        telemetry but are excluded from behavioural analysis, contextual risk
+        scoring, correlation, and investigation publishing.
+        """
         raw_wazuh_events = (
             normalize_wazuh_input(
                 wazuh_data
@@ -2225,7 +2234,6 @@ class ContextualRiskEngine:
                 zeek_data
             )
         )
-
         self._validate_input_environments(
             raw_wazuh_events,
             "Wazuh",
@@ -2249,7 +2257,6 @@ class ContextualRiskEngine:
                 normalised_wazuh
             )
         )
-
         wazuh_results = [
             self._score_wazuh_event(
                 event
@@ -2258,12 +2265,54 @@ class ContextualRiskEngine:
             in normalised_wazuh
         ]
 
+        # Defensively classify Zeek input here as well as in the parser.
+        # This ensures direct risk_engine.py execution cannot bypass the
+        # discovery/control-traffic gate.
+        prepared_zeek_events: list[
+            dict[str, Any]
+        ] = []
+
+        for event in raw_zeek_events:
+            prepared_event = dict(
+                event
+            )
+            classification = (
+                classify_zeek_traffic(
+                    prepared_event
+                )
+            )
+
+            # A positive routine-noise classification always wins.
+            if (
+                classification.get(
+                    "risk_eligible"
+                )
+                is False
+            ):
+                prepared_event.update(
+                    classification
+                )
+            else:
+                # Preserve an explicit/manual exclusion if one already
+                # exists, while filling any missing metadata.
+                for key, value in (
+                    classification.items()
+                ):
+                    prepared_event.setdefault(
+                        key,
+                        value,
+                    )
+
+            prepared_zeek_events.append(
+                prepared_event
+            )
+
         normalised_zeek = [
             self._normalize_zeek_event(
                 event
             )
             for event
-            in raw_zeek_events
+            in prepared_zeek_events
         ]
 
         normalised_zeek = (
@@ -2272,12 +2321,34 @@ class ContextualRiskEngine:
             )
         )
 
+        # Apply risk eligibility BEFORE behaviour analysis. This prevents
+        # routine discovery/control traffic from inflating frequency,
+        # destination fanout, port fanout, or other behavioural metrics.
+        risk_eligible_zeek = [
+            event
+            for event in normalised_zeek
+            if event.get(
+                "risk_eligible",
+                True,
+            )
+            is not False
+        ]
+
+        excluded_zeek_events = [
+            event
+            for event in normalised_zeek
+            if event.get(
+                "risk_eligible",
+                True,
+            )
+            is False
+        ]
+
         behavior_results = (
             self.behavior_analyzer.analyze(
-                normalised_zeek
+                risk_eligible_zeek
             )
         )
-
         zeek_results = [
             self._score_network_event(
                 event=event,
@@ -2292,9 +2363,9 @@ class ContextualRiskEngine:
                     )
                 ),
             )
-            for event in normalised_zeek
+            for event
+            in risk_eligible_zeek
         ]
-
         correlated_results = (
             self._correlate_network_events(
                 network_results=(
@@ -2315,7 +2386,6 @@ class ContextualRiskEngine:
             event["event_id"]: event
             for event in zeek_results
         }
-
         final_network_by_id.update(
             {
                 event["event_id"]: event
@@ -2336,7 +2406,6 @@ class ContextualRiskEngine:
                 )
                 or "Unknown"
             )
-
             classification_counts[
                 classification
             ] = (
@@ -2346,7 +2415,6 @@ class ContextualRiskEngine:
                 )
                 + 1
             )
-
         return {
             "environment": (
                 self._environment_fields()
@@ -2379,6 +2447,15 @@ class ContextualRiskEngine:
                 "raw_zeek_event_count": len(
                     raw_zeek_events
                 ),
+                "unique_zeek_input_count": len(
+                    normalised_zeek
+                ),
+                "risk_eligible_zeek_event_count": len(
+                    risk_eligible_zeek
+                ),
+                "excluded_zeek_event_count": len(
+                    excluded_zeek_events
+                ),
                 "unique_wazuh_"
                 "result_count": len(
                     wazuh_results
@@ -2401,7 +2478,6 @@ class ContextualRiskEngine:
                 ),
             },
         }
-
 
 def main() -> int:
     """Command-line entry point."""

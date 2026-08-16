@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """
 Parse a Zeek conn.log file and tag each event with a hospital environment ID.
+
+Routine discovery/network-control traffic is retained in the parsed JSON and
+annotated with risk-eligibility metadata. The risk engine decides whether the
+event participates in behavioural analysis, contextual scoring, correlation,
+and investigation publishing.
 """
 
 from __future__ import annotations
@@ -16,10 +21,10 @@ from event_environment import (
     resolve_environment_id,
 )
 from environment_paths import EnvironmentPaths
+from network_traffic_classifier import classify_zeek_traffic
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-
 DEFAULT_ZEEK_CONN_LOG_FILE = (
     PROJECT_ROOT
     / "data"
@@ -82,7 +87,6 @@ def convert_numeric_fields(
         "id.resp_p",
         "ip_proto",
     }
-
     floating_fields = {
         "duration",
         "orig_bytes",
@@ -131,7 +135,6 @@ def parse_zeek_conn_log(
 ) -> list[dict[str, Any]]:
     """Parse one Zeek conn.log file."""
     path = Path(file_path)
-
     if not path.exists():
         raise FileNotFoundError(
             f"Zeek conn.log file was not found: {path}"
@@ -145,7 +148,6 @@ def parse_zeek_conn_log(
 
     fields: list[str] = []
     events: list[dict[str, Any]] = []
-
     with path.open(
         "r",
         encoding="utf-8",
@@ -166,7 +168,6 @@ def parse_zeek_conn_log(
                     "\t"
                 )[1:]
                 continue
-
             if line.startswith("#"):
                 continue
 
@@ -183,7 +184,6 @@ def parse_zeek_conn_log(
                     f"{len(values)}"
                 )
                 continue
-
             event = {
                 field: convert_value(value)
                 for field, value in zip(
@@ -197,6 +197,14 @@ def parse_zeek_conn_log(
             event["ts"] = (
                 convert_zeek_timestamp(
                     event.get("ts")
+                )
+            )
+
+            # Keep the event in parsed telemetry, but annotate whether it
+            # should enter security risk analysis.
+            event.update(
+                classify_zeek_traffic(
+                    event
                 )
             )
 
@@ -223,7 +231,6 @@ def write_json(
     temporary_path = path.with_suffix(
         path.suffix + ".tmp"
     )
-
     with temporary_path.open(
         "w",
         encoding="utf-8",
@@ -245,7 +252,6 @@ def main() -> int:
             "hospital environment"
         )
     )
-
     parser.add_argument(
         "--environment",
         default=None,
@@ -264,7 +270,6 @@ def main() -> int:
             "is used."
         ),
     )
-
     parser.add_argument(
         "--output",
         default=None,
@@ -287,7 +292,6 @@ def main() -> int:
     )
 
     environment_paths.ensure_directories()
-
     input_path = (
         Path(args.input).resolve()
         if args.input
@@ -309,7 +313,6 @@ def main() -> int:
         output_path,
         events,
     )
-
     print(
         f"Environment: {environment_id}"
     )
