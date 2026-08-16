@@ -9,13 +9,31 @@ This module combines:
 - role-based communication policies;
 - fixed-window behavioural analysis;
 - Wazuh host-event scoring;
-- Wazuh/Zeek correlation;
-- deterministic event IDs and deduplication.
+- semantic Wazuh/Zeek correlation;
+- deterministic event IDs and deduplication;
+- discovery/control-traffic risk eligibility filtering.
 
 The same Python code can run for different hospital environments by selecting
 an environment profile under config/environments/<environment-id>.
-"""
 
+Priority 4 semantic-correlation behaviour
+-----------------------------------------
+A Wazuh event is no longer allowed to increase the risk of a Zeek connection
+merely because both observations involve the same endpoint within the bounded
+correlation window. Endpoint and time matching create temporal candidates only.
+
+Risk is increased only when at least one temporal candidate has a configured
+security relationship with the network connection:
+
+- failed authentication + SSH/RDP/SMB remote-service traffic;
+- privilege activity + database access;
+- privilege activity + SMB activity;
+- malware indicator + SMB activity.
+
+This retains the configured five-minute bounded window and all existing point
+weights, while reducing false correlations caused by unrelated nearby host
+activity.
+"""
 from __future__ import annotations
 
 import argparse
@@ -35,9 +53,7 @@ from behavior_analyzer import BehaviorAnalyzer
 from environment_registry import EnvironmentRegistry
 from event_environment import get_event_environment
 from environment_paths import EnvironmentPaths
-from network_traffic_classifier import (
-    classify_zeek_traffic,
-)
+from network_traffic_classifier import classify_zeek_traffic
 from policy_engine import PolicyEngine
 
 
@@ -332,7 +348,6 @@ class ContextualRiskEngine:
         self.policy_engine = policy_engine
         self.behavior_analyzer = behavior_analyzer
         self.risk_rules = risk_rules
-
         self.environment_id = str(
             environment_id or "legacy"
         )
@@ -343,11 +358,9 @@ class ContextualRiskEngine:
             else {}
         )
 
-        self.classification_rules = (
-            risk_rules.get(
-                "classification",
-                {},
-            )
+        self.classification_rules = risk_rules.get(
+            "classification",
+            {},
         )
 
         self.limits = risk_rules.get(
@@ -432,8 +445,8 @@ class ContextualRiskEngine:
         """
         Build an engine for a selected hospital environment.
 
-        Common scoring and policy files are loaded from config/base. Hospital
-        asset and network details are loaded from
+        Common scoring and policy files are loaded from config/base.
+        Hospital asset and network details are loaded from
         config/environments/<environment-id>.
         """
         registry = EnvironmentRegistry(
@@ -547,9 +560,7 @@ class ContextualRiskEngine:
     ) -> dict[str, Any]:
         """Return environment metadata included in every result."""
         return {
-            "environment_id": (
-                self.environment_id
-            ),
+            "environment_id": self.environment_id,
             "environment_name": (
                 self.environment.get(
                     "name",
@@ -576,7 +587,6 @@ class ContextualRiskEngine:
             ),
         }
 
-
     def _validate_input_environments(
         self,
         events: list[dict[str, Any]],
@@ -586,8 +596,7 @@ class ContextualRiskEngine:
         Reject telemetry explicitly tagged for another environment.
 
         Untagged events remain accepted temporarily for backwards
-        compatibility. The Wazuh collector and Zeek parser generated in this
-        step tag all newly collected events.
+        compatibility. Collectors and parsers tag newly collected events.
         """
         mismatched: set[str] = set()
 
@@ -679,6 +688,9 @@ class ContextualRiskEngine:
                 timezone_name,
             )
 
+            # datetime.timezone.utc does not require the optional tzdata
+            # package and therefore remains safe on minimal Windows Python
+            # installations.
             return timezone.utc
 
     def classify(
@@ -762,7 +774,8 @@ class ContextualRiskEngine:
 
         for event in events:
             event_id = str(
-                event.get("event_id") or ""
+                event.get("event_id")
+                or ""
             ).strip()
 
             if event_id:
@@ -772,7 +785,9 @@ class ContextualRiskEngine:
             unique.values(),
             key=lambda event: (
                 parse_timestamp(
-                    event.get(timestamp_field)
+                    event.get(
+                        timestamp_field
+                    )
                 )
                 or datetime.min.replace(
                     tzinfo=timezone.utc
@@ -866,7 +881,8 @@ class ContextualRiskEngine:
         )
 
         full_log = str(
-            source.get("full_log") or ""
+            source.get("full_log")
+            or ""
         )
 
         program_name = str(
@@ -1091,8 +1107,11 @@ class ContextualRiskEngine:
                 continue
 
             phrases = [
-                str(phrase).strip().lower()
-                for phrase in configuration.get(
+                str(phrase)
+                .strip()
+                .lower()
+                for phrase
+                in configuration.get(
                     "phrases",
                     [],
                 )
@@ -1113,6 +1132,7 @@ class ContextualRiskEngine:
                 )
 
                 indicator_score += points
+
                 indicator_codes.append(
                     str(indicator_name)
                 )
@@ -1229,9 +1249,27 @@ class ContextualRiskEngine:
                 )
             )
 
+        # Priority 3 metadata is carried from the parser/direct classifier
+        # into the normalised event. BehaviorAnalyzer.normalize_event may
+        # preserve arbitrary fields in the current implementation, but set
+        # these explicitly to make the risk gate deterministic.
+        for metadata_key in (
+            "traffic_class",
+            "risk_eligible",
+            "risk_exclusion_reason",
+        ):
+            if metadata_key in event:
+                normalized[
+                    metadata_key
+                ] = event[
+                    metadata_key
+                ]
+
         source_context = (
             self.asset_resolver.resolve(
-                normalized["source_ip"]
+                normalized[
+                    "source_ip"
+                ]
             )
         )
 
@@ -1463,7 +1501,6 @@ class ContextualRiskEngine:
                 "Source trust level is "
                 f"{source_trust_level}"
             )
-
         elif source_trust_points < 0:
             reasons.append(
                 "Trusted source context "
@@ -1550,14 +1587,18 @@ class ContextualRiskEngine:
         )
 
         total = clamp(
-            sum(breakdown.values()),
+            sum(
+                breakdown.values()
+            ),
             0,
             maximum,
         )
 
         return (
             total,
-            unique_strings(reasons),
+            unique_strings(
+                reasons
+            ),
             breakdown,
         )
 
@@ -1660,13 +1701,17 @@ class ContextualRiskEngine:
 
         clean_event = {
             key: value
-            for key, value in event.items()
-            if not str(key).startswith("_")
+            for key, value
+            in event.items()
+            if not str(
+                key
+            ).startswith("_")
         }
 
         return {
             **clean_event,
             "correlated": False,
+            "semantic_correlation": False,
             "asset_score": asset_score,
             "asset_score_breakdown": (
                 asset_breakdown
@@ -1708,12 +1753,154 @@ class ContextualRiskEngine:
             "correlation_score": 0,
             "risk_score": total,
             "classification": (
-                self.classify(total)
+                self.classify(
+                    total
+                )
             ),
             "reasons": unique_strings(
                 reasons
             ),
         }
+
+    @staticmethod
+    def _network_semantic_flags(
+        network_event: dict[str, Any],
+        remote_ports: set[int],
+    ) -> dict[str, bool]:
+        """
+        Return semantic properties of a Zeek network event.
+
+        These properties are intentionally narrow. The engine does not infer a
+        relationship merely from TCP/UDP usage; it requires a configured role,
+        service, or destination port that represents the relevant activity.
+        """
+        destination_role = str(
+            network_event.get(
+                "destination_role"
+            )
+            or ""
+        ).lower()
+
+        destination_port = safe_int(
+            network_event.get(
+                "destination_port"
+            )
+        )
+
+        service = str(
+            network_event.get(
+                "service"
+            )
+            or ""
+        ).lower()
+
+        database_ports = {
+            5432,
+            3306,
+            1433,
+            1521,
+        }
+
+        is_database_access = (
+            destination_role
+            == "database"
+            or destination_port
+            in database_ports
+        )
+
+        is_smb_activity = (
+            destination_port == 445
+            or "smb" in service
+        )
+
+        is_remote_service = (
+            destination_port
+            in remote_ports
+        )
+
+        return {
+            "database_access": (
+                is_database_access
+            ),
+            "smb_activity": (
+                is_smb_activity
+            ),
+            "remote_service": (
+                is_remote_service
+            ),
+        }
+
+    @staticmethod
+    def _semantic_types_for_match(
+        wazuh_event: dict[str, Any],
+        semantic_flags: dict[str, bool],
+    ) -> set[str]:
+        """
+        Return semantic relationships that genuinely connect this Wazuh event
+        to the current Zeek event.
+        """
+        indicator_codes = {
+            str(code)
+            for code
+            in wazuh_event.get(
+                "indicator_codes",
+                [],
+            )
+        }
+
+        correlation_types: set[
+            str
+        ] = set()
+
+        if (
+            "privilege_activity"
+            in indicator_codes
+            and semantic_flags.get(
+                "database_access",
+                False,
+            )
+        ):
+            correlation_types.add(
+                "privilege_database_access"
+            )
+
+        if (
+            "privilege_activity"
+            in indicator_codes
+            and semantic_flags.get(
+                "smb_activity",
+                False,
+            )
+        ):
+            correlation_types.add(
+                "privilege_smb_activity"
+            )
+
+        if (
+            "failed_authentication"
+            in indicator_codes
+            and semantic_flags.get(
+                "remote_service",
+                False,
+            )
+        ):
+            correlation_types.add(
+                "failed_authentication_remote_service"
+            )
+
+        if (
+            "malware_indicator"
+            in indicator_codes
+            and semantic_flags.get(
+                "smb_activity",
+                False,
+            )
+        ):
+            correlation_types.add(
+                "malware_smb_activity"
+            )
+
+        return correlation_types
 
     def _correlate_network_events(
         self,
@@ -1724,7 +1911,23 @@ class ContextualRiskEngine:
             dict[str, Any]
         ],
     ) -> list[dict[str, Any]]:
-        """Correlate Wazuh host evidence with nearby Zeek connections."""
+        """
+        Correlate Wazuh host evidence with Zeek network activity.
+
+        Priority 4 uses a two-stage process:
+
+        1. Temporal candidate stage:
+           - Wazuh score reaches the configured minimum;
+           - Wazuh host IP matches the Zeek source or destination endpoint;
+           - the timestamps are inside the configured bounded window.
+
+        2. Semantic validation stage:
+           - at least one candidate must have a defined security relationship
+             with the Zeek connection.
+
+        A temporal-only match is deliberately discarded. It contributes no
+        Wazuh points, no base correlation points, and no correlated result.
+        """
         window_minutes = safe_float(
             self.correlation_rules.get(
                 "window_minutes"
@@ -1764,11 +1967,69 @@ class ContextualRiskEngine:
             30,
         )
 
+        base_points = safe_int(
+            self.correlation_rules.get(
+                "base_points"
+            ),
+            2,
+        )
+
+        privilege_database_config = (
+            self.correlation_rules.get(
+                "privilege_and_database_access",
+                {},
+            )
+        )
+
+        privilege_smb_config = (
+            self.correlation_rules.get(
+                "privilege_and_smb_activity",
+                {},
+            )
+        )
+
+        failed_authentication_config = (
+            self.correlation_rules.get(
+                "failed_authentication_and_remote_service",
+                {},
+            )
+        )
+
+        malware_smb_config = (
+            self.correlation_rules.get(
+                "malware_and_smb_activity",
+                {},
+            )
+        )
+
+        remote_ports = {
+            safe_int(
+                port
+            )
+            for port
+            in failed_authentication_config.get(
+                "remote_ports",
+                [],
+            )
+        }
+
         correlated_results: list[
             dict[str, Any]
         ] = []
 
         for network_event in network_results:
+            # Priority 3 is already expected to remove ineligible Zeek events
+            # before this method. Retain this defensive check so direct method
+            # calls cannot accidentally correlate routine discovery traffic.
+            if (
+                network_event.get(
+                    "risk_eligible",
+                    True,
+                )
+                is False
+            ):
+                continue
+
             network_time = parse_timestamp(
                 network_event.get(
                     "timestamp"
@@ -1792,7 +2053,10 @@ class ContextualRiskEngine:
                 or ""
             )
 
-            matches: list[
+            # -------------------------------------------------------------
+            # Stage 1: same endpoint + bounded time = candidate only.
+            # -------------------------------------------------------------
+            temporal_matches: list[
                 dict[str, Any]
             ] = []
 
@@ -1836,11 +2100,10 @@ class ContextualRiskEngine:
                 if difference > window_minutes:
                     continue
 
-                matches.append(
+                temporal_matches.append(
                     {
                         **wazuh_event,
-                        "_time_difference_"
-                        "minutes": (
+                        "_time_difference_minutes": (
                             difference
                         ),
                         "_matched_side": (
@@ -1852,10 +2115,69 @@ class ContextualRiskEngine:
                     }
                 )
 
-            if not matches:
+            if not temporal_matches:
                 continue
 
-            matches.sort(
+            semantic_flags = (
+                self._network_semantic_flags(
+                    network_event=(
+                        network_event
+                    ),
+                    remote_ports=(
+                        remote_ports
+                    ),
+                )
+            )
+
+            # -------------------------------------------------------------
+            # Stage 2: require event-by-event semantic evidence.
+            # -------------------------------------------------------------
+            semantic_matches: list[
+                dict[str, Any]
+            ] = []
+
+            all_correlation_types: set[
+                str
+            ] = set()
+
+            for temporal_match in temporal_matches:
+                match_types = (
+                    self._semantic_types_for_match(
+                        wazuh_event=(
+                            temporal_match
+                        ),
+                        semantic_flags=(
+                            semantic_flags
+                        ),
+                    )
+                )
+
+                if not match_types:
+                    continue
+
+                semantic_matches.append(
+                    {
+                        **temporal_match,
+                        "_semantic_types": (
+                            sorted(
+                                match_types
+                            )
+                        ),
+                    }
+                )
+
+                all_correlation_types.update(
+                    match_types
+                )
+
+            # Most important Priority 4 rule:
+            # temporal proximity alone must never produce correlation risk.
+            if not semantic_matches:
+                continue
+
+            # Only a semantically related Wazuh event may provide the capped
+            # Wazuh contribution.
+            semantic_matches.sort(
                 key=lambda matched: (
                     -safe_int(
                         matched.get(
@@ -1864,8 +2186,7 @@ class ContextualRiskEngine:
                     ),
                     safe_float(
                         matched.get(
-                            "_time_difference_"
-                            "minutes"
+                            "_time_difference_minutes"
                         )
                     ),
                     str(
@@ -1877,7 +2198,9 @@ class ContextualRiskEngine:
                 )
             )
 
-            strongest = matches[0]
+            strongest = (
+                semantic_matches[0]
+            )
 
             wazuh_contribution = min(
                 safe_int(
@@ -1888,77 +2211,36 @@ class ContextualRiskEngine:
                 maximum_wazuh_contribution,
             )
 
-            correlation_score = safe_int(
-                self.correlation_rules.get(
-                    "base_points"
-                ),
-                2,
+            # Base points are earned only after a genuine semantic
+            # relationship has been established.
+            correlation_score = (
+                base_points
             )
 
             correlation_reasons = [
                 (
-                    f"{len(matches)} Wazuh event(s) "
-                    f"were aggregated within "
+                    f"{len(semantic_matches)} semantically related "
+                    f"Wazuh event(s) matched within "
                     f"{window_minutes:g} minutes"
                 )
             ]
 
-            indicator_codes = {
-                code
-                for match in matches
-                for code in match.get(
-                    "indicator_codes",
-                    [],
-                )
-            }
-
-            destination_role = str(
-                network_event.get(
-                    "destination_role"
-                )
-                or ""
-            ).lower()
-
-            destination_port = safe_int(
-                network_event.get(
-                    "destination_port"
-                )
-            )
-
-            service = str(
-                network_event.get(
-                    "service"
-                )
-                or ""
-            ).lower()
-
+            # A semantic relationship bonus is added only once per type even
+            # if multiple Wazuh alerts carry the same indicator.
             if (
-                "privilege_activity"
-                in indicator_codes
-                and (
-                    destination_role
-                    == "database"
-                    or destination_port
-                    in {
-                        5432,
-                        3306,
-                        1433,
-                        1521,
-                    }
-                )
+                "privilege_database_access"
+                in all_correlation_types
             ):
                 points = safe_int(
-                    self.correlation_rules.get(
-                        "privilege_and_"
-                        "database_access",
-                        {},
-                    ).get(
+                    privilege_database_config.get(
                         "points"
                     ),
                     5,
                 )
 
-                correlation_score += points
+                correlation_score += (
+                    points
+                )
 
                 correlation_reasons.append(
                     "Privilege activity correlated "
@@ -1966,53 +2248,28 @@ class ContextualRiskEngine:
                 )
 
             if (
-                "privilege_activity"
-                in indicator_codes
-                and (
-                    destination_port == 445
-                    or "smb" in service
-                )
+                "privilege_smb_activity"
+                in all_correlation_types
             ):
                 points = safe_int(
-                    self.correlation_rules.get(
-                        "privilege_and_"
-                        "smb_activity",
-                        {},
-                    ).get(
+                    privilege_smb_config.get(
                         "points"
                     ),
                     4,
                 )
 
-                correlation_score += points
+                correlation_score += (
+                    points
+                )
 
                 correlation_reasons.append(
                     "Privilege activity correlated "
                     "with SMB activity"
                 )
 
-            failed_authentication_config = (
-                self.correlation_rules.get(
-                    "failed_authentication_"
-                    "and_remote_service",
-                    {},
-                )
-            )
-
-            remote_ports = {
-                safe_int(port)
-                for port
-                in failed_authentication_config.get(
-                    "remote_ports",
-                    [],
-                )
-            }
-
             if (
-                "failed_authentication"
-                in indicator_codes
-                and destination_port
-                in remote_ports
+                "failed_authentication_remote_service"
+                in all_correlation_types
             ):
                 points = safe_int(
                     failed_authentication_config.get(
@@ -2021,7 +2278,9 @@ class ContextualRiskEngine:
                     4,
                 )
 
-                correlation_score += points
+                correlation_score += (
+                    points
+                )
 
                 correlation_reasons.append(
                     "Failed authentication correlated "
@@ -2029,25 +2288,19 @@ class ContextualRiskEngine:
                 )
 
             if (
-                "malware_indicator"
-                in indicator_codes
-                and (
-                    destination_port == 445
-                    or "smb" in service
-                )
+                "malware_smb_activity"
+                in all_correlation_types
             ):
                 points = safe_int(
-                    self.correlation_rules.get(
-                        "malware_and_"
-                        "smb_activity",
-                        {},
-                    ).get(
+                    malware_smb_config.get(
                         "points"
                     ),
                     7,
                 )
 
-                correlation_score += points
+                correlation_score += (
+                    points
+                )
 
                 correlation_reasons.append(
                     "Malware indicator correlated "
@@ -2081,7 +2334,8 @@ class ContextualRiskEngine:
                             "event_id"
                         )
                     )
-                    for match in matches
+                    for match
+                    in semantic_matches
                     if match.get(
                         "event_id"
                     )
@@ -2095,7 +2349,8 @@ class ContextualRiskEngine:
                             "rule_id"
                         )
                     )
-                    for match in matches
+                    for match
+                    in semantic_matches
                     if match.get(
                         "rule_id"
                     )
@@ -2109,24 +2364,35 @@ class ContextualRiskEngine:
                             "_matched_side"
                         )
                     )
-                    for match in matches
+                    for match
+                    in semantic_matches
                 }
             )
 
-            all_wazuh_reasons = unique_strings(
-                reason
-                for match in matches
-                for reason in match.get(
-                    "reasons",
-                    [],
+            all_wazuh_reasons = (
+                unique_strings(
+                    reason
+                    for match
+                    in semantic_matches
+                    for reason
+                    in match.get(
+                        "reasons",
+                        [],
+                    )
                 )
+            )
+
+            correlation_types = sorted(
+                all_correlation_types
             )
 
             correlated_results.append(
                 {
                     **network_event,
-                    # Keep the Zeek event ID so the publisher can replace the
-                    # standalone network result rather than create a duplicate.
+
+                    # Keep the Zeek ID so push_scored_events can replace the
+                    # standalone network record rather than creating a
+                    # duplicate investigation document.
                     "event_id": (
                         network_event[
                             "event_id"
@@ -2141,17 +2407,45 @@ class ContextualRiskEngine:
                         "zeek+wazuh"
                     ),
                     "event_type": (
-                        "correlated_"
-                        "network_activity"
+                        "correlated_network_activity"
                     ),
                     "correlated": True,
+
+                    # Priority 4 explainability.
+                    "semantic_correlation": True,
+                    "correlation_strength": (
+                        "strong"
+                    ),
+                    "correlation_types": (
+                        correlation_types
+                    ),
+                    "temporal_wazuh_count": (
+                        len(
+                            temporal_matches
+                        )
+                    ),
+                    "matched_wazuh_count": (
+                        len(
+                            semantic_matches
+                        )
+                    ),
+                    "discarded_temporal_match_count": (
+                        len(
+                            temporal_matches
+                        )
+                        - len(
+                            semantic_matches
+                        )
+                    ),
+
                     "wazuh_score": (
                         wazuh_contribution
                     ),
-                    "strongest_wazuh_"
-                    "raw_score": safe_int(
-                        strongest.get(
-                            "risk_score"
+                    "strongest_wazuh_raw_score": (
+                        safe_int(
+                            strongest.get(
+                                "risk_score"
+                            )
                         )
                     ),
                     "correlation_score": (
@@ -2159,40 +2453,37 @@ class ContextualRiskEngine:
                     ),
                     "risk_score": total,
                     "classification": (
-                        self.classify(total)
+                        self.classify(
+                            total
+                        )
                     ),
-                    "matched_wazuh_count": (
-                        len(matches)
-                    ),
-                    "matched_wazuh_"
-                    "event_ids": (
+                    "matched_wazuh_event_ids": (
                         matched_event_ids
                     ),
-                    "matched_wazuh_"
-                    "rule_ids": (
+                    "matched_wazuh_rule_ids": (
                         matched_rule_ids
                     ),
                     "matched_host_sides": (
                         matched_host_sides
                     ),
-                    "strongest_wazuh_"
-                    "event_id": (
+                    "strongest_wazuh_event_id": (
                         strongest.get(
                             "event_id"
                         )
                     ),
-                    "time_difference_"
-                    "minutes": round(
-                        min(
-                            safe_float(
-                                match.get(
-                                    "_time_difference_"
-                                    "minutes"
+                    "time_difference_minutes": (
+                        round(
+                            min(
+                                safe_float(
+                                    match.get(
+                                        "_time_difference_minutes"
+                                    )
                                 )
-                            )
-                            for match in matches
-                        ),
-                        3,
+                                for match
+                                in semantic_matches
+                            ),
+                            3,
+                        )
                     ),
                     "reasons": unique_strings(
                         list(
@@ -2221,7 +2512,7 @@ class ContextualRiskEngine:
 
         Routine Zeek discovery/network-control events remain in parsed/raw
         telemetry but are excluded from behavioural analysis, contextual risk
-        scoring, correlation, and investigation publishing.
+        scoring, semantic correlation, and investigation publishing.
         """
         raw_wazuh_events = (
             normalize_wazuh_input(
@@ -2234,6 +2525,7 @@ class ContextualRiskEngine:
                 zeek_data
             )
         )
+
         self._validate_input_environments(
             raw_wazuh_events,
             "Wazuh",
@@ -2257,6 +2549,7 @@ class ContextualRiskEngine:
                 normalised_wazuh
             )
         )
+
         wazuh_results = [
             self._score_wazuh_event(
                 event
@@ -2265,9 +2558,8 @@ class ContextualRiskEngine:
             in normalised_wazuh
         ]
 
-        # Defensively classify Zeek input here as well as in the parser.
-        # This ensures direct risk_engine.py execution cannot bypass the
-        # discovery/control-traffic gate.
+        # Priority 3: defensively classify Zeek input here as well as in the
+        # parser so direct risk_engine.py execution cannot bypass the gate.
         prepared_zeek_events: list[
             dict[str, Any]
         ] = []
@@ -2276,7 +2568,8 @@ class ContextualRiskEngine:
             prepared_event = dict(
                 event
             )
-            classification = (
+
+            traffic_classification = (
                 classify_zeek_traffic(
                     prepared_event
                 )
@@ -2284,19 +2577,19 @@ class ContextualRiskEngine:
 
             # A positive routine-noise classification always wins.
             if (
-                classification.get(
+                traffic_classification.get(
                     "risk_eligible"
                 )
                 is False
             ):
                 prepared_event.update(
-                    classification
+                    traffic_classification
                 )
             else:
-                # Preserve an explicit/manual exclusion if one already
-                # exists, while filling any missing metadata.
+                # Preserve an explicit/manual exclusion if one already exists,
+                # while filling any missing classifier metadata.
                 for key, value in (
-                    classification.items()
+                    traffic_classification.items()
                 ):
                     prepared_event.setdefault(
                         key,
@@ -2321,12 +2614,13 @@ class ContextualRiskEngine:
             )
         )
 
-        # Apply risk eligibility BEFORE behaviour analysis. This prevents
-        # routine discovery/control traffic from inflating frequency,
+        # Priority 3: apply risk eligibility BEFORE behaviour analysis. This
+        # prevents routine discovery/control traffic from inflating frequency,
         # destination fanout, port fanout, or other behavioural metrics.
         risk_eligible_zeek = [
             event
-            for event in normalised_zeek
+            for event
+            in normalised_zeek
             if event.get(
                 "risk_eligible",
                 True,
@@ -2336,7 +2630,8 @@ class ContextualRiskEngine:
 
         excluded_zeek_events = [
             event
-            for event in normalised_zeek
+            for event
+            in normalised_zeek
             if event.get(
                 "risk_eligible",
                 True,
@@ -2349,6 +2644,7 @@ class ContextualRiskEngine:
                 risk_eligible_zeek
             )
         )
+
         zeek_results = [
             self._score_network_event(
                 event=event,
@@ -2366,6 +2662,7 @@ class ContextualRiskEngine:
             for event
             in risk_eligible_zeek
         ]
+
         correlated_results = (
             self._correlate_network_events(
                 network_results=(
@@ -2384,8 +2681,10 @@ class ContextualRiskEngine:
 
         final_network_by_id = {
             event["event_id"]: event
-            for event in zeek_results
+            for event
+            in zeek_results
         }
+
         final_network_by_id.update(
             {
                 event["event_id"]: event
@@ -2395,7 +2694,9 @@ class ContextualRiskEngine:
         )
 
         for event in (
-            list(wazuh_results)
+            list(
+                wazuh_results
+            )
             + list(
                 final_network_by_id.values()
             )
@@ -2406,6 +2707,7 @@ class ContextualRiskEngine:
                 )
                 or "Unknown"
             )
+
             classification_counts[
                 classification
             ] = (
@@ -2415,6 +2717,7 @@ class ContextualRiskEngine:
                 )
                 + 1
             )
+
         return {
             "environment": (
                 self._environment_fields()
@@ -2441,34 +2744,50 @@ class ContextualRiskEngine:
                 correlated_results
             ),
             "summary": {
-                "raw_wazuh_event_count": len(
-                    raw_wazuh_events
+                "raw_wazuh_event_count": (
+                    len(
+                        raw_wazuh_events
+                    )
                 ),
-                "raw_zeek_event_count": len(
-                    raw_zeek_events
+                "raw_zeek_event_count": (
+                    len(
+                        raw_zeek_events
+                    )
                 ),
-                "unique_zeek_input_count": len(
-                    normalised_zeek
+                "unique_zeek_input_count": (
+                    len(
+                        normalised_zeek
+                    )
                 ),
-                "risk_eligible_zeek_event_count": len(
-                    risk_eligible_zeek
+                "risk_eligible_zeek_event_count": (
+                    len(
+                        risk_eligible_zeek
+                    )
                 ),
-                "excluded_zeek_event_count": len(
-                    excluded_zeek_events
+                "excluded_zeek_event_count": (
+                    len(
+                        excluded_zeek_events
+                    )
                 ),
-                "unique_wazuh_"
-                "result_count": len(
-                    wazuh_results
+                "unique_wazuh_result_count": (
+                    len(
+                        wazuh_results
+                    )
                 ),
-                "unique_zeek_"
-                "result_count": len(
-                    zeek_results
+                "unique_zeek_result_count": (
+                    len(
+                        zeek_results
+                    )
                 ),
-                "correlated_result_count": len(
-                    correlated_results
+                "correlated_result_count": (
+                    len(
+                        correlated_results
+                    )
                 ),
                 "final_document_count": (
-                    len(wazuh_results)
+                    len(
+                        wazuh_results
+                    )
                     + len(
                         final_network_by_id
                     )
@@ -2478,6 +2797,7 @@ class ContextualRiskEngine:
                 ),
             },
         }
+
 
 def main() -> int:
     """Command-line entry point."""
@@ -2542,27 +2862,37 @@ def main() -> int:
 
     args = parser.parse_args()
 
-    environment_paths = EnvironmentPaths(
-        project_root=PROJECT_ROOT,
-        environment_id=args.environment,
+    environment_paths = (
+        EnvironmentPaths(
+            project_root=PROJECT_ROOT,
+            environment_id=(
+                args.environment
+            ),
+        )
     )
 
     environment_paths.ensure_directories()
 
     wazuh_input_path = (
-        Path(args.wazuh_input).resolve()
+        Path(
+            args.wazuh_input
+        ).resolve()
         if args.wazuh_input
         else environment_paths.wazuh_events_file
     )
 
     zeek_input_path = (
-        Path(args.zeek_input).resolve()
+        Path(
+            args.zeek_input
+        ).resolve()
         if args.zeek_input
         else environment_paths.zeek_conn_json_file
     )
 
     output_path = (
-        Path(args.output).resolve()
+        Path(
+            args.output
+        ).resolve()
         if args.output
         else environment_paths.scored_events_file
     )
@@ -2634,4 +2964,6 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(
+        main()
+    )
